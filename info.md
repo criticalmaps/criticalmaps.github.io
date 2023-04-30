@@ -3,8 +3,6 @@ layout: default
 title: "Critical Maps - Info"
 pathName: infoPath
 ---
-
-
 <div id="wrapper">
 	<div class="inner content">
 		<h2><a name="Team">Team</a></h2>
@@ -127,11 +125,11 @@ pathName: infoPath
 			<li>Rodrigo Aguilera <small>(Translation)</small></li>
 			<li><a href="https://github.com/weliveindetail">Stefan Gränitz</a> <small>(Web)</small></li>
 		</ul>
-		<h2><a name="Impressum"><%= t("imprint") %></a></h2>
+		<h2><a name="Impressum">Imprint</a></h2>
 		<p>Angaben gemäß § 5 TMG</p>
 		<pre>Stephan Lindauer
-Siegfriedstr. 45
-12051 Berlin</pre>
+Grellstr. 5A
+10409 Berlin</pre>
 		<p>Vertreten durch: Stephan Lindauer und Norman Sander</p>
 		<p>Kontakt: <a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></p>
 
