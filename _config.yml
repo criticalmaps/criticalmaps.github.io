@@ -1,0 +1,8 @@
+title: "Critical Maps"  
+url: "https://criticalmaps.net" 
+baseurl: ""
+
+sass:
+  style: compressed 
+  sass_dir: "_sass"
+
