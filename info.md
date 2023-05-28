@@ -107,6 +107,10 @@ pathName: infoPath
 					<span class="contribute-link">See Project</span>
 				</a>
 			</li>
+			<a href="https://opencollective.com/criticalmaps" target="_blank">
+  				<img src="/assets/images/opencollective.png" width="300" />
+			</a>
+
 		</ul>
 		<h2><a name="Contributors">Contributors</a></h2>
 		<ul>
