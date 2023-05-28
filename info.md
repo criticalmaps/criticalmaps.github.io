@@ -189,8 +189,8 @@ Grellstr. 5A
 		<p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung
 			(DSGVO), ist:</p>
 		<pre>Stephan Lindauer
-Siegfriedstr. 45
-12051 Berlin</pre>
+Grellstr. 5A
+10409 Berlin</pre>
 
 		<h3>Geltungsbereich</h3>
 		<p>Diese Datenschutzerklärung klärt Nutzer über die Art, den Umfang und Zwecke der Erhebung und Verwendung
