@@ -97,7 +97,7 @@ pathName: mapPath
                 setNewLocations(locationsArray);
             });
         }
-        setInterval(function () { refreshLocationsFromServer() }, 30000);
+        setInterval(function () { refreshLocationsFromServer() }, 60000);
 
         refreshLocationsFromServer();
 
