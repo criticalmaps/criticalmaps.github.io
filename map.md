@@ -107,7 +107,7 @@ pathName: mapPath
             refreshLocationsFromServer();
             var nBikes = countMarkerInView();
             document.getElementById("activeusers").innerHTML = nBikes;
-        }, 2000);
+        }, 60000);
 
     });
 </script>
