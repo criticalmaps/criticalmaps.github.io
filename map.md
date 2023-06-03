@@ -82,12 +82,11 @@ pathName: mapPath
                 locationsArray = [];
     
                 for (const location of data) {
-                        var coordinate = {
-                            latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
-                            longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
-                        }
-                        locationsArray.push(coordinate);
+                    var coordinate = {
+                        latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
+                        longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
                     }
+                    locationsArray.push(coordinate);
                 }
 
                 setNewLocations(locationsArray);
