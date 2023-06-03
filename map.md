@@ -77,18 +77,14 @@ pathName: mapPath
         };
 
         var refreshLocationsFromServer = function () {
-            $.getJSON("https://api.criticalmaps.net/postv2", function (data) {
+            $.getJSON("https://api-cdn.criticalmaps.net/locations", function (data) {
 
                 locationsArray = [];
-
-                var locations = data.locations;
-
-                for (var key in locations) {
-                    if (locations.hasOwnProperty(key)) {
-                        var currentLocation = locations[key];
+    
+                for (const location of data) {
                         var coordinate = {
-                            latitude: criticalMapsUtils.convertCoordinateFormat(currentLocation.latitude),
-                            longitude: criticalMapsUtils.convertCoordinateFormat(currentLocation.longitude)
+                            latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
+                            longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
                         }
                         locationsArray.push(coordinate);
                     }
