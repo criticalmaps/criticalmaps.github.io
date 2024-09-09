@@ -18,7 +18,7 @@ pathName: mapPath
         var currentMarkers = [];
 
         var bikeIcon = L.icon({
-            iconUrl: '/assets/images/candle.png',
+            iconUrl: '/assets/images/marker-bike.png',
             iconSize: [48, 48],
             iconAnchor: [24, 24],
             className: 'map-marker-bike',
