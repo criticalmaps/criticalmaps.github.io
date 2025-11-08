@@ -29,8 +29,8 @@ pathName: mapPath
         // create a shared SVG renderer and add it to the map so all circleMarkers live in the same <svg>
         var svgRenderer = L.svg().addTo(bikeMap);
 
-        // shared meatball state (so setNewLocations can boost on hover)
-        var meatballState = { blur: 0, thresh: 1, hover: 0 };
+        // shared meatball state
+        var meatballState = { blur: 0, thresh: 1 };
 
         // compute the minimum pixel distance between any two current markers (used by meatball animation)
         function computeMinPixelDistance() {
@@ -207,8 +207,7 @@ pathName: mapPath
                 // combine: take the stronger signal (either closest pair OR overall proximity)
                 var t = Math.max(tMin, proximity);
 
-                // if a marker is hovered, boost merge
-                if (state.hover) t = Math.max(t, 0.9);
+                // hover-based boosts removed
 
                 // small zoom bias (optional)
                 // small distance bias (optional) — boost based on closest pair pixel distance
@@ -256,17 +255,7 @@ pathName: mapPath
                 rafId = null;
             });
 
-            // optional: on marker hover expand local blur for nicer interaction
-            function hoverBoost(e) {
-                state.blur = Math.max(state.blur, 6);
-            }
-            function hoverUnboost(e) {
-                // allow decay back to computed value
-            }
-            // attach hover handlers (delegated to markers)
-            // marker elements are Leaflet circleMarker instances (currentMarkers)
-            // add event listeners when markers are created in setNewLocations()
-            // (see setNewLocations below — it will add 'mouseover'/'mouseout' listeners to circle)
+            // hover handlers removed — markers no longer affect meatball state on mouseover
         })();
 
         function saveHashToElements() {
@@ -304,17 +293,8 @@ pathName: mapPath
                     className: 'map-marker-bike'
                 }).addTo(bikeMap);
 
-                // attach hover/click handlers that boost the meatball blur while active
+                // attach click handler only (hover effects removed)
                 (function (c) {
-                    c.on('mouseover', function () {
-                        meatballState.hover = 1;
-                        // immediate local boost
-                        meatballState.blur = Math.max(meatballState.blur, 10);
-                    });
-                    c.on('mouseout', function () {
-                        meatballState.hover = 0;
-                        // allow decay handled by animation loop
-                    });
                     c.on('click', function () {
                         // temporary strong boost on click
                         meatballState.blur = Math.max(meatballState.blur, 14);
