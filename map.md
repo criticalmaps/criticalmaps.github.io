@@ -6,11 +6,6 @@ pathName: mapPath
 
 <div id="map-count">Online in visible area: <span id="activeusers"></span></div>
 
-<!-- <div id="map-share">
-    <p>Embed this map on your website:</p>
-    <pre><code>&lt;iframe width=&quot;1280&quot; height=&quot;720&quot; src=&quot;https://criticalmaps.net/map-embed&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;</code></pre>
-</div> -->
-
 <div id="map"></div>
 
 <script type="text/javascript">
@@ -34,10 +29,10 @@ pathName: mapPath
         // create a shared SVG renderer and add it to the map so all circleMarkers live in the same <svg>
         var svgRenderer = L.svg().addTo(bikeMap);
 
-        // shared metaball state (so setNewLocations can boost on hover)
-        var metaballState = { blur: 0, thresh: 1, hover: 0 };
+        // shared meatball state (so setNewLocations can boost on hover)
+        var meatballState = { blur: 0, thresh: 1, hover: 0 };
 
-        // compute the minimum pixel distance between any two current markers (used by metaball animation)
+        // compute the minimum pixel distance between any two current markers (used by meatball animation)
         function computeMinPixelDistance() {
             var pts = [];
             for (var i = 0; i < currentMarkers.length; i++) {
@@ -61,12 +56,12 @@ pathName: mapPath
             return isFinite(min) ? min : Infinity;
         }
 
-        // inject an SVG metaball filter and animate stdDeviation + tableValues so markers "merge"
-        (function addSvgMetaballAndAnimate() {
+        // inject an SVG meatball filter and animate stdDeviation + tableValues so markers "merge"
+        (function addSvgmeatballAndAnimate() {
             var ns = 'http://www.w3.org/2000/svg';
             var svg = svgRenderer._container && svgRenderer._container.ownerSVGElement || svgRenderer._container;
             if (!svg) {
-                bikeMap.once('load', addSvgMetaballAndAnimate);
+                bikeMap.once('load', addSvgmeatballAndAnimate);
                 return;
             }
 
@@ -79,7 +74,7 @@ pathName: mapPath
             defs.setAttribute('id', 'cm-defs');
 
             var filter = document.createElementNS(ns, 'filter');
-            filter.setAttribute('id', 'metaball');
+            filter.setAttribute('id', 'meatball');
             filter.setAttribute('x', '-50%');
             filter.setAttribute('y', '-50%');
             filter.setAttribute('width', '200%');
@@ -109,22 +104,38 @@ pathName: mapPath
 
             svg.insertBefore(defs, svg.firstChild);
 
-            // find the renderer group (where Leaflet places circleMarker elements) and attach the filter
+            // cache frequently-used DOM refs (avoid querying on every frame)
             var rendererGroup = svgRenderer._container || svg.querySelector('g');
+            var feBlurEl = svg.querySelector('#cm-feGaussianBlur');
+            var feFuncAEl = svg.querySelector('#cm-feFuncA');
+            if (rendererGroup && rendererGroup.setAttribute) rendererGroup.setAttribute('filter', 'url(#meatball)');
             function applyFilterToRendererGroup() {
-                if (rendererGroup && rendererGroup.setAttribute) {
-                    rendererGroup.setAttribute('filter', 'url(#metaball)');
-                } else {
-                    // fallback: try to locate group again
-                    rendererGroup = svgRenderer._container || svg.querySelector('g');
-                    if (rendererGroup && rendererGroup.setAttribute) rendererGroup.setAttribute('filter', 'url(#metaball)');
+                // avoid repeated DOM writes
+                if (rendererGroup && rendererGroup.setAttribute && rendererGroup.getAttribute('filter') !== 'url(#meatball)') {
+                    rendererGroup.setAttribute('filter', 'url(#meatball)');
                 }
             }
             applyFilterToRendererGroup();
 
-            // animation state uses outer metaballState
-            var state = metaballState;
+            // animation state uses outer meatballState
+            var state = meatballState;
             var rafId = null;
+            var isZooming = false; // pause heavy updates while user is zooming
+
+            // pause meatball updates while zooming to avoid heavy work during map zoom animations
+            bikeMap.on('zoomstart', function () {
+                isZooming = true;
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
+            });
+            bikeMap.on('zoomend', function () {
+                isZooming = false;
+                // force one immediate update and restart loop
+                updateOnce();
+                if (!rafId) loop();
+            });
 
             // compute proximity score (0..1) from all marker pairs in viewport
             function computeProximityScore() {
@@ -216,14 +227,17 @@ pathName: mapPath
                 state.blur += (targetBlur - state.blur) * 0.12;
                 state.thresh += (targetThresh - state.thresh) * 0.12;
 
-                // apply to SVG filter elements
-                var feBlurEl = svg.querySelector('#cm-feGaussianBlur');
-                var feFuncAEl = svg.querySelector('#cm-feFuncA');
+                // if zooming, skip expensive proximity computations (we pause RAF on zoomstart,
+                // but keep defensive guard here too)
+                if (isZooming) return;
 
-
+                // apply to cached SVG filter elements
                 if (feBlurEl) feBlurEl.setAttribute('stdDeviation', Math.max(0.001, state.blur).toFixed(3));
                 var table = buildTableValues(state.thresh);
-                if (feFuncAEl) feFuncAEl.setAttribute('tableValues', table);
+                if (feFuncAEl) {
+                    // avoid unnecessary attribute writes
+                    if (feFuncAEl.getAttribute('tableValues') !== table) feFuncAEl.setAttribute('tableValues', table);
+                }
 
                 applyFilterToRendererGroup();
             }
@@ -290,20 +304,20 @@ pathName: mapPath
                     className: 'map-marker-bike'
                 }).addTo(bikeMap);
 
-                // attach hover/click handlers that boost the metaball blur while active
+                // attach hover/click handlers that boost the meatball blur while active
                 (function (c) {
                     c.on('mouseover', function () {
-                        metaballState.hover = 1;
+                        meatballState.hover = 1;
                         // immediate local boost
-                        metaballState.blur = Math.max(metaballState.blur, 10);
+                        meatballState.blur = Math.max(meatballState.blur, 10);
                     });
                     c.on('mouseout', function () {
-                        metaballState.hover = 0;
+                        meatballState.hover = 0;
                         // allow decay handled by animation loop
                     });
                     c.on('click', function () {
                         // temporary strong boost on click
-                        metaballState.blur = Math.max(metaballState.blur, 14);
+                        meatballState.blur = Math.max(meatballState.blur, 14);
                     });
                 })(circle);
 
