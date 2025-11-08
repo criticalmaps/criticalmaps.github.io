@@ -14,7 +14,7 @@ pathName: mapPath
 <div id="map"></div>
 
 <script type="text/javascript">
-    $().ready(function () {
+    document.addEventListener('DOMContentLoaded', function () {
         var currentMarkers = [];
 
         var bikeIcon = L.icon({
@@ -36,33 +36,28 @@ pathName: mapPath
 
         function saveHashToElements() {
             if (hash.lastHash) {
-                $(".hash-append").each(function (index) {
-                    $(this).attr("href", $(this).data("template").replace('${hash}', hash.lastHash));
+                document.querySelectorAll('.hash-append').forEach(function (el) {
+                    var template = el.dataset.template || el.getAttribute('data-template') || '';
+                    el.setAttribute('href', template.replace('${hash}', hash.lastHash));
                 });
             }
         }
-        bikeMap.on("moveend", function () {
-            saveHashToElements()
-        }, this);
-        bikeMap.on("zoomend", function () {
-            saveHashToElements()
-        }, this);
+        bikeMap.on("moveend", saveHashToElements);
+        bikeMap.on("zoomend", saveHashToElements);
 
         function setNewLocations(locationsArray) {
-            //remove old markers
+            // remove old markers
             currentMarkers.forEach(function (marker) {
-                bikeMap.removeLayer(marker)
+                bikeMap.removeLayer(marker);
             });
-            currentMarkers = []
+            currentMarkers = [];
 
-            //add new markes
+            // add new markers
             locationsArray.forEach(function (coordinate) {
                 var marker = L.marker([coordinate.latitude, coordinate.longitude], { icon: bikeIcon }).addTo(bikeMap);
                 currentMarkers.push(marker);
             });
         }
-
-
 
         function countMarkerInView() {
             var counter = 0;
@@ -74,30 +69,39 @@ pathName: mapPath
                 }
             });
             return counter;
-        };
+        }
 
         var refreshLocationsFromServer = function () {
-            $.getJSON("https://api-cdn.criticalmaps.net/locations", function (data) {
+            fetch("https://api-cdn.criticalmaps.net/locations")
+                .then(function (response) {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(function (data) {
+                    var locationsArray = [];
 
-                locationsArray = [];
-    
-                for (const location of data) {
-                    var coordinate = {
-                        latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
-                        longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
+                    for (const location of data) {
+                        var coordinate = {
+                            latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
+                            longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
+                        };
+                        locationsArray.push(coordinate);
                     }
-                    locationsArray.push(coordinate);
-                }
 
-                setNewLocations(locationsArray);
-            });
-        }
+                    setNewLocations(locationsArray);
+                })
+                .catch(function (err) {
+                    console.error('Failed to fetch locations:', err);
+                });
+        };
+
         setInterval(function () { refreshLocationsFromServer() }, 60000);
 
         refreshLocationsFromServer();
 
-        $("body").keypress(function (event) {
-            if (event.which == 104) {
+        document.body.addEventListener('keypress', function (event) {
+            var key = event.key || event.keyIdentifier || String.fromCharCode(event.charCode || event.keyCode || 0);
+            if (key === 'h' || key === 'H') {
                 setInterval(function () { refreshLocationsFromServer() }, 1000);
                 alert("ab geht die post!");
             }
@@ -106,7 +110,8 @@ pathName: mapPath
         setInterval(function () {
             refreshLocationsFromServer();
             var nBikes = countMarkerInView();
-            document.getElementById("activeusers").innerHTML = nBikes;
+            var el = document.getElementById("activeusers");
+            if (el) el.innerHTML = nBikes;
         }, 60000);
 
     });
