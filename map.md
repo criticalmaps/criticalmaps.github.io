@@ -14,94 +14,364 @@ pathName: mapPath
 <div id="map"></div>
 
 <script type="text/javascript">
-    document.addEventListener('DOMContentLoaded', function () {
+    $().ready(function () {
         var currentMarkers = [];
 
-        var bikeIcon = L.icon({
-            iconUrl: '/assets/images/marker-bike.png',
-            iconSize: [48, 48],
-            iconAnchor: [24, 24],
-            className: 'map-marker-bike',
-        });
-
+        // create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
+        // before bikeMap existed ("t.addLayer" -> internal map object was undefined).
         var bikeMap = new L.map('map', { zoomControl: false }).setView([52.468209, 13.425995], 3);
 
         L.mapboxGL({
-            attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">&copy; OpenStreetMap contributors</a>',
+            attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
             style: 'https://api.maptiler.com/maps/basic/style.json?key=BF1ZtxvN8zHG9Wc6omQn'
         }).addTo(bikeMap);
 
         new L.Control.Zoom({ position: 'bottomleft' }).addTo(bikeMap);
         var hash = new L.Hash(bikeMap);
 
+        // create a shared SVG renderer and add it to the map so all circleMarkers live in the same <svg>
+        var svgRenderer = L.svg().addTo(bikeMap);
+
+        // shared metaball state (so setNewLocations can boost on hover)
+        var metaballState = { blur: 0, thresh: 1, hover: 0 };
+
+        // compute the minimum pixel distance between any two current markers (used by metaball animation)
+        function computeMinPixelDistance() {
+            var pts = [];
+            for (var i = 0; i < currentMarkers.length; i++) {
+                try {
+                    var latlng = currentMarkers[i].getLatLng();
+                    if (!latlng) continue;
+                    pts.push(bikeMap.latLngToContainerPoint(latlng));
+                } catch (e) {
+                    // ignore invalid markers
+                }
+            }
+            var min = Infinity;
+            for (var i = 0; i < pts.length; i++) {
+                for (var j = i + 1; j < pts.length; j++) {
+                    var dx = pts[i].x - pts[j].x;
+                    var dy = pts[i].y - pts[j].y;
+                    var d = Math.sqrt(dx * dx + dy * dy);
+                    if (d < min) min = d;
+                }
+            }
+            return isFinite(min) ? min : Infinity;
+        }
+
+        // inject an SVG metaball filter and animate stdDeviation + tableValues so markers "merge"
+        (function addSvgMetaballAndAnimate() {
+            var ns = 'http://www.w3.org/2000/svg';
+            var svg = svgRenderer._container && svgRenderer._container.ownerSVGElement || svgRenderer._container;
+            if (!svg) {
+                bikeMap.once('load', addSvgMetaballAndAnimate);
+                return;
+            }
+
+            // remove existing defs/filter if present (allow reload)
+            var existing = svg.querySelector('#cm-defs');
+            if (existing) existing.parentNode.removeChild(existing);
+
+            // build defs/filter programmatically so we keep references
+            var defs = document.createElementNS(ns, 'defs');
+            defs.setAttribute('id', 'cm-defs');
+
+            var filter = document.createElementNS(ns, 'filter');
+            filter.setAttribute('id', 'metaball');
+            filter.setAttribute('x', '-50%');
+            filter.setAttribute('y', '-50%');
+            filter.setAttribute('width', '200%');
+            filter.setAttribute('height', '200%');
+
+            var feGaussianBlur = document.createElementNS(ns, 'feGaussianBlur');
+            feGaussianBlur.setAttribute('in', 'SourceGraphic');
+            feGaussianBlur.setAttribute('stdDeviation', '0');
+            feGaussianBlur.setAttribute('result', 'blur');
+            feGaussianBlur.setAttribute('id', 'cm-feGaussianBlur');
+
+            var feComponentTransfer = document.createElementNS(ns, 'feComponentTransfer');
+            feComponentTransfer.setAttribute('in', 'blur');
+            feComponentTransfer.setAttribute('result', 'thresholded');
+
+            // use table functions for RGB + A so colours remain intact after thresholding
+            var feFuncA = document.createElementNS(ns, 'feFuncA');
+            feFuncA.setAttribute('type', 'table');
+            feFuncA.setAttribute('tableValues', '0 1');
+            feFuncA.setAttribute('id', 'cm-feFuncA');
+
+            var feFuncR = document.createElementNS(ns, 'feFuncR');
+            feFuncR.setAttribute('type', 'table');
+            feFuncR.setAttribute('tableValues', '0 1');
+            feFuncR.setAttribute('id', 'cm-feFuncR');
+
+            var feFuncG = document.createElementNS(ns, 'feFuncG');
+            feFuncG.setAttribute('type', 'table');
+            feFuncG.setAttribute('tableValues', '0 1');
+            feFuncG.setAttribute('id', 'cm-feFuncG');
+
+            var feFuncB = document.createElementNS(ns, 'feFuncB');
+            feFuncB.setAttribute('type', 'table');
+            feFuncB.setAttribute('tableValues', '0 1');
+            feFuncB.setAttribute('id', 'cm-feFuncB');
+
+            feComponentTransfer.appendChild(feFuncA);
+            feComponentTransfer.appendChild(feFuncR);
+            feComponentTransfer.appendChild(feFuncG);
+            feComponentTransfer.appendChild(feFuncB);
+
+            filter.appendChild(feGaussianBlur);
+            filter.appendChild(feComponentTransfer);
+            defs.appendChild(filter);
+
+            svg.insertBefore(defs, svg.firstChild);
+
+            // find the renderer group (where Leaflet places circleMarker elements) and attach the filter
+            var rendererGroup = svgRenderer._container || svg.querySelector('g');
+            function applyFilterToRendererGroup() {
+                if (rendererGroup && rendererGroup.setAttribute) {
+                    rendererGroup.setAttribute('filter', 'url(#metaball)');
+                } else {
+                    // fallback: try to locate group again
+                    rendererGroup = svgRenderer._container || svg.querySelector('g');
+                    if (rendererGroup && rendererGroup.setAttribute) rendererGroup.setAttribute('filter', 'url(#metaball)');
+                }
+            }
+            applyFilterToRendererGroup();
+
+            // animation state uses outer metaballState
+            var state = metaballState;
+            var rafId = null;
+
+            // compute proximity score (0..1) from all marker pairs in viewport
+            function computeProximityScore() {
+                var pts = [];
+                var bounds = bikeMap.getBounds();
+                for (var i = 0; i < currentMarkers.length; i++) {
+                    try {
+                        var latlng = currentMarkers[i].getLatLng();
+                        if (!latlng) continue;
+                        if (!bounds.contains(latlng)) continue; // only consider visible markers
+                        var p = bikeMap.latLngToContainerPoint(latlng);
+                        pts.push(p);
+                    } catch (e) { /* ignore invalid markers */ }
+                }
+                var n = pts.length;
+                if (n < 2) return 0;
+
+                var mergeR = mergeRadius; // capture below variable
+                var sum = 0;
+                var pairs = 0;
+                for (var i = 0; i < n; i++) {
+                    for (var j = i + 1; j < n; j++) {
+                        pairs++;
+                        var dx = pts[i].x - pts[j].x;
+                        var dy = pts[i].y - pts[j].y;
+                        var d = Math.sqrt(dx * dx + dy * dy);
+                        if (d < mergeR) {
+                            // weight grows as distance gets smaller
+                            sum += (1 - d / mergeR);
+                        }
+                    }
+                }
+                if (pairs === 0) return 0;
+                // average weight across all pairs => 0..1
+                return Math.min(1, sum / pairs);
+            }
+
+            // parameters (ensure available in closure)
+            var mergeRadius = 80; // pixels where merging starts
+            var maxBlur = 16;     // maximum stdDeviation (px)
+            var minThreshold = 0.05;
+            var maxThreshold = 0.9;
+            var TABLE_STEPS = 10;
+
+            // same buildTableValues as before
+            function buildTableValues(threshold) {
+                var normalized = (threshold - minThreshold) / (maxThreshold - minThreshold);
+                normalized = Math.max(0, Math.min(1, normalized));
+                var onesCount = Math.round((1 - normalized) * (TABLE_STEPS - 1));
+                var zerosCount = TABLE_STEPS - onesCount;
+                var arr = [];
+                for (var i = 0; i < zerosCount; i++) arr.push('0');
+                for (var i = 0; i < onesCount; i++) arr.push('1');
+                if (arr.indexOf('1') === -1) arr[arr.length - 1] = '1';
+                return arr.join(' ');
+            }
+
+            function updateOnce() {
+                // proximity score from all visible markers
+                var proximity = computeProximityScore(); // 0..1
+
+                // fallback min-distance-based t (keeps behaviour from before)
+                var minDist = computeMinPixelDistance();
+                var tMin = 0;
+                if (minDist !== Infinity) {
+                    tMin = 1 - Math.min(mergeRadius, minDist) / mergeRadius;
+                }
+
+                // combine: take the stronger signal (either closest pair OR overall proximity)
+                var t = Math.max(tMin, proximity);
+
+                // if a marker is hovered, boost merge
+                if (state.hover) t = Math.max(t, 0.9);
+
+                // small zoom bias (optional)
+                // small distance bias (optional) — boost based on closest pair pixel distance
+                var minDistForBias = computeMinPixelDistance();
+                var distanceFactor = 0;
+                if (minDistForBias !== Infinity) {
+                    // distanceFactor = 1 when markers are very close, 0 when farther than mergeRadius
+                    distanceFactor = Math.max(0, 1 - Math.min(mergeRadius, minDistForBias) / mergeRadius);
+                }
+                t = Math.max(t, (t * 0.9 + distanceFactor * 0.1));
+
+                var targetBlur = maxBlur * t;
+                var targetThresh = maxThreshold - (maxThreshold - minThreshold) * t;
+
+                // smooth interpolation
+                state.blur += (targetBlur - state.blur) * 0.12;
+                state.thresh += (targetThresh - state.thresh) * 0.12;
+
+                // apply to SVG filter elements
+                var feBlurEl = svg.querySelector('#cm-feGaussianBlur');
+                var feFuncAEl = svg.querySelector('#cm-feFuncA');
+                // var feFuncREl = svg.querySelector('#cm-feFuncR');
+                // var feFuncGEl = svg.querySelector('#cm-feFuncG');
+                // var feFuncBEl = svg.querySelector('#cm-feFuncB');
+
+                if (feBlurEl) feBlurEl.setAttribute('stdDeviation', Math.max(0.001, state.blur).toFixed(3));
+                var table = buildTableValues(state.thresh);
+                if (feFuncAEl) feFuncAEl.setAttribute('tableValues', table);
+                // if (feFuncREl) feFuncREl.setAttribute('tableValues', table);
+                // if (feFuncGEl) feFuncGEl.setAttribute('tableValues', table);
+                // if (feFuncBEl) feFuncBEl.setAttribute('tableValues', table);
+
+                applyFilterToRendererGroup();
+            }
+
+            // animation loop
+            function loop() {
+                updateOnce();
+                rafId = requestAnimationFrame(loop);
+            }
+
+            if (!rafId) loop();
+
+            // cleanup when map removed
+            bikeMap.on('unload', function () {
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = null;
+            });
+
+            // optional: on marker hover expand local blur for nicer interaction
+            function hoverBoost(e) {
+                state.blur = Math.max(state.blur, 6);
+            }
+            function hoverUnboost(e) {
+                // allow decay back to computed value
+            }
+            // attach hover handlers (delegated to markers)
+            // marker elements are Leaflet circleMarker instances (currentMarkers)
+            // add event listeners when markers are created in setNewLocations()
+            // (see setNewLocations below — it will add 'mouseover'/'mouseout' listeners to circle)
+        })();
+
         function saveHashToElements() {
             if (hash.lastHash) {
-                document.querySelectorAll('.hash-append').forEach(function (el) {
-                    var template = el.dataset.template || el.getAttribute('data-template') || '';
-                    el.setAttribute('href', template.replace('${hash}', hash.lastHash));
+                $(".hash-append").each(function (index) {
+                    $(this).attr("href", $(this).data("template").replace('${hash}', hash.lastHash));
                 });
             }
         }
-        bikeMap.on("moveend", saveHashToElements);
-        bikeMap.on("zoomend", saveHashToElements);
+        bikeMap.on("moveend", function () {
+            saveHashToElements()
+        }, this);
+        bikeMap.on("zoomend", function () {
+            saveHashToElements()
+        }, this);
 
         function setNewLocations(locationsArray) {
-            // remove old markers
+            //remove old markers
             currentMarkers.forEach(function (marker) {
-                bikeMap.removeLayer(marker);
+                bikeMap.removeLayer(marker)
             });
-            currentMarkers = [];
+            currentMarkers = []
 
-            // add new markers
+            //add new markers as SVG circleMarkers (use shared svgRenderer)
             locationsArray.forEach(function (coordinate) {
-                var marker = L.marker([coordinate.latitude, coordinate.longitude], { icon: bikeIcon }).addTo(bikeMap);
-                currentMarkers.push(marker);
+                var circle = L.circleMarker([coordinate.latitude, coordinate.longitude], {
+                    renderer: svgRenderer,
+                    radius: 12,
+                    fillColor: '#4400ff',
+                    color: '#4400ff',
+                    weight: 1,
+                    opacity: 1,
+                    fillOpacity: 1,
+                    className: 'map-marker-bike'
+                }).addTo(bikeMap);
+
+                // attach hover/click handlers that boost the metaball blur while active
+                (function (c) {
+                    c.on('mouseover', function () {
+                        metaballState.hover = 1;
+                        // immediate local boost
+                        metaballState.blur = Math.max(metaballState.blur, 10);
+                    });
+                    c.on('mouseout', function () {
+                        metaballState.hover = 0;
+                        // allow decay handled by animation loop
+                    });
+                    c.on('click', function () {
+                        // temporary strong boost on click
+                        metaballState.blur = Math.max(metaballState.blur, 14);
+                    });
+                })(circle);
+
+                currentMarkers.push(circle);
             });
         }
+
+
 
         function countMarkerInView() {
             var counter = 0;
             bikeMap.eachLayer(function (layer) {
-                if (layer instanceof L.Marker) {
-                    if (bikeMap.getBounds().contains(layer.getLatLng())) {
-                        counter++;
+                // accept layers that expose getLatLng (CircleMarker / Marker)
+                if (typeof layer.getLatLng === 'function') {
+                    try {
+                        if (bikeMap.getBounds().contains(layer.getLatLng())) {
+                            counter++;
+                        }
+                    } catch (e) {
+                        // ignore layers that don't have valid latlng
                     }
                 }
             });
             return counter;
-        }
-
-        var refreshLocationsFromServer = function () {
-            fetch("https://api-cdn.criticalmaps.net/locations")
-                .then(function (response) {
-                    if (!response.ok) throw new Error('Network response was not ok');
-                    return response.json();
-                })
-                .then(function (data) {
-                    var locationsArray = [];
-
-                    for (const location of data) {
-                        var coordinate = {
-                            latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
-                            longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
-                        };
-                        locationsArray.push(coordinate);
-                    }
-
-                    setNewLocations(locationsArray);
-                })
-                .catch(function (err) {
-                    console.error('Failed to fetch locations:', err);
-                });
         };
 
+        var refreshLocationsFromServer = function () {
+            $.getJSON("https://api-cdn.criticalmaps.net/locations", function (data) {
+
+                locationsArray = [];
+    
+                for (const location of data) {
+                    var coordinate = {
+                        latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
+                        longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
+                    }
+                    locationsArray.push(coordinate);
+                }
+
+                setNewLocations(locationsArray);
+            });
+        }
         setInterval(function () { refreshLocationsFromServer() }, 60000);
 
         refreshLocationsFromServer();
 
-        document.body.addEventListener('keypress', function (event) {
-            var key = event.key || event.keyIdentifier || String.fromCharCode(event.charCode || event.keyCode || 0);
-            if (key === 'h' || key === 'H') {
+        $("body").keypress(function (event) {
+            if (event.which == 104) {
                 setInterval(function () { refreshLocationsFromServer() }, 1000);
                 alert("ab geht die post!");
             }
@@ -110,8 +380,7 @@ pathName: mapPath
         setInterval(function () {
             refreshLocationsFromServer();
             var nBikes = countMarkerInView();
-            var el = document.getElementById("activeusers");
-            if (el) el.innerHTML = nBikes;
+            document.getElementById("activeusers").innerHTML = nBikes;
         }, 60000);
 
     });
