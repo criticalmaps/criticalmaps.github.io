@@ -14,8 +14,8 @@ pathName: mapPath
 <div id="map"></div>
 
 <script type="text/javascript">
-    $().ready(function () {
-        var currentMarkers = [];
+    document.addEventListener('DOMContentLoaded', function () {
+         var currentMarkers = [];
 
         // create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
         // before bikeMap existed ("t.addLayer" -> internal map object was undefined).
@@ -278,8 +278,9 @@ pathName: mapPath
 
         function saveHashToElements() {
             if (hash.lastHash) {
-                $(".hash-append").each(function (index) {
-                    $(this).attr("href", $(this).data("template").replace('${hash}', hash.lastHash));
+                document.querySelectorAll('.hash-append').forEach(function (el) {
+                    var tmpl = el.getAttribute('data-template') || el.dataset.template || '';
+                    el.setAttribute('href', tmpl.replace('${hash}', hash.lastHash));
                 });
             }
         }
@@ -351,28 +352,31 @@ pathName: mapPath
         };
 
         var refreshLocationsFromServer = function () {
-            $.getJSON("https://api-cdn.criticalmaps.net/locations", function (data) {
-
-                locationsArray = [];
-    
-                for (const location of data) {
-                    var coordinate = {
-                        latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
-                        longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
+            fetch("https://api-cdn.criticalmaps.net/locations")
+                .then(function (res) { if (!res.ok) throw res; return res.json(); })
+                .then(function (data) {
+                    locationsArray = [];
+                    for (const location of data) {
+                        var coordinate = {
+                            latitude: criticalMapsUtils.convertCoordinateFormat(location.latitude),
+                            longitude: criticalMapsUtils.convertCoordinateFormat(location.longitude)
+                        };
+                        locationsArray.push(coordinate);
                     }
-                    locationsArray.push(coordinate);
-                }
-
-                setNewLocations(locationsArray);
-            });
+                    setNewLocations(locationsArray);
+                })
+                .catch(function (err) {
+                    console.error('Failed to fetch locations', err);
+                });
         }
         setInterval(function () { refreshLocationsFromServer() }, 60000);
 
         refreshLocationsFromServer();
 
-        $("body").keypress(function (event) {
-            if (event.which == 104) {
-                setInterval(function () { refreshLocationsFromServer() }, 1000);
+        document.addEventListener('keypress', function (event) {
+            var key = event.key || event.keyIdentifier || '';
+            if (key === 'h' || key === 'H' || event.which === 104) {
+                setInterval(function () { refreshLocationsFromServer(); }, 1000);
                 alert("ab geht die post!");
             }
         });
