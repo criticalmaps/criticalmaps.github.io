@@ -19,7 +19,9 @@ pathName: mapPath
 
         // create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
         // before bikeMap existed ("t.addLayer" -> internal map object was undefined).
-        var bikeMap = new L.map('map', { zoomControl: false }).setView([52.468209, 13.425995], 3);
+        // prevent zooming out past level 3 (change 3 to your desired minimum zoom)
+        var bikeMap = new L.map('map', { zoomControl: false, minZoom: 3 }).setView([52.468209, 13.425995], 3);
+        // alternatively you can call: bikeMap.setMinZoom(3);
 
         L.mapboxGL({
             attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
@@ -99,25 +101,7 @@ pathName: mapPath
             feFuncA.setAttribute('tableValues', '0 1');
             feFuncA.setAttribute('id', 'cm-feFuncA');
 
-            var feFuncR = document.createElementNS(ns, 'feFuncR');
-            feFuncR.setAttribute('type', 'table');
-            feFuncR.setAttribute('tableValues', '0 1');
-            feFuncR.setAttribute('id', 'cm-feFuncR');
-
-            var feFuncG = document.createElementNS(ns, 'feFuncG');
-            feFuncG.setAttribute('type', 'table');
-            feFuncG.setAttribute('tableValues', '0 1');
-            feFuncG.setAttribute('id', 'cm-feFuncG');
-
-            var feFuncB = document.createElementNS(ns, 'feFuncB');
-            feFuncB.setAttribute('type', 'table');
-            feFuncB.setAttribute('tableValues', '0 1');
-            feFuncB.setAttribute('id', 'cm-feFuncB');
-
             feComponentTransfer.appendChild(feFuncA);
-            feComponentTransfer.appendChild(feFuncR);
-            feComponentTransfer.appendChild(feFuncG);
-            feComponentTransfer.appendChild(feFuncB);
 
             filter.appendChild(feGaussianBlur);
             filter.appendChild(feComponentTransfer);
@@ -235,16 +219,11 @@ pathName: mapPath
                 // apply to SVG filter elements
                 var feBlurEl = svg.querySelector('#cm-feGaussianBlur');
                 var feFuncAEl = svg.querySelector('#cm-feFuncA');
-                // var feFuncREl = svg.querySelector('#cm-feFuncR');
-                // var feFuncGEl = svg.querySelector('#cm-feFuncG');
-                // var feFuncBEl = svg.querySelector('#cm-feFuncB');
+
 
                 if (feBlurEl) feBlurEl.setAttribute('stdDeviation', Math.max(0.001, state.blur).toFixed(3));
                 var table = buildTableValues(state.thresh);
                 if (feFuncAEl) feFuncAEl.setAttribute('tableValues', table);
-                // if (feFuncREl) feFuncREl.setAttribute('tableValues', table);
-                // if (feFuncGEl) feFuncGEl.setAttribute('tableValues', table);
-                // if (feFuncBEl) feFuncBEl.setAttribute('tableValues', table);
 
                 applyFilterToRendererGroup();
             }
