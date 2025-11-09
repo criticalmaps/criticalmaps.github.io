@@ -173,13 +173,13 @@ body {
         top: 0;
         left: 0;
         width: 100%;
-        background: linear-gradient(#FFF,rgba(255,255,255,.7));
+        background: linear-gradient(#FFF,rgba(255,255,255,.5));
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 
         @media (prefers-color-scheme: dark) {
-          background: linear-gradient(rgba(26,26,26,.9),rgba(26,26,26,.8));
+          background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
         }
     }
 }
