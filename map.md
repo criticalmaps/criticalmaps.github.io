@@ -11,6 +11,7 @@ pathName: mapPath
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function () {
          var currentMarkers = [];
+        var isDarkMode = false;
 
         // create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
         // before bikeMap existed ("t.addLayer" -> internal map object was undefined).
@@ -18,10 +19,42 @@ pathName: mapPath
         var bikeMap = new L.map('map', { zoomControl: false, minZoom: 3 }).setView([52.468209, 13.425995], 3);
         // alternatively you can call: bikeMap.setMinZoom(3);
 
-        L.mapboxGL({
-            attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
-            style: 'https://api.maptiler.com/maps/basic/style.json?key=BF1ZtxvN8zHG9Wc6omQn'
-        }).addTo(bikeMap);
+        // map style URLs (change darkStyle if you have a preferred dark theme)
+        var MAPTILER_KEY = 'veX8Oi3lr3dolNkIbcRT';
+        var lightStyleUrl = 'https://api.maptiler.com/maps/basic/style.json?key=' + MAPTILER_KEY;
+        var darkStyleUrl = 'https://api.maptiler.com/maps/streets-v2-dark/style.json?key=' + MAPTILER_KEY;
+
+        var mapboxLayer = null;
+        function applyMapStyle(useDark) {
+            isDarkMode = !!useDark;
+            // remove existing layer if present
+            if (mapboxLayer) {
+                try { bikeMap.removeLayer(mapboxLayer); } catch (e) { /* ignore */ }
+                mapboxLayer = null;
+            }
+            mapboxLayer = L.mapboxGL({
+                attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
+                style: useDark ? darkStyleUrl : lightStyleUrl
+            }).addTo(bikeMap);
+            // update existing markers to match theme (yellow in dark mode)
+            var markerColor = isDarkMode ? '#ffd633' : '#4400ff';
+            currentMarkers.forEach(function (m) {
+                try { m.setStyle({ fillColor: markerColor, color: markerColor }); } catch (e) { /* ignore */ }
+            });
+        }
+
+        // initial apply and live updates based on system preference
+        var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        applyMapStyle(mq ? mq.matches : false);
+        if (mq) {
+            // modern browsers
+            if (typeof mq.addEventListener === 'function') {
+                mq.addEventListener('change', function (ev) { applyMapStyle(ev.matches); });
+            } else if (typeof mq.addListener === 'function') {
+                // older browsers
+                mq.addListener(function (ev) { applyMapStyle(ev.matches); });
+            }
+        }
 
         new L.Control.Zoom({ position: 'bottomleft' }).addTo(bikeMap);
         var hash = new L.Hash(bikeMap);
@@ -282,11 +315,12 @@ pathName: mapPath
 
             //add new markers as SVG circleMarkers (use shared svgRenderer)
             locationsArray.forEach(function (coordinate) {
+                var markerColor = isDarkMode ? '#ffd633' : '#4400ff';
                 var circle = L.circleMarker([coordinate.latitude, coordinate.longitude], {
                     renderer: svgRenderer,
                     radius: 12,
-                    fillColor: '#4400ff',
-                    color: '#4400ff',
+                    fillColor: markerColor,
+                    color: markerColor,
                     weight: 1,
                     opacity: 1,
                     fillOpacity: 1,
