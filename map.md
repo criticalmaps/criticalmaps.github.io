@@ -15,9 +15,7 @@ pathName: mapPath
 
         // create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
         // before bikeMap existed ("t.addLayer" -> internal map object was undefined).
-        // prevent zooming out past level 3 (change 3 to your desired minimum zoom)
-        var bikeMap = new L.map('map', { zoomControl: false, minZoom: 3 }).setView([52.468209, 13.425995], 3);
-        // alternatively you can call: bikeMap.setMinZoom(3);
+        var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13 }).setView([52.468209, 13.425995], 3);
 
         // map style URLs (change darkStyle if you have a preferred dark theme)
         var MAPTILER_KEY = 'veX8Oi3lr3dolNkIbcRT';
