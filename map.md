@@ -327,13 +327,7 @@ pathName: mapPath
                     className: 'map-marker-bike'
                 }).addTo(bikeMap);
 
-                // attach click handler only (hover effects removed)
-                (function (c) {
-                    c.on('click', function () {
-                        // temporary strong boost on click
-                        meatballState.blur = Math.max(meatballState.blur, 14);
-                    });
-                })(circle);
+                // click handler removed
 
                 currentMarkers.push(circle);
             });
