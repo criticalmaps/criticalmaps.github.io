@@ -19,7 +19,7 @@ pathName: mapPath
 
         // map style URLs (change darkStyle if you have a preferred dark theme)
         var MAPTILER_KEY = 'veX8Oi3lr3dolNkIbcRT';
-        var lightStyleUrl = 'https://api.maptiler.com/maps/basic/style.json?key=' + MAPTILER_KEY;
+        var lightStyleUrl = 'https://api.maptiler.com/maps/basic-v2/style.json?key=' + MAPTILER_KEY;
         var darkStyleUrl = 'https://api.maptiler.com/maps/streets-v2-dark/style.json?key=' + MAPTILER_KEY;
 
         var mapboxLayer = null;
