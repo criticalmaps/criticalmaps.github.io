@@ -56,7 +56,7 @@ body {
       max-width: 96rem;
       display: flex;
       flex-grow: 1;
-      padding: 0 4rem;
+      padding: 1.2rem 4rem;
 
       @media only screen and (max-width: $breakpoint) {
         flex-wrap: wrap;
@@ -64,13 +64,14 @@ body {
     }
 
     .nav-logo {
-        width: 16rem;
+        width: 14rem;
         flex-shrink: 0;
         margin-left: 0;
         margin-right: auto;
+        align-content: center;
 
         @media only screen and (max-width: $breakpoint) {
-          width: 14rem;
+          width: 12rem;
           order: 1;
         }
 
