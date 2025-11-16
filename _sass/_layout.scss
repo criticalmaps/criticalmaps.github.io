@@ -53,10 +53,10 @@ body {
     flex-direction: row;
 
     .inner {
-      max-width: 128rem;
+      max-width: 96rem;
       display: flex;
       flex-grow: 1;
-      padding: 0;
+      padding: 0 4rem;
 
       @media only screen and (max-width: $breakpoint) {
         flex-wrap: wrap;
@@ -70,6 +70,7 @@ body {
         margin-right: auto;
 
         @media only screen and (max-width: $breakpoint) {
+          width: 14rem;
           order: 1;
         }
 
@@ -88,34 +89,61 @@ body {
 
     .nav-primary {
         margin: 0 auto;
-        padding: 0 2rem;
+        align-content: center;
 
         @media only screen and (max-width: $breakpoint) {
+          width: 100%;
           order: 3;
           flex-grow: 1;
         }
     }
 
     .nav-secondary {
-        margin-left: auto;
-        margin-right: 0;
-        padding: 0 1.2rem;
+      display: flex;
+      align-content: center;
+      margin-left: auto;
+      margin-right: 0;
 
-        @media only screen and (max-width: $breakpoint) {
-          order: 2;
-        }
-
-        a {
-            font-size: 1.6rem;
-            width: 4rem;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-
-            i:before {
-                margin: 0;
-            }
-        }
+      @media only screen and (max-width: $breakpoint) {
+        order: 2;
+      }
     }
+
+    .nav-button {
+      font-size: 1.6rem;
+      margin: auto;
+      padding: 1rem 1.6rem 1rem 1.2rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 700;
+      color: $color-gray100;
+      background: rgba(0,0,0,.05);
+      border-radius: 4rem;
+      text-decoration: none;
+      transition: all ease-out 0.2s;
+
+      i {
+        font-size: 2rem;
+        vertical-align: bottom;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray400;
+        background: rgba(255,255,255,0.1);
+      }
+
+      &:hover,
+      &:focus {
+        color: $color-gray100;
+        background: rgba(0,0,0,0.1);
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-gray400;
+          background: rgba(255,255,255,0.2);
+        }
+      }
+    }
+
 
   ul {
       display: flex;
@@ -130,16 +158,13 @@ body {
       a {
         position: relative;
         display: block;
-        font-size: 1.4rem;
-        line-height: 1.6rem;
-        padding: 3.2rem 2rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 2rem;
         font-weight: 500;
         text-decoration: none;
         text-align: center;
         color: $color-gray400;
-
-
-
         transition: all ease-out 0.2s;
         box-sizing: border-box;
 
