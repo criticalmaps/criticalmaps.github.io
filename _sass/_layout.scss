@@ -129,18 +129,20 @@ body {
       }
 
       @media (prefers-color-scheme: dark) {
-        color: $color-gray400;
-        background: rgba(255,255,255,0.1);
+        color: $color-gray500;
+        background: rgba(255,255,255,0.05);
       }
 
       &:hover,
       &:focus {
         color: $color-gray100;
         background: rgba(0,0,0,0.1);
+        transform: scale3d(1.01,1.01,1);
 
         @media (prefers-color-scheme: dark) {
-          color: $color-gray400;
-          background: rgba(255,255,255,0.2);
+          color: $color-gray600;
+          background: rgba(255,255,255,0.1);
+          box-shadow: 0 0 4px rgba(255,255,255,.05), 0 0 8px rgba(255,255,255,.05), inset 0 0 2px rgba(255,255,255,.1);
         }
       }
     }
