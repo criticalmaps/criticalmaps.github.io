@@ -125,9 +125,6 @@ pathName: infoPath
 				<a href="https://www.facebook.com/criticalmaps" target="_blank" rel="noopener"
 				title="Critical Maps Facebook">Facebook</a>
 			</li>
-			<li>
-				<a href="https://twitter.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps X / Twitter">X / Twitter</a>
-			</li>
 		</ul>
 		<h2><a name="Contributors">Contributors</a></h2>
 		<ul>
