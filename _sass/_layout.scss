@@ -17,7 +17,7 @@ body {
   position: relative;
   max-width: 72rem;
   margin: auto;
-  padding: 0 4rem;
+  padding: 0 2.4rem;
 
   &::after {
     clear: both;
@@ -47,29 +47,50 @@ body {
 
 #navigation {
     position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.2rem;
     z-index: 9999;
+    box-sizing: border-box;
     display: flex;
     align-content: space-between;
     flex-direction: row;
 
+    @media only screen and (max-width: $breakpoint) {
+      padding: 0;
+    }
+
     .inner {
-      max-width: 128rem;
+      max-width: 80rem;
       display: flex;
       flex-grow: 1;
-      padding: 0;
+      padding: 1.2rem 1.6rem;
+      border-radius: 8rem;
+      background: linear-gradient(#FFF,rgba(255,255,255,.5));
+      backdrop-filter: blur(10px);
+
+      @media (prefers-color-scheme: dark) {
+        background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
+      }
 
       @media only screen and (max-width: $breakpoint) {
         flex-wrap: wrap;
+        border-radius: 3.2rem;
+        padding: 1.2rem;
+        border-radius: 0;
       }
     }
 
     .nav-logo {
-        width: 16rem;
+        width: 14rem;
         flex-shrink: 0;
         margin-left: 0;
         margin-right: auto;
+        align-content: center;
 
         @media only screen and (max-width: $breakpoint) {
+          width: 12rem;
           order: 1;
         }
 
@@ -88,34 +109,72 @@ body {
 
     .nav-primary {
         margin: 0 auto;
-        padding: 0 2rem;
+        align-content: center;
 
         @media only screen and (max-width: $breakpoint) {
+          width: 100%;
           order: 3;
           flex-grow: 1;
+          margin-top: 0.8rem;
         }
     }
 
     .nav-secondary {
-        margin-left: auto;
-        margin-right: 0;
-        padding: 0 1.2rem;
+      display: flex;
+      align-content: center;
+      margin-left: auto;
+      margin-right: 0;
 
-        @media only screen and (max-width: $breakpoint) {
-          order: 2;
-        }
-
-        a {
-            font-size: 1.6rem;
-            width: 4rem;
-            padding-left: 1.2rem;
-            padding-right: 1.2rem;
-
-            i:before {
-                margin: 0;
-            }
-        }
+      @media only screen and (max-width: $breakpoint) {
+        order: 2;
+      }
     }
+
+    .nav-button {
+      font-size: 1.6rem;
+      margin: auto 0.4rem;
+      padding: 1rem 1.6rem;
+      font-size: 1.5rem;
+      line-height: 2rem;
+      font-weight: 700;
+      color: $color-gray100;
+      background: rgba(0,0,0,.05);
+      border-radius: 4rem;
+      text-decoration: none;
+      transition: all ease-out 0.2s;
+      white-space: nowrap;
+
+      svg {
+        width: 1.6rem;
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.4rem;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray500;
+        background: rgba(255,255,255,0.05);
+      }
+
+      &:hover,
+      &:focus {
+        color: $color-gray100;
+        background: rgba(0,0,0,0.1);
+        transform: scale3d(1.01,1.01,1);
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-gray600;
+          background: rgba(255,255,255,0.1);
+          box-shadow: 0 0 4px rgba(255,255,255,.05), 0 0 8px rgba(255,255,255,.05), inset 0 0 2px rgba(255,255,255,.1);
+        }
+      }
+    }
+
 
   ul {
       display: flex;
@@ -130,18 +189,19 @@ body {
       a {
         position: relative;
         display: block;
-        font-size: 1.4rem;
-        line-height: 1.6rem;
-        padding: 3.2rem 2rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+        padding: 1.6rem 2.4rem;
         font-weight: 500;
         text-decoration: none;
         text-align: center;
         color: $color-gray400;
-
-
-
         transition: all ease-out 0.2s;
         box-sizing: border-box;
+
+        @media only screen and (max-width: $breakpoint) {
+          padding: 1.2rem 1.6rem;
+        }
 
         &:hover,
         &:focus {
@@ -169,18 +229,17 @@ body {
 .mapPath {
 
     #navigation {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background: linear-gradient(#FFF,rgba(255,255,255,.5));
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      position: absolute;
 
-        @media (prefers-color-scheme: dark) {
-          background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
-        }
+      .inner {
+          background: linear-gradient(#FFF,rgba(255,255,255,.5));
+          backdrop-filter: blur(10px);
+          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+          @media (prefers-color-scheme: dark) {
+            background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
+          }
+    }
     }
 }
 
@@ -209,7 +268,7 @@ body {
 
   @media only screen and (max-width: $breakpoint) {
     width: 75%;
-    margin: -6.4rem 12.5% 0;
+    margin: -2.4rem 12.5% 0;
   }
 
   img {
@@ -365,59 +424,6 @@ html.android .download .button-ios {
         }
     }
 
-    li.contribute {
-        width: 100%;
-
-        a {
-            position: relative;
-            overflow: hidden;
-            height: auto;
-            padding: 2.4rem;
-            padding-right: 33%;
-            border: 0;
-            border-radius: 0.6rem;
-            background: url('../images/icon-github.svg') no-repeat scroll right 2.4rem bottom -1.6rem / contain $color-yellow100;
-            color: $color-gray100;
-
-            @media only screen and (max-width: $breakpoint) {
-              background-position: right -6.4rem bottom -1.6rem;
-              padding-right: 2.4rem;
-            }
-        }
-
-        .contribute-title {
-            display: block;
-            margin-bottom: 0.8rem;
-            font-weight: 800;
-            font-size: 2.4rem;
-            line-height: 3.2rem;
-        }
-
-        .contribute-copy {
-            display: block;
-            margin-bottom: 1.6rem;
-            font-weight: 400;
-            font-size: 1.6rem;
-            line-height: 2.4rem;
-        }
-
-        .contribute-link {
-            display: block;
-            font-weight: 700;
-            font-size: 1.8rem;
-            line-height: 2.8rem;
-
-            &::after {
-                content: '';
-                display: inline-block;
-                width: 1.6rem;
-                height: 1.6rem;
-                margin: -0.2rem 0.8rem;
-                background: url('../images/icon-arrow.svg') center center / contain transparent;
-            }
-        }
-    }
-
     .team-avatar {
         width: 4.8rem;
         height: 4.8rem;
@@ -481,6 +487,63 @@ html.android .download .button-ios {
       text-overflow: ellipsis;
     }
 }
+
+a.contribute {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  padding: 2.4rem;
+  padding-right: 33%;
+  border: 0;
+  border-radius: 0.6rem;
+  background: url('../images/icon-github.svg') no-repeat scroll right 2.4rem bottom -1.6rem / contain $color-yellow100;
+  color: $color-gray100;
+  text-decoration: none;
+
+  @media (prefers-color-scheme: dark) {
+    color: $color-gray100;
+  }
+
+  @media only screen and (max-width: $breakpoint) {
+    background-position: right -6.4rem bottom -1.6rem;
+    padding-right: 2.4rem;
+  }
+  
+
+  .contribute-title {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: 800;
+      font-size: 2.4rem;
+      line-height: 3.2rem;
+  }
+
+  .contribute-copy {
+      display: block;
+      margin-bottom: 1.6rem;
+      font-weight: 400;
+      font-size: 1.6rem;
+      line-height: 2.4rem;
+  }
+
+  .contribute-link {
+      display: block;
+      font-weight: 700;
+      font-size: 1.8rem;
+      line-height: 2.8rem;
+
+      &::after {
+          content: '';
+          display: inline-block;
+          width: 1.6rem;
+          height: 1.6rem;
+          margin: -0.2rem 0.8rem;
+          background: url('../images/icon-arrow.svg') center center / contain transparent;
+      }
+  }
+}
+
 
 // ============================================================
 // Gallery

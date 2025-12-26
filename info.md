@@ -100,17 +100,31 @@ pathName: infoPath
 					<span class="team-project">Android</span>
 				</a>
 			</li>
-			<li class="contribute">
-				<a href="https://github.com/criticalmaps" target="_blank" rel="noopener">
-					<span class="contribute-title">Get involved!</span>
-					<span class="contribute-copy">Critical Maps is open source and we’re always looking for people to help making this project even better!</span>
-					<span class="contribute-link">See Project</span>
-				</a>
-			</li>
-			<a href="https://opencollective.com/criticalmaps" target="_blank">
-  				<img src="/assets/images/opencollective.png" width="300" />
+		</ul>
+		<p>
+			<a class="contribute" href="https://github.com/criticalmaps" target="_blank" rel="noopener">
+				<span class="contribute-title">Get involved!</span>
+				<span class="contribute-copy">Critical Maps is open source and we’re always looking for people to help making this project even better!</span>
+				<span class="contribute-link">See Project</span>
 			</a>
-
+		</p>
+		<p>
+			<a href="https://opencollective.com/criticalmaps" target="_blank">
+				<img src="/assets/images/opencollective.png" width="300" />
+			</a>
+		</p>
+		<h2><a name="Follow">Follow</a></h2>
+		<ul>
+			<li>
+				<a href="https://mastodon.social/@criticalmaps" target="_blank" rel="noopener" title="Critical Maps Mastodon">Mastodon</a>
+			</li>
+			<li>
+				<a href="https://instagram.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps Instagram">Instagram</a>
+			</li>
+			<li>
+				<a href="https://www.facebook.com/criticalmaps" target="_blank" rel="noopener"
+				title="Critical Maps Facebook">Facebook</a>
+			</li>
 		</ul>
 		<h2><a name="Contributors">Contributors</a></h2>
 		<ul>

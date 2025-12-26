@@ -108,12 +108,6 @@
               Map
             </a>
           </li>
-<!--           <li class="label">
-            <a class="{% if page.pathName == "galleryPath" %} active {% endif %} hash-append" href="/gallery"
-              data-template="/gallery${hash}">
-              Gallery
-            </a>
-          </li> -->
           <li class="label">
             <a class="{% if page.pathName == "infoPath" %} active {% endif %}" href="/info">
               Info
@@ -122,29 +116,9 @@
         </ul>
       </nav>
       <nav class="nav-secondary">
-        <ul>
-          <li class="icon">
-            <a href="https://github.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps GitHub">
-              <i class="icon-github"></i>
-            </a>
-          </li>
-          <li class="icon">
-            <a href="https://twitter.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps Twitter">
-              <i class="icon-twitter"></i>
-            </a>
-          </li>
-          <li class="icon">
-            <a href="https://instagram.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps Instagram">
-              <i class="icon-instagram"></i>
-            </a>
-          </li>
-          <li class="icon">
-            <a href="https://www.facebook.com/criticalmaps" target="_blank" rel="noopener"
-              title="Critical Maps Facebook">
-              <i class="icon-facebook"></i>
-            </a>
-          </li>
-        </ul>
+        <a class="nav-button" href="https://github.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps GitHub">
+          {% include icon-github.svg %} <span>GitHub</span>
+        </a>
       </nav>
     </div>
   </header>
