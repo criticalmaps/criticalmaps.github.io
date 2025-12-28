@@ -24,8 +24,6 @@ $().ready(function () {
 		$('html').addClass('ios');
 	} else if (isMobile.Android()) {
 		$('html').addClass('android');
-		$('.front-image picture source').attr('srcset', '/assets/images/app-android-dark.jpg');
-		$('.front-image img').attr('src', '/assets/images/app-android.jpg')
 	}
 });
 

@@ -62,7 +62,7 @@ body {
     }
 
     .inner {
-      max-width: 80rem;
+      max-width: 96rem;
       display: flex;
       flex-grow: 1;
       padding: 1.2rem 1.6rem;
@@ -244,122 +244,108 @@ body {
 }
 
 //============================================================
-// Frontpage
+// stage
 //============================================================
 
-.rootPath .inner {
+.stage {
+  padding-top: 16rem;
+  padding-bottom: 8rem;
+
+  @media only screen and (max-width: $breakpoint) {
+    padding-top: 4rem;
+  }
+}
+
+.stage .inner {
   max-width: 96rem;
-  padding: 0;
 }
 
-.front {
-  display: flex;
-  flex-direction: row;
-
-  @media only screen and (max-width: $breakpoint) {
-    flex-direction: column;
-  }
-}
-
-.front-image {
+.stage--title {
   position: relative;
-  float: left;
-  width: 50%;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-size: 10rem;
+  line-height: 1em;
+  color: $color-gray100;
+  font-weight: 800;
 
-  @media only screen and (max-width: $breakpoint) {
-    width: 75%;
-    margin: -2.4rem 12.5% 0;
+  @media (prefers-color-scheme: dark) {
+    color: #FFF;
   }
 
-  img {
-    margin: 0;
+  @media only screen and (max-width: 64rem) {
+    font-size: 10vw;
+  }
+
+  @media only screen and (max-width: $breakpoint) {
+    font-size: 9.5vw;
+    line-height: 1.25em;
   }
 }
 
-.front-text {
+.stage--description {
   position: relative;
-  width: 50%;
-  z-index: 10;
-  align-self: center;
-  padding-right: 4rem;
-  margin-left: -8rem;
-  box-sizing: border-box;
+  margin-top: 0;
+  font-size: 3.2rem;
+  line-height: 1.5em;
 
   @media only screen and (max-width: $breakpoint) {
+    font-size: 2.4rem;
+    line-height: 1.5em;
+  }
+
+  a {
+    font-weight: 600;
+    color: inherit;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      border-bottom: 2px solid currentColor;
+    }
+  }
+}
+
+.stage--buttongroup {
+  display: inline-flex;
+  gap: 1.6rem;
+  z-index: 3;
+  width: 100%;
+  margin: 2rem auto 0;
+  flex-flow: wrap;
+
+  @media only screen and (max-width: $breakpoint) {
+      flex-direction: column;
+  }
+
+  .stage--button {
+    padding: 1rem 2.6rem 1rem 2.2rem;
     width: auto;
-    margin: 0;
-    padding: 0 4rem;
-    text-align: center;
-  }
+    gap: 1.2rem;
 
-  .front-title {
-    position: relative;
-    margin-top: 0;
-    margin-bottom: 0.8rem;
-
-    @media only screen and (max-width: $breakpoint) {
-      font-size: 2.4rem;
-      line-height: 3.2rem;
+    svg {
+      width: 3rem;
     }
-  }
 
-  .front-description {
-    position: relative;
-    margin-top: 0;
+    .download-text--tagline {
+      font-size: 1.2rem;
+      line-height: 1em;
+      color: $color-gray300;
 
-    @media only screen and (max-width: $breakpoint) {
-      font-size: 1.6rem;
-      line-height: 2.4rem;
-    }
-  }
-
-  .download {
-    display: block;
-    z-index: 3;
-    margin: 0 -0.4rem;
-
-    .button {
-      display: inline-block;
-      padding: 1rem 2.4rem;
-      margin: 0.4rem;
-      width: auto;
-      font-size: 1.4rem;
-      line-height: 2.4rem;
-      background: $color-yellow100;
-      color: #000;
-      font-weight: 700;
-      text-decoration: none;
-      border-radius: 2.4rem;
-
-      span {
-          display: block;
-
-            &::after {
-                position: relative;
-                content: '';
-                display: inline-block;
-                width: 1.6rem;
-                height: 1.6rem;
-                margin: -0.2rem 0 -0.2rem 0.8rem;
-                background: url('../images/icon-arrow.svg') center center / contain transparent;
-                transform-style: preserve-3d;
-                transform: translate3d(0,0,0);
-                transition: all ease-out 0.3s;
-            }
-      }
-
-      &:hover,
-      &:focus {
-          span:after {
-              transform: translate3d(4px,0,0);
-          }
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray400;
       }
     }
-  }
 
-  .f-droid {
-    color: $color-gray400;
-    font-size: 1.4rem;
+    .download-text--title {
+      font-size: 1.8rem;
+      line-height: 1.5em;
+      color: $color-gray100;
+
+      @media (prefers-color-scheme: dark) {
+        color: #FFF;
+      }
+    }
   }
 }
 

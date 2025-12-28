@@ -14,6 +14,53 @@ body {
   }
 }
 
+.button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 2rem 0.8rem 1.6rem;
+  color: $color-gray100;
+  border: 1px solid $color-gray500;
+  border-radius: 4rem;
+  color: inherit;
+  text-decoration: none;
+  transition: all ease-out 0.3s;
+
+  @media (prefers-color-scheme: dark) {
+    color: #FFF;
+    border-color: $color-gray300;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $color-gray200;
+    border-color: $color-gray300;
+    text-decoration: none;
+  }
+
+  svg {
+    height: auto;
+    flex-shrink: 0;
+  }
+
+  .button-text {
+    display: block;
+    text-align: left;
+  }
+
+  .button-tagline {
+    display: block;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .button-title {
+    display: block;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+}
+
 .content {
   a {
     font-weight: 500;
