@@ -34,15 +34,12 @@ body {
   @media only screen and (max-width: $breakpoint) {
       padding-top: 4rem;
   }
+
+  &.imprint {
+    padding-bottom: 24rem;
+  }
 }
 
-.infoPath #wrapper {
-  padding-bottom: 24rem;
-}
-
-.infoPath .inner {
-  max-width: 72rem;
-}
 
 
 //============================================================
@@ -229,7 +226,6 @@ body {
   }
 }
 
-.galleryPath,
 .mapPath {
 
     #navigation {
@@ -254,13 +250,27 @@ body {
 .footer {
     padding: 4rem;
     text-align: center;
-    color-scheme: dark;
 
+    background: $color-gray100;
+    color: $color-gray400;
+  
     .footer-navigation {
+      display: flex;
+      justify-content: space-between;
+
+      @media only screen and (max-width: $breakpoint) {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
 
       ul {
         display: flex;
-        gap: 1rem;
+        gap: 2rem;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -268,13 +278,23 @@ body {
     }
 
     a {
-      color: inherit;
+      color: $color-gray400;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 400;
 
       &:hover,
       &:focus {
-        text-decoration: underline;
+        color: $color-gray600;
+        text-decoration: none;
+      }
+
+      &.active {
+        font-weight: 600;
+        color: #fff;
+
+        @media (prefers-color-scheme: dark) {
+          color: #FFF;
+        }
       }
     }
 }

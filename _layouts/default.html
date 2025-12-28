@@ -108,11 +108,6 @@
               Map
             </a>
           </li>
-          <li class="label">
-            <a class="{% if page.pathName == "infoPath" %} active {% endif %}" href="/info">
-              Info
-            </a>
-          </li>
         </ul>
       </nav>
       <nav class="nav-secondary">
@@ -128,9 +123,12 @@
   <footer id="footer" class="footer">
     <div class="inner">
       <nav class="footer-navigation">
+        <p>Critical Maps</p>
         <ul>
           <li>
-            <a href="/info">Imprint</a>
+            <a class="{% if page.pathName == "infoPath" %} active {% endif %}" href="/info">
+              Imprint
+            </a>
           </li>
           <li>
             <a href="https://mastodon.social/@criticalmaps" target="_blank" rel="noopener" title="Critical Maps Mastodon">Mastodon</a>

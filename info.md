@@ -3,7 +3,7 @@ layout: default
 title: "Critical Maps - Info"
 pathName: infoPath
 ---
-<div id="wrapper">
+<div class="wrapper imprint">
 	<div class="inner content">
 		<h2><a name="Impressum">Imprint</a></h2>
 		<p>Angaben gemäß § 5 TMG</p>
