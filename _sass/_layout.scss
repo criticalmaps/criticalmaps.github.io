@@ -444,9 +444,6 @@ html.android .download .button-ios {
     max-width: 40rem;
     z-index: 2;
 
-    @media only screen and (max-width: $breakpoint) {
-    }
-
     picture {
       display: block;
       overflow: hidden;
@@ -469,17 +466,117 @@ html.android .download .button-ios {
       height: 100%;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08), 0px 16px 24px -4px rgba(0, 0, 0, 0.1), 0px 32px 48px -8px rgba(0, 0, 0, 0.12);
       box-sizing: border-box;
-
-      @media (prefers-color-scheme: dark) {
-
-      }
       border-radius: 4rem;
       pointer-events: none;
     }
   }
 }
 
+//============================================================
+// Contribute
+//============================================================
 
+.contribute {
+  padding: 16rem 0 8rem;
+
+  .contribute--introduction {
+    font-size: 3.6rem;
+    line-height: 1.5em;
+
+    @media only screen and (max-width: $breakpoint) {
+      font-size: 2.4rem;
+      line-height: 1.5em;
+    }
+
+    .contribute--button {
+      display: inline-flex;
+      vertical-align: middle;
+      margin: 0 0.1em;
+      padding: 0.2em 0.4em;
+      gap: 0.3em;
+    }
+
+    .contribute--button-title {
+      font-size: 0.6em;
+      line-height: 1em;
+      font-weight: 700;
+    }
+
+    *:first-child {
+      margin-top: 0;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .contribute--decoration {
+    position: absolute;
+    z-index: -1;
+    right: 0;
+    bottom: -12rem;
+    width: 40rem;
+    pointer-events: none;
+    color: $color-gray500;
+
+    @media only screen and (max-width: $breakpoint) {
+      right: -16rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-gray200;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+//============================================================
+// Donate
+//============================================================
+
+.donate {
+
+  .donate--introduction {
+    padding: 5rem;
+    border-radius: 6rem;
+    background: linear-gradient(180deg, #52BBF7 0%, #2FA8EE 100%);
+    color: white;
+    font-size: 2.4rem;
+    line-height: 1.5em;
+
+    @media only screen and (max-width: $breakpoint) {
+      font-size: 2rem;
+      line-height: 1.5em;
+      padding: 3rem;
+      border-radius: 4rem;
+    }
+
+    *:first-child {
+      margin-top: 0;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+
+    .donate--button {
+      background: transparent;
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .donate--button-title {
+      width: 100%;
+      text-align: center;
+    }
+  } 
+}
 
 //============================================================
 // Info

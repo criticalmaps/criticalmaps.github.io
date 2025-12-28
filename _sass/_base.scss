@@ -20,6 +20,7 @@ body {
   gap: 1rem;
   padding: 0.8rem 2rem 0.8rem 1.6rem;
   color: $color-gray100;
+  background-color: #fff;
   border: 1px solid $color-gray500;
   border-radius: 4rem;
   color: inherit;
@@ -27,15 +28,21 @@ body {
   transition: all ease-out 0.3s;
 
   @media (prefers-color-scheme: dark) {
+    background: $color-gray100;
     color: #FFF;
     border-color: $color-gray300;
   }
 
   &:hover,
   &:focus {
-    background-color: $color-gray200;
-    border-color: $color-gray300;
+    background-color: $color-gray600;
+    border-color: $color-gray400;
     text-decoration: none;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-gray200;
+      border-color: $color-gray300;
+    }
   }
 
   svg {

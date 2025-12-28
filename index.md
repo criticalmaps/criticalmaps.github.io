@@ -48,3 +48,34 @@ pathName: rootPath
       </div>
   </div>
 </div>
+
+<div class="wrapper contribute">
+  <div class="inner">
+    <div class="contribute--decoration">{% include icon-octocat.svg %}</div>
+     <div class="contribute--introduction">
+      <p><strong>Critical Maps</strong> is built by a <a class="contribute--button button" href="https://github.com/orgs/criticalmaps/people" target="_blank" rel="noopener">
+        {% include icon-team.svg %}
+        <span class="contribute--button-title button-title">Team</span>
+      </a> of an <em>passionate</em> open source community. We are always looking for new contributors. Explore the <a class="contribute--button button" href="https://github.com/criticalmaps/criticalmaps-ios" target="_blank" rel="noopener">
+        {% include icon-xcode.svg %}
+        <span class="contribute--button-title button-title">iOS</span>
+      </a> or <a class="contribute--button button" href="https://github.com/criticalmaps/criticalmaps-android" target="_blank" rel="noopener">
+        {% include icon-androidstudio.svg %}
+        <span class="contribute--button-title button-title">Android</span>
+      </a> projects on <a class="contribute--button button" href="https://github.com/criticalmaps/" target="_blank" rel="noopener">
+        {% include icon-github.svg %}
+        <span class="contribute--button-title button-title">GitHub</span>
+      </a> and get involved.</p>
+      </div>
+  </div>
+</div>
+
+<div class="wrapper donate">
+  <div class="inner">
+    <div class="donate--introduction">
+    <p>Critical Maps exists because <strong>people like you</strong> support it. If you find the app useful and want it to remain available, you can help cover its running costs. Our monthly server expenses range from 20 to 60 €, depending on traffic.</p>
+    <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on <strong>Open Collective</strong>.</p>
+    <p><a class="donate--button button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="donate--button-title button-title">Donate now</span></a></p>
+    </div>
+  </div>
+</div>
