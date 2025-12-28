@@ -639,9 +639,15 @@ a.contribute {
 
   .leaflet-bar {
     background: linear-gradient(#FFF,rgba(255,255,255,.5));
+    backdrop-filter: blur(10px);
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     border-radius: 4rem;
     border: 0;
+
+    @media (prefers-color-scheme: dark) {
+      background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
+      color: #FFF;
+    }
     }
   .leaflet-bar a {
     background-color: transparent;
@@ -649,6 +655,12 @@ a.contribute {
     width: 4rem;
     height: 4rem;
     line-height: 4rem;
+    color: $color-gray100;
+
+    @media (prefers-color-scheme: dark) {
+      border-color: $color-gray200;
+      color: $color-gray500;
+    }
     }
     .leaflet-bar a span {
       position: relative;
@@ -657,6 +669,10 @@ a.contribute {
   .leaflet-bar a:hover,
   .leaflet-bar a:focus {
     background-color: $color-gray600;
+
+    @media (prefers-color-scheme: dark) {
+     background-color: $color-gray200;
+    }
     }
   .leaflet-bar a:first-child {
     border-top-left-radius: 4rem;
@@ -667,10 +683,14 @@ a.contribute {
     border-bottom-left-radius: 4rem;
     border-bottom-right-radius: 4rem;
     padding-bottom: 0.2rem;
+    border-bottom: 0;
     }
   .leaflet-bar a.leaflet-disabled {
     background-color: transparent;
     color: $color-gray400;
+   @media (prefers-color-scheme: dark) {
+     color: $color-gray300;
+    }
     }
 
   .leaflet-touch .leaflet-bar a {
