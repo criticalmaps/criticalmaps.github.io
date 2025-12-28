@@ -579,6 +579,7 @@ a.contribute {
   margin: 0;
   background: #AAD3DF; //OSM
   background: #94C1E0; //Maptiler Basic
+  z-index: 10;
 
   @media (prefers-color-scheme: dark) {
     background: #172131; //Maptiler Dark
