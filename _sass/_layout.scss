@@ -611,28 +611,6 @@ html.android .download .button-ios {
 }
 
 // ============================================================
-// Gallery
-// ============================================================
-
-#gallerymap {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  background: #AAD3DF; //OSM
-  background: #94C1E0; //Maptiler Basic
-  left: 0;
-  top: 0;
-}
-
-.popupimage {
-  display: block;
-  width: 16rem;
-  margin: 2rem auto;
-}
-
-// ============================================================
 // Map
 // ============================================================
 
@@ -721,84 +699,5 @@ html.android .download .button-ios {
     overflow-y: hidden;
     background: #FFF;
     border-radius: 0 0 0.4rem 0.4rem;
-  }
-}
-
-
-//============================================================
-// Videos
-//============================================================
-
-
-.video-post {
-  margin: 2.5em auto;
-
-  &::after {
-    clear: both;
-    content: '';
-    display: table;
-  }
-
-  .video-info {
-    float: left;
-    width: 33.333%;
-    box-sizing: border-box;
-    padding-right: 0.5em;
-
-    @media only screen and (max-width: $breakpoint) {
-      float: none;
-      width: auto;
-      padding: 0;
-    }
-
-    .video-title {
-      margin: 0;
-    }
-
-    p {
-      margin: 0 0 1em;
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.5);
-    }
-  }
-
-  .video-media {
-    float: right;
-    width: 66.666%;
-    box-sizing: border-box;
-    padding-left: 0.5em;
-
-    @media only screen and (max-width: $breakpoint) {
-      float: none;
-      width: auto;
-      padding: 0;
-    }
-
-    .video-wrapper {
-      position: relative;
-      width: 100%;
-      height: 0;
-      margin: 0;
-      padding-bottom: 56.25%;
-      background: rgba(0, 0, 0, 0.25);
-      box-shadow: 0 0.25em 1em rgba(0, 0, 0, 0.1);
-
-      iframe {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-
-        opacity: 0;
-        transition: opacity ease-out 0.75s;
-
-        &.lazy-loaded {
-          opacity: 1;
-        }
-      }
-    }
   }
 }
