@@ -35,3 +35,16 @@ pathName: rootPath
       </p>
   </div>
 </div>
+
+<div class="wrapper screenshot">
+  <div class="inner">
+      <div class="screenshot-wrapper">
+      <figure>
+        <picture>
+            <source srcset="/assets/images/screenshot-app-light.webp" media="(prefers-color-scheme: dark)">
+            <img src="/assets/images/screenshot-app-light.webp" width="375" height="812" alt="Critical Maps App Screeenshot" />
+        </picture>
+      </figure>
+      </div>
+  </div>
+</div>
