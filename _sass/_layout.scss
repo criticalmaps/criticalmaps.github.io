@@ -591,31 +591,35 @@ a.contribute {
 
 #map-count {
   position: fixed;
-  height: 32px;
-  left: 0;
+  width: 14em;
+  left: 50%;
+  margin-left: -7em;
   bottom: 0;
-  margin-left: 4.6rem;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.4rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.65);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  border-radius: 4rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   font-size: 1.4rem;
   line-height: 1.6rem;
   font-weight: 400;
-  background: rgba(255,255,255,0.8);
-  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  background: linear-gradient(#FFF,rgba(255,255,255,.5));
   backdrop-filter: blur(10px);
   color: $color-gray200;
   z-index: 100;
   box-sizing: border-box;
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(26,26,26,0.8);
+    background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
     color: #FFF;
   }
 
   @media only screen and (max-width: $breakpoint) {
     display: none;
+  }
+
+  span {
+    font-weight: 500;
   }
 }
 
