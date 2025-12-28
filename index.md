@@ -73,7 +73,7 @@ pathName: rootPath
 <div class="wrapper donate">
   <div class="inner">
     <div class="donate--introduction">
-    <p>Critical Maps exists because <strong>people like you</strong> support it. If you find the app useful and want it to remain available, you can help cover its running costs. Our monthly server expenses range from 20 to 60 €, depending on traffic.</p>
+    <p>Critical Maps exists because <strong>people like you</strong> support it. If you find the app useful and want it to remain available, you can help cover running costs. Monthly server expenses range from 20 to 60 €, depending on traffic.</p>
     <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on <strong>Open Collective</strong>.</p>
     <p><a class="donate--button button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="donate--button-title button-title">Donate now</span></a></p>
     </div>
