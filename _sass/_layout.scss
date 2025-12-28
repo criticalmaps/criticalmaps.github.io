@@ -610,16 +610,21 @@ a.contribute {
   box-sizing: border-box;
 
   @media (prefers-color-scheme: dark) {
-    background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
+    background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
     color: #FFF;
   }
 
   @media only screen and (max-width: $breakpoint) {
-    display: none;
+    margin-bottom: 2.4rem;
   }
 
   span {
-    font-weight: 500;
+    font-weight: 700;
+    color: rgba(68,0,255,1);
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba(255,214,51,1);
+    }
   }
 }
 
