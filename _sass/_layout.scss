@@ -688,48 +688,6 @@ a.contribute {
     }
 }
 
-#map-share {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: calc(100vw - 5.6rem);
-  max-width: 48rem;
-  margin-left: 4.6rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1.2rem 0;
-  border-radius: 0.4rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.65);
-  font-size: 1.4rem;
-  line-height: 1.6rem;
-  font-weight: 400;
-  background: rgba(255,255,255,0.8);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  color: $color-gray200;
-  z-index: 100;
-  box-sizing: border-box;
-
-  @media only screen and (max-width: $breakpoint) {
-    display: none;
-  }
-
-  p {
-    margin-top: 0.4rem;
-  }
-
-  pre {
-    color: $color-gray300;
-    margin: -0.4rem -1.2rem 0;
-    padding: 1.2rem;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    background: #FFF;
-    border-radius: 0 0 0.4rem 0.4rem;
-  }
-}
-
-
 //============================================================
 // Videos
 //============================================================
