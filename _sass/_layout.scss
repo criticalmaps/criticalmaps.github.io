@@ -642,6 +642,7 @@ html.android .download .button-ios {
   margin: 0;
   background: #AAD3DF; //OSM
   background: #94C1E0; //Maptiler Basic
+  z-index: 10;
 
   @media (prefers-color-scheme: dark) {
     background: #172131; //Maptiler Dark
@@ -653,71 +654,119 @@ html.android .download .button-ios {
 
 #map-count {
   position: fixed;
-  height: 32px;
-  left: 0;
+  width: 14em;
+  left: 50%;
+  margin-left: -7em;
   bottom: 0;
-  margin-left: 4.6rem;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1.2rem;
-  border-radius: 0.4rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.65);
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  border-radius: 4rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   font-size: 1.4rem;
   line-height: 1.6rem;
   font-weight: 400;
-  background: rgba(255,255,255,0.8);
-  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  background: linear-gradient(#FFF,rgba(255,255,255,.5));
   backdrop-filter: blur(10px);
   color: $color-gray200;
   z-index: 100;
   box-sizing: border-box;
 
   @media (prefers-color-scheme: dark) {
-    background: rgba(26,26,26,0.8);
+    background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
     color: #FFF;
   }
 
   @media only screen and (max-width: $breakpoint) {
-    display: none;
+    margin-bottom: 2.4rem;
+  }
+
+  span {
+    font-weight: 700;
+    color: rgba(68,0,255,1);
+
+    @media (prefers-color-scheme: dark) {
+      color: rgba(255,214,51,1);
+    }
   }
 }
 
-#map-share {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: calc(100vw - 5.6rem);
-  max-width: 48rem;
-  margin-left: 4.6rem;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-  padding: 0.8rem 1.2rem 0;
-  border-radius: 0.4rem;
-  box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.65);
-  font-size: 1.4rem;
-  line-height: 1.6rem;
-  font-weight: 400;
-  background: rgba(255,255,255,0.8);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  color: $color-gray200;
-  z-index: 100;
-  box-sizing: border-box;
+#map {
+  .leaflet-control-zoom {
+    margin: 1.2rem;
 
-  @media only screen and (max-width: $breakpoint) {
-    display: none;
+    @media only screen and (max-width: $breakpoint) {
+      margin: 2.4rem;
+    }
   }
 
-  p {
-    margin-top: 0.4rem;
-  }
+  .leaflet-bar {
+    background: linear-gradient(#FFF,rgba(255,255,255,.5));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 4rem;
+    border: 0;
 
-  pre {
-    color: $color-gray300;
-    margin: -0.4rem -1.2rem 0;
-    padding: 1.2rem;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    background: #FFF;
-    border-radius: 0 0 0.4rem 0.4rem;
-  }
+    @media (prefers-color-scheme: dark) {
+      background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
+      color: #FFF;
+    }
+    }
+  .leaflet-bar a {
+    background-color: transparent;
+    border-bottom: 1px solid $color-gray500;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    color: $color-gray100;
+
+    @media (prefers-color-scheme: dark) {
+      border-color: $color-gray200;
+      color: $color-gray500;
+    }
+    }
+    .leaflet-bar a span {
+      position: relative;
+      top: -2px;
+    }
+  .leaflet-bar a:hover,
+  .leaflet-bar a:focus {
+    background-color: $color-gray600;
+
+    @media (prefers-color-scheme: dark) {
+     background-color: $color-gray200;
+    }
+    }
+  .leaflet-bar a:first-child {
+    border-top-left-radius: 4rem;
+    border-top-right-radius: 4rem;
+    padding-top: 0.2rem;
+    }
+  .leaflet-bar a:last-child {
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+    padding-bottom: 0.2rem;
+    border-bottom: 0;
+    }
+  .leaflet-bar a.leaflet-disabled {
+    background-color: transparent;
+    color: $color-gray400;
+   @media (prefers-color-scheme: dark) {
+     color: $color-gray300;
+    }
+    }
+
+  .leaflet-touch .leaflet-bar a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    }
+  .leaflet-touch .leaflet-bar a:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    }
+  .leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    }
 }
