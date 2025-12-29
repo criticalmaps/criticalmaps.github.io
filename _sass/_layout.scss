@@ -591,6 +591,7 @@ a.contribute {
 
 #map-count {
   position: fixed;
+  display: flex;
   width: 14em;
   left: 50%;
   margin-left: -7em;
@@ -618,12 +619,25 @@ a.contribute {
     margin-bottom: 2.4rem;
   }
 
-  span {
-    font-weight: 700;
-    color: rgba(68,0,255,1);
+  .map-count-online,
+  .map-count-visible {
+    display: block;
+    width: 100%;
+
+    span {
+      font-weight: 700;
+      color: rgba(68,0,255,1);
+
+      @media (prefers-color-scheme: dark) {
+        color: rgba(255,214,51,1);
+      }
+    }
+  }
+  .map-count-online {
+    border-right: 1px solid $color-gray500;
 
     @media (prefers-color-scheme: dark) {
-      color: rgba(255,214,51,1);
+      border-color: $color-gray300;
     }
   }
 }
