@@ -69,19 +69,19 @@ body {
 }
 
 .content {
-  a {
+  a:not(.button) {
     font-weight: 500;
-    color: $color-blue100;
+    color: $color-action-light;
     text-decoration: none;
     transition: all ease-out 0.2s;
 
     @media (prefers-color-scheme: dark) {
-      color: $color-yellow100;
+      color: $color-action-dark;
     }
 
     &:focus,
     &:hover {
-      text-decoration: underline;
+      border-bottom: 2px solid currentColor;
     }
   }
 
@@ -98,13 +98,14 @@ body {
       color: #FFF;
     }
 
-    a {
+    a:not(.button) {
       font-weight: inherit;
       color: inherit;
 
       &:focus,
       &:hover {
         text-decoration: none;
+        border: 0;
       }
     }
   }
@@ -243,6 +244,7 @@ body {
   i {
     font-weight: 400;
     font-style: italic;
+    font-family: ui-serif, Iowan Old Style, Apple Garamond, Baskerville, "Times New Roman", "Droid Serif", Times, "Source Serif Pro", serif;
   }
 
   b,
@@ -265,7 +267,7 @@ body {
   }
 
   mark {
-    background-color: $color-yellow100;
+    background-color: $color-action-dark;
   }
 
   pre {

@@ -246,17 +246,6 @@ body {
       font-size: 2.4rem;
       line-height: 1.5em;
     }
-
-    a {
-      font-weight: 600;
-      color: inherit;
-      text-decoration: none;
-
-      &:focus,
-      &:hover {
-        border-bottom: 2px solid currentColor;
-      }
-    }
   }
 
   .stage--buttongroup {
@@ -589,10 +578,10 @@ html.android .download .button-ios {
 
   span {
     font-weight: 700;
-    color: rgba(68,0,255,1);
+    color: $color-action-light;
 
     @media (prefers-color-scheme: dark) {
-      color: rgba(255,214,51,1);
+      color: $color-action-dark;
     }
   }
 }
