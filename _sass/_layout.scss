@@ -29,14 +29,10 @@ body {
 .wrapper {
   position: relative;
   z-index: 10;
-  padding: 8rem 0;
+  padding: calc(8vw + 4rem) 0;
 
-  @media only screen and (max-width: $breakpoint) {
-      padding-top: 4rem;
-  }
-
-  &.imprint {
-    padding-bottom: 24rem;
+  @media only screen and (min-width: $screen-large) {
+      padding-top: 16rem;
   }
 }
 
@@ -58,7 +54,7 @@ body {
     align-content: space-between;
     flex-direction: row;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
       padding: 0;
     }
 
@@ -75,7 +71,7 @@ body {
         background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
       }
 
-      @media only screen and (max-width: $breakpoint) {
+      @media only screen and (max-width: $screen-small) {
         flex-wrap: wrap;
         border-radius: 3.2rem;
         padding: 1.2rem;
@@ -90,7 +86,7 @@ body {
         margin-right: auto;
         align-content: center;
 
-        @media only screen and (max-width: $breakpoint) {
+        @media only screen and (max-width: $screen-small) {
           width: 12rem;
           order: 1;
         }
@@ -112,7 +108,7 @@ body {
         margin: 0 auto;
         align-content: center;
 
-        @media only screen and (max-width: $breakpoint) {
+        @media only screen and (max-width: $screen-small) {
           width: 100%;
           order: 3;
           flex-grow: 1;
@@ -126,7 +122,7 @@ body {
       margin-left: auto;
       margin-right: 0;
 
-      @media only screen and (max-width: $breakpoint) {
+      @media only screen and (max-width: $screen-small) {
         order: 2;
       }
     }
@@ -200,7 +196,7 @@ body {
         transition: all ease-out 0.2s;
         box-sizing: border-box;
 
-        @media only screen and (max-width: $breakpoint) {
+        @media only screen and (max-width: $screen-small) {
           padding: 1.2rem 1.6rem;
         }
 
@@ -258,7 +254,7 @@ body {
       display: flex;
       justify-content: space-between;
 
-      @media only screen and (max-width: $breakpoint) {
+      @media only screen and (max-width: $screen-small) {
         flex-direction: column;
         gap: 2rem;
       }
@@ -304,102 +300,94 @@ body {
 //============================================================
 
 .stage {
-  padding-top: 12rem;
   padding-bottom: 8rem;
 
-  @media only screen and (max-width: $breakpoint) {
-    padding-top: 4rem;
-  }
-}
-
-.stage .inner {
-  max-width: 96rem;
-}
-
-.stage--title {
-  position: relative;
-  margin-top: 0;
-  margin-bottom: 2rem;
-  font-size: 10rem;
-  line-height: 1em;
-  color: $color-gray100;
-  font-weight: 800;
-
-  @media (prefers-color-scheme: dark) {
-    color: #FFF;
-  }
-
-  @media only screen and (max-width: 64rem) {
+  .stage--title {
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 2rem;
     font-size: 10vw;
+    line-height: 1em;
+    color: $color-gray100;
+    font-weight: 800;
+
+    @media (prefers-color-scheme: dark) {
+      color: #FFF;
+    }
+
+    @media only screen and (min-width: $screen-large) {
+      font-size: 10rem;
+    }
+
+    @media only screen and (max-width: $screen-small) {
+      font-size: 9.5vw;
+      line-height: 1.25em;
+      font-weight: 900;
+    }
   }
 
-  @media only screen and (max-width: $breakpoint) {
-    font-size: 9.5vw;
-    line-height: 1.25em;
-  }
-}
-
-.stage--description {
-  position: relative;
-  margin-top: 0;
-  font-size: 3.2rem;
-  line-height: 1.5em;
-
-  @media only screen and (max-width: $breakpoint) {
-    font-size: 2.4rem;
+  .stage--description {
+    position: relative;
+    margin-top: 0;
+    font-size: 3.2rem;
     line-height: 1.5em;
-  }
 
-  a {
-    font-weight: 600;
-    color: inherit;
-    text-decoration: none;
-
-    &:focus,
-    &:hover {
-      border-bottom: 2px solid currentColor;
-    }
-  }
-}
-
-.stage--buttongroup {
-  display: inline-flex;
-  gap: 1.6rem;
-  z-index: 3;
-  width: 100%;
-  margin: 2rem auto 0;
-  flex-flow: wrap;
-
-  @media only screen and (max-width: $breakpoint) {
-      flex-direction: column;
-  }
-
-  .stage--button {
-    padding: 1rem 2.6rem 1rem 2.2rem;
-    width: auto;
-    gap: 1.2rem;
-
-    svg {
-      width: 3rem;
+    @media only screen and (max-width: $screen-small) {
+      font-size: 2.4rem;
+      line-height: 1.5em;
     }
 
-    .download-text--tagline {
-      font-size: 1.2rem;
-      line-height: 1em;
-      color: $color-gray300;
+    a {
+      font-weight: 600;
+      color: inherit;
+      text-decoration: none;
 
-      @media (prefers-color-scheme: dark) {
-        color: $color-gray400;
+      &:focus,
+      &:hover {
+        border-bottom: 2px solid currentColor;
       }
     }
+  }
 
-    .download-text--title {
-      font-size: 1.8rem;
-      line-height: 1.5em;
-      color: $color-gray100;
+  .stage--buttongroup {
+    display: inline-flex;
+    gap: 1.6rem;
+    z-index: 3;
+    width: 100%;
+    margin: 2rem auto 0;
+    flex-flow: wrap;
 
-      @media (prefers-color-scheme: dark) {
-        color: #FFF;
+    @media only screen and (max-width: $screen-small) {
+        flex-direction: column;
+    }
+
+    .stage--button {
+      padding: 1rem 2.6rem 1rem 2.2rem;
+      width: auto;
+      gap: 1.2rem;
+
+      svg {
+        width: 3rem;
+      }
+
+      .download-text--tagline {
+        font-size: 1.2rem;
+        line-height: 1em;
+        color: $color-gray300;
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-gray400;
+        }
+      }
+
+      .download-text--title {
+        font-size: 1.8rem;
+        line-height: 1.5em;
+        color: $color-gray100;
+
+        @media (prefers-color-scheme: dark) {
+          color: #FFF;
+        }
       }
     }
   }
@@ -484,7 +472,7 @@ html.android .download .button-ios {
     width: 100%;
     box-sizing: border-box;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
         padding: 0 2rem;
     }
   }
@@ -529,13 +517,16 @@ html.android .download .button-ios {
 //============================================================
 
 .contribute {
-  padding: 16rem 0 8rem;
+
+  @media only screen and (max-width: $screen-small) {
+    padding-top: 16rem;
+  }
 
   .contribute--introduction {
     font-size: 3.6rem;
     line-height: 1.5em;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
       font-size: 2.4rem;
       line-height: 1.5em;
     }
@@ -572,7 +563,7 @@ html.android .download .button-ios {
     pointer-events: none;
     color: $color-gray500;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
       right: -16rem;
     }
 
@@ -593,6 +584,11 @@ html.android .download .button-ios {
 //============================================================
 
 .donate {
+  padding: 8rem 0;
+
+  @media only screen and (max-width: $screen-small) {
+    padding-bottom: 2.4rem;
+  }
 
   .donate--introduction {
     padding: 5rem;
@@ -602,7 +598,7 @@ html.android .download .button-ios {
     font-size: 2.4rem;
     line-height: 1.5em;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
       font-size: 2rem;
       line-height: 1.5em;
       padding: 3rem;
@@ -677,7 +673,7 @@ html.android .download .button-ios {
     color: #FFF;
   }
 
-  @media only screen and (max-width: $breakpoint) {
+  @media only screen and (max-width: $screen-small) {
     margin-bottom: 2.4rem;
   }
 
@@ -695,7 +691,7 @@ html.android .download .button-ios {
   .leaflet-control-zoom {
     margin: 1.2rem;
 
-    @media only screen and (max-width: $breakpoint) {
+    @media only screen and (max-width: $screen-small) {
       margin: 2.4rem;
     }
   }
@@ -769,4 +765,16 @@ html.android .download .button-ios {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     }
+}
+
+//============================================================
+// Imprint
+//============================================================
+
+.imprint {
+  padding-top: calc(6vw + 2rem);
+
+  @media only screen and (min-width: $screen-large) {
+      padding-top: 8rem;
+  }
 }
