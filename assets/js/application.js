@@ -289,10 +289,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	bikeMap.on("moveend", function () {
 		saveHashToElements();
 		document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
+		document.getElementById('totalusers') && (document.getElementById('totalusers').textContent = currentMarkers.length);
 	}, this);
 	bikeMap.on("zoomend", function () {
 		saveHashToElements();
 		document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
+		document.getElementById('totalusers') && (document.getElementById('totalusers').textContent = currentMarkers.length);
 	}, this);
 
 	function setNewLocations(locationsArray) {
@@ -322,6 +324,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		// update visible counter right away
 		var el = document.getElementById('activeusers');
 		if (el) el.textContent = countMarkerInView();
+
+		// update total counter
+		var elTotal = document.getElementById('totalusers');
+		if (elTotal) elTotal.textContent = currentMarkers.length;
 	}
 
 
@@ -376,11 +382,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	setInterval(function () {
 		refreshLocationsFromServer();
 		var nBikes = countMarkerInView();
-		document.getElementById("activeusers").innerHTML = nBikes;
+		document.getElementById("activeusers").textContent = nBikes;
+		document.getElementById("totalusers").textContent = currentMarkers.length;
 	}, 60000);
-
 });
-
 
 $().ready(function () {
 	var isMobile = {
