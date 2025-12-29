@@ -298,10 +298,12 @@ pathName: mapPath
             }
         }
         bikeMap.on("moveend", function () {
-            saveHashToElements()
+            saveHashToElements();
+            document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
         }, this);
         bikeMap.on("zoomend", function () {
-            saveHashToElements()
+            saveHashToElements();
+            document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
         }, this);
 
         function setNewLocations(locationsArray) {
@@ -325,10 +327,12 @@ pathName: mapPath
                     className: 'map-marker-bike'
                 }).addTo(bikeMap);
 
-                // click handler removed
-
                 currentMarkers.push(circle);
             });
+
+            // update visible counter right away
+            var el = document.getElementById('activeusers');
+            if (el) el.textContent = countMarkerInView();
         }
 
 
