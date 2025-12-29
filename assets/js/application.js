@@ -6,6 +6,25 @@ document.addEventListener('DOMContentLoaded', function () {
 	// before bikeMap existed ("t.addLayer" -> internal map object was undefined).
 	var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13 }).setView([52.468209, 13.425995], 3);
 
+	// Create additional Control placeholders (vertical center left/right)
+	function addControlPlaceholders(map) {
+		var corners = map._controlCorners,
+			l = 'leaflet-',
+			container = map._controlContainer;
+
+		function createCorner(vSide, hSide) {
+			var className = l + vSide + ' ' + l + hSide;
+			corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+		}
+
+		createCorner('verticalcenter', 'left');
+		createCorner('verticalcenter', 'right');
+	}
+	addControlPlaceholders(bikeMap);
+
+	// add zoom control to vertical center left
+	new L.Control.Zoom({ position: 'verticalcenterleft' }).addTo(bikeMap);
+
 	// map style URLs (change darkStyle if you have a preferred dark theme)
 	var MAPTILER_KEY = 'veX8Oi3lr3dolNkIbcRT';
 	var lightStyleUrl = 'https://api.maptiler.com/maps/basic-v2/style.json?key=' + MAPTILER_KEY;
@@ -43,7 +62,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 	}
 
-	new L.Control.Zoom({ position: 'bottomleft' }).addTo(bikeMap);
 	var hash = new L.Hash(bikeMap);
 
 	// create a shared SVG renderer and add it to the map so all circleMarkers live in the same <svg>
@@ -385,6 +403,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.getElementById("activeusers").textContent = nBikes;
 		document.getElementById("totalusers").textContent = currentMarkers.length;
 	}, 60000);
+
 });
 
 $().ready(function () {
