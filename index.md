@@ -38,15 +38,11 @@ pathName: rootPath
   </div>
 </div>
 
-<div class="wrapper screenshot">
+<div class="wrapper map">
   <div class="inner">
-      <div class="screenshot-wrapper">
-      <figure>
-        <picture>
-            <source srcset="/assets/images/screenshot-app-dark.webp" media="(prefers-color-scheme: dark)">
-            <img src="/assets/images/screenshot-app-light.webp" width="375" height="812" alt="Critical Maps App Screeenshot" />
-        </picture>
-      </figure>
+      <div class="map-wrapper">
+        <div id="map-count">Online in visible area: <span id="activeusers"></span></div>
+        <div id="map"></div>
       </div>
   </div>
 </div>

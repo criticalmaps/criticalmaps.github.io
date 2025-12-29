@@ -304,10 +304,10 @@ html.android .download .button-ios {
 
 
 //============================================================
-// Screenshot
+// Map
 //============================================================
 
-.screenshot {
+.map {
   position: relative;
   z-index: 200;
   padding: 0;
@@ -317,9 +317,9 @@ html.android .download .button-ios {
     position: absolute;
     z-index: -1;
     left: 0;
-    top: 6rem;
+    top: 4rem;
     width: 100%;
-    height: calc(100% - 6rem);
+    height: calc(100% - 4rem);
     background-attachment: scroll;
     background-image: 
       repeating-linear-gradient(90deg, #ffffff22 0 1px, #0000 1px 25px), 
@@ -345,6 +345,10 @@ html.android .download .button-ios {
       25px 25px, 
       100px 100px, 
       100px 100px;
+    
+    @media only screen and (max-width: $screen-small) {
+      display: none;
+    }
   }
 
   &::after {
@@ -352,10 +356,10 @@ html.android .download .button-ios {
     position: absolute;
     z-index: -2;
     left: 0;
-    top: 6rem;
+    top: 4rem;
     width: 100%;
-    height: calc(100% - 6rem);
-    background-color: #000;
+    height: calc(100% - 4rem);
+    background-color: $color-action-light;
     background-image: url('../images/screenshot-background-light.webp');
     background-position: top center;
     background-size: cover;
@@ -363,50 +367,39 @@ html.android .download .button-ios {
     background-attachment: scroll;
 
     @media (prefers-color-scheme: dark) {
+      background-color: $color-action-dark;
       background-image: url('../images/screenshot-background-dark.webp');
+    }
+
+    @media only screen and (max-width: $screen-small) {
+      background-image: none;
     }
   }
 
-  .screenshot-wrapper { 
+  .map-wrapper {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
 
-    @media only screen and (max-width: $screen-small) {
-        padding: 0 2rem;
-    }
-  }
-
-  figure {
-    position: relative;
-    margin: 0 0 -4rem;
-    width: 100%;
-    max-width: 40rem;
-    z-index: 2;
-
-    picture {
-      display: block;
-      overflow: hidden;
-      border-radius: 4rem;
+    @media only screen and (min-width: $screen-large) {
+      width: calc(100% + 4.8rem);
+      margin-left: -2.4rem;
+      margin-right: -2.4rem;
     }
 
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      margin: 0;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
+    #map {
+      padding-bottom: calc(100% / 3 * 2);
+      margin-bottom: -4rem;
+      border-radius: 2rem;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08), 0px 16px 24px -4px rgba(0, 0, 0, 0.1), 0px 32px 48px -8px rgba(0, 0, 0, 0.12);
-      box-sizing: border-box;
-      border-radius: 4rem;
-      pointer-events: none;
+
+      @media only screen and (max-width: $screen-small) {
+        padding-bottom: 125%;
+      }
+    }
+
+    #map-count {
+      position: absolute;
     }
   }
 }
@@ -606,7 +599,7 @@ html.android .download .button-ios {
       background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
       color: #FFF;
     }
-    }
+  }
   .leaflet-bar a {
     background-color: transparent;
     border-bottom: 1px solid $color-gray500;
@@ -619,11 +612,11 @@ html.android .download .button-ios {
       border-color: $color-gray200;
       color: $color-gray500;
     }
-    }
-    .leaflet-bar a span {
-      position: relative;
-      top: -2px;
-    }
+  }
+  .leaflet-bar a span {
+    position: relative;
+    top: -2px;
+  }
   .leaflet-bar a:hover,
   .leaflet-bar a:focus {
     background-color: $color-gray600;
@@ -631,39 +624,40 @@ html.android .download .button-ios {
     @media (prefers-color-scheme: dark) {
      background-color: $color-gray200;
     }
-    }
+  }
   .leaflet-bar a:first-child {
     border-top-left-radius: 4rem;
     border-top-right-radius: 4rem;
     padding-top: 0.2rem;
-    }
+  }
   .leaflet-bar a:last-child {
     border-bottom-left-radius: 4rem;
     border-bottom-right-radius: 4rem;
     padding-bottom: 0.2rem;
     border-bottom: 0;
-    }
+  }
   .leaflet-bar a.leaflet-disabled {
     background-color: transparent;
     color: $color-gray400;
-   @media (prefers-color-scheme: dark) {
+
+    @media (prefers-color-scheme: dark) {
      color: $color-gray300;
     }
-    }
+  }
 
   .leaflet-touch .leaflet-bar a {
     width: 30px;
     height: 30px;
     line-height: 30px;
-    }
+  }
   .leaflet-touch .leaflet-bar a:first-child {
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
-    }
+  }
   .leaflet-touch .leaflet-bar a:last-child {
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    }
+  }
 }
 
 //============================================================
