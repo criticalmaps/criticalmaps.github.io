@@ -4,7 +4,10 @@ title: "Critical Maps - Map"
 pathName: mapPath
 ---
 
-<div id="map-count">Online in visible area: <span id="activeusers"></span></div>
+<div id="map-count">
+    <span class="map-count-online">Online: <span id="totalusers" class="map-count-number">0</span></span>
+    <span class="map-count-visible">Visible: <span id="activeusers" class="map-count-number">0</span></span>
+</div>
 
 <div id="map"></div>
 
@@ -300,10 +303,12 @@ pathName: mapPath
         bikeMap.on("moveend", function () {
             saveHashToElements();
             document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
+            document.getElementById('totalusers') && (document.getElementById('totalusers').textContent = currentMarkers.length);
         }, this);
         bikeMap.on("zoomend", function () {
             saveHashToElements();
             document.getElementById('activeusers') && (document.getElementById('activeusers').textContent = countMarkerInView());
+            document.getElementById('totalusers') && (document.getElementById('totalusers').textContent = currentMarkers.length);
         }, this);
 
         function setNewLocations(locationsArray) {
@@ -333,6 +338,10 @@ pathName: mapPath
             // update visible counter right away
             var el = document.getElementById('activeusers');
             if (el) el.textContent = countMarkerInView();
+
+            // update total counter
+            var elTotal = document.getElementById('totalusers');
+            if (elTotal) elTotal.textContent = currentMarkers.length;
         }
 
 
@@ -387,7 +396,8 @@ pathName: mapPath
         setInterval(function () {
             refreshLocationsFromServer();
             var nBikes = countMarkerInView();
-            document.getElementById("activeusers").innerHTML = nBikes;
+            document.getElementById("activeusers").textContent = nBikes;
+            document.getElementById("totalusers").textContent = currentMarkers.length;
         }, 60000);
 
     });
