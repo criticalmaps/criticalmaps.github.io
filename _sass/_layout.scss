@@ -42,181 +42,93 @@ body {
 //	Navigation
 //============================================================
 
-#navigation {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 1.2rem;
-    z-index: 9999;
-    box-sizing: border-box;
+.navigation {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  box-sizing: border-box;
+  background: linear-gradient(#FFF,rgba(255,255,255,.5));
+  backdrop-filter: blur(10px);
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
+  }
+
+  .inner {
     display: flex;
-    align-content: space-between;
-    flex-direction: row;
+    padding: 2.4rem;
+  }
 
-    @media only screen and (max-width: $screen-small) {
-      padding: 0;
-    }
-
-    .inner {
-      max-width: 96rem;
-      display: flex;
-      flex-grow: 1;
-      padding: 1.2rem 1.6rem;
-      border-radius: 8rem;
-      background: linear-gradient(#FFF,rgba(255,255,255,.5));
-      backdrop-filter: blur(10px);
-
-      @media (prefers-color-scheme: dark) {
-        background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
-      }
-
-      @media only screen and (max-width: $screen-small) {
-        flex-wrap: wrap;
-        border-radius: 3.2rem;
-        padding: 1.2rem;
-        border-radius: 0;
-      }
-    }
-
-    .nav-logo {
-        width: 14rem;
-        flex-shrink: 0;
-        margin-left: 0;
-        margin-right: auto;
-        align-content: center;
-
-        @media only screen and (max-width: $screen-small) {
-          width: 12rem;
-          order: 1;
-        }
-
-        a {
-            display: block;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-    }
-
-    .nav-primary {
-        margin: 0 auto;
-        align-content: center;
-
-        @media only screen and (max-width: $screen-small) {
-          width: 100%;
-          order: 3;
-          flex-grow: 1;
-          margin-top: 0.8rem;
-        }
-    }
-
-    .nav-secondary {
-      display: flex;
+  .nav-logo {
+      width: 14rem;
+      flex-shrink: 0;
+      margin-left: 0;
+      margin-right: auto;
       align-content: center;
-      margin-left: auto;
-      margin-right: 0;
-
-      @media only screen and (max-width: $screen-small) {
-        order: 2;
-      }
-    }
-
-    .nav-button {
-      font-size: 1.6rem;
-      margin: auto 0.4rem;
-      padding: 1rem 1.6rem;
-      font-size: 1.5rem;
-      line-height: 2rem;
-      font-weight: 700;
-      color: $color-gray100;
-      background: rgba(0,0,0,.05);
-      border-radius: 4rem;
-      text-decoration: none;
-      transition: all ease-out 0.2s;
-      white-space: nowrap;
-
-      svg {
-        width: 1.6rem;
-        vertical-align: middle;
-        display: inline-block;
-      }
-
-      span {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 0.4rem;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        color: $color-gray500;
-        background: rgba(255,255,255,0.05);
-      }
-
-      &:hover,
-      &:focus {
-        color: $color-gray100;
-        background: rgba(0,0,0,0.1);
-        transform: scale3d(1.01,1.01,1);
-
-        @media (prefers-color-scheme: dark) {
-          color: $color-gray600;
-          background: rgba(255,255,255,0.1);
-          box-shadow: 0 0 4px rgba(255,255,255,.05), 0 0 8px rgba(255,255,255,.05), inset 0 0 2px rgba(255,255,255,.1);
-        }
-      }
-    }
-
-
-  ul {
-      display: flex;
-      justify-content: space-around;
-      flex-direction: row;
-      margin: 0;
-      padding: 0;
-
-    li {
-      display: flex;
 
       a {
-        position: relative;
-        display: block;
-        font-size: 1.5rem;
-        line-height: 2rem;
-        padding: 1.6rem 2.4rem;
-        font-weight: 500;
-        text-decoration: none;
-        text-align: center;
-        color: $color-gray400;
-        transition: all ease-out 0.2s;
-        box-sizing: border-box;
+          display: block;
+          text-decoration: none;
+          color: inherit;
+      }
 
-        @media only screen and (max-width: $screen-small) {
-          padding: 1.2rem 1.6rem;
-        }
+      img {
+          display: block;
+          width: 100%;
+          height: auto;
+      }
+  }
 
-        &:hover,
-        &:focus {
-          color: $color-gray300;
+  .nav-github {
+    display: flex;
+    align-content: center;
+    margin-left: auto;
+    margin-right: 0;
+  }
 
-          @media (prefers-color-scheme: dark) {
-            color: #FFF;
-          }
-        }
+  .nav-button {
+    font-size: 1.6rem;
+    margin: auto 0.4rem;
+    padding: 1rem 1.6rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    color: $color-gray100;
+    background: rgba(0,0,0,.05);
+    border-radius: 4rem;
+    text-decoration: none;
+    transition: all ease-out 0.2s;
+    white-space: nowrap;
 
-        &.active {
-          font-weight: 700;
-          color: $color-gray200;
+    svg {
+      width: 1.6rem;
+      vertical-align: middle;
+      display: inline-block;
+    }
 
-          @media (prefers-color-scheme: dark) {
-            color: #FFF;
-          }
-        }
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 0.4rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-gray500;
+      background: rgba(255,255,255,0.05);
+    }
+
+    &:hover,
+    &:focus {
+      color: $color-gray100;
+      background: rgba(0,0,0,0.1);
+      transform: scale3d(1.01,1.01,1);
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray600;
+        background: rgba(255,255,255,0.1);
+        box-shadow: 0 0 4px rgba(255,255,255,.05), 0 0 8px rgba(255,255,255,.05), inset 0 0 2px rgba(255,255,255,.1);
       }
     }
   }
@@ -224,19 +136,17 @@ body {
 
 .mapPath {
 
-    #navigation {
-      position: absolute;
+  .navigation {
+    position: absolute;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 
-      .inner {
-          background: linear-gradient(#FFF,rgba(255,255,255,.5));
-          backdrop-filter: blur(10px);
-          box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-
-          @media (prefers-color-scheme: dark) {
-            background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
-          }
+    .inner {
+        
+      @media only screen and (max-width: $screen-small) {
+        padding: 1.2rem;
+      }
     }
-    }
+  }
 }
 
 //============================================================

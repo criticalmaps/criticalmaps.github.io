@@ -85,7 +85,7 @@
 
 <body>
 
-  <header id="navigation">
+  <header id="navigation" class="navigation">
     <div class="inner">
       <div class="nav-logo">
         <a href="/">
@@ -95,26 +95,11 @@
           </picture>
         </a>
       </div>
-      <nav class="nav-primary">
-        <ul>
-          <li class="label">
-            <a class="{% if page.pathName == "rootPath" %} active {% endif %}" href=" /">
-              App
-            </a>
-          </li>
-          <li class="label">
-            <a class="{% if page.pathName == "mapPath" %} active {% endif %} hash-append" href="/map"
-              data-template="/map${hash}">
-              Map
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <nav class="nav-secondary">
+      <div class="nav-github">
         <a class="nav-button" href="https://github.com/criticalmaps" target="_blank" rel="noopener" title="Critical Maps GitHub">
           {% include icon-github.svg %} <span>GitHub</span>
         </a>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -128,6 +113,11 @@
           <li>
             <a class="{% if page.pathName == "infoPath" %} active {% endif %}" href="/info">
               Imprint
+            </a>
+          </li>
+          <li>
+            <a class="{% if page.pathName == "mapPath" %} active {% endif %}" href="/map">
+              Map
             </a>
           </li>
           <li>
