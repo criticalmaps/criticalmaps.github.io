@@ -144,15 +144,15 @@ pathName: infoPath
 			<li><a href="https://github.com/weliveindetail">Stefan Gränitz</a> <small>(Web)</small></li>
 		</ul>
 		<h2><a name="Impressum">Imprint</a></h2>
-		<p>Angaben gemäß § 5 TMG</p>
+		<p>Angaben gemäß § 5 TMG:</p>
 		<pre>Stephan Lindauer
 Grellstr. 5A
-10409 Berlin</pre>
+10409 Berlin
+<a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></pre>
+
 		<p>Vertreten durch: Stephan Lindauer und Norman Sander</p>
-		<p>Kontakt: <a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></p>
 
 		<h2><a name="Haftungsausschluss">Haftungsausschluss</a></h2>
-
 		<h3>Haftung für Inhalte</h3>
 		<p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
 			Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7
@@ -201,10 +201,7 @@ Grellstr. 5A
 
 		<h2><a name="Datenschutzerklärung">Datenschutzerklärung</a></h2>
 		<p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung
-			(DSGVO), ist:</p>
-		<pre>Stephan Lindauer
-Grellstr. 5A
-10409 Berlin</pre>
+			(DSGVO), ist: Stephan Lindauer, Grellstr. 5A, 10409 Berlin</p>
 
 		<h3>Geltungsbereich</h3>
 		<p>Diese Datenschutzerklärung klärt Nutzer über die Art, den Umfang und Zwecke der Erhebung und Verwendung
@@ -237,15 +234,9 @@ Grellstr. 5A
 			einwilligen.</p>
 
 		<h3>Kontaktaufnahme</h3>
-		<p>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per Kontaktformular oder E-Mail) werden die Angaben
+		<p>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per E-Mail) werden die Angaben
 			des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.
 		</p>
-
-		<h3>Kommentare und Beiträge</h3>
-		<p>Wenn Nutzer Kommentare im Blog oder sonstige Beiträge hinterlassen, werden ihre IP-Adressen gespeichert. Das
-			erfolgt zur Sicherheit des Anbieters, falls jemand in Kommentaren und Beiträgen widerrechtliche Inhalte
-			schreibt (Beleidigungen, verbotene politische Propaganda, etc.). In diesem Fall kann der Anbieter selbst für
-			den Kommentar oder Beitrag belangt werden und ist daher an der Identität des Verfassers interessiert.</p>
 
 		<h3>Einbindung von Diensten und Inhalten Dritter</h3>
 		<p>Es kann vorkommen, dass innerhalb dieses Onlineangebotes Inhalte Dritter, wie zum Beispiel Videos von
@@ -263,9 +254,6 @@ Grellstr. 5A
 			über ihn gespeichert wurden. Zusätzlich hat der Nutzer das Recht auf Berichtigung unrichtiger Daten,
 			Sperrung und Löschung seiner personenbezogenen Daten, soweit dem keine gesetzliche Aufbewahrungspflicht
 			entgegensteht.</p>
-		<p><a
-				href="http://rechtsanwalt-schwenke.de/smmr-buch/datenschutz-muster-generator-fuer-webseiten-blogs-und-social-media/">Datenschutz-Muster
-				von Rechtsanwalt Thomas Schwenke</a></p>
 
 		<h3>Ihre Betroffenenrechte</h3>
 		<p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte
@@ -345,22 +333,6 @@ Grellstr. 5A
 			Hilfefunktionen Ihres Internetbrowsers, um zu erfahren, wie Sie diese Einstellungen ändern können. Bitte
 			beachten Sie, dass einzelne Funktionen unserer Website möglicherweise nicht funktionieren, wenn Sie die
 			Verwendung von Cookies deaktiviert haben.</p>
-
-		<h3>Eingebettete YouTube-Videos</h3>
-		<p>Auf einigen unserer Webseiten betten wir Youtube-Videos ein. Betreiber der entsprechenden Plugins ist die
-			YouTube, LLC, 901 Cherry Ave., San Bruno, CA 94066, USA. Wenn Sie eine Seite mit dem YouTube-Plugin
-			besuchen, wird eine Verbindung zu Servern von Youtube hergestellt. Dabei wird Youtube mitgeteilt, welche
-			Seiten Sie besuchen. Wenn Sie in Ihrem Youtube-Account eingeloggt sind, kann Youtube Ihr Surfverhalten Ihnen
-			persönlich zuzuordnen. Dies verhindern Sie, indem Sie sich vorher aus Ihrem Youtube-Account ausloggen.</p>
-		<p>Wird ein Youtube-Video gestartet, setzt der Anbieter Cookies ein, die Hinweise über das Nutzerverhalten
-			sammeln.</p>
-		<p>Wer das Speichern von Cookies für das Google-Ad-Programm deaktiviert hat, wird auch beim Anschauen von
-			Youtube-Videos mit keinen solchen Cookies rechnen müssen. Youtube legt aber auch in anderen Cookies
-			nicht-personenbezogene Nutzungsinformationen ab. Möchten Sie dies verhindern, so müssen Sie das Speichern
-			von Cookies im Browser blockieren.</p>
-		<p>Weitere Informationen zum Datenschutz bei „Youtube“ finden Sie in der Datenschutzerklärung des Anbieters
-			unter: <a href="https://www.google.de/intl/de/policies/privacy/" target="_blank"
-				rel="noopener">https://www.google.de/intl/de/policies/privacy/ </a></p>
 
 		<h3>Änderung unserer Datenschutzbestimmungen</h3>
 		<p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen
