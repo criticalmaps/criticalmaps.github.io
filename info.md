@@ -150,7 +150,7 @@ Grellstr. 5A
 10409 Berlin
 <a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></pre>
 
-		<p>Vertreten durch: Stephan Lindauer und Norman Sander</p>
+		<p>Vertreten durch: <strong>Stephan Lindauer</strong> und <strong>Norman Sander</strong></p>
 
 		<h2><a name="Haftungsausschluss">Haftungsausschluss</a></h2>
 		<h3>Haftung für Inhalte</h3>
@@ -164,7 +164,6 @@ Grellstr. 5A
 			konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese
 			Inhalte umgehend entfernen.</p>
 
-
 		<h3>Haftung für Links</h3>
 		<p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
 			Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
@@ -173,7 +172,6 @@ Grellstr. 5A
 			Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
 			jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
 			Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-
 
 		<h3>Urheberrecht</h3>
 		<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
@@ -185,10 +183,9 @@ Grellstr. 5A
 			Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von
 			Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
 
-
 		<h3>Datenschutz</h3>
 		<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren
-			Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt
+			Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt
 			dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung
 			nicht an Dritte weitergegeben.</p>
 		<p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail)
@@ -205,7 +202,7 @@ Grellstr. 5A
 
 		<h3>Geltungsbereich</h3>
 		<p>Diese Datenschutzerklärung klärt Nutzer über die Art, den Umfang und Zwecke der Erhebung und Verwendung
-			personenbezogener Daten durch den verantwortlichen Anbieter Stephan Lindauer (stephanlindauer@posteo.de)
+			personenbezogener Daten durch den verantwortlichen Anbieter Stephan Lindauer (<a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a>)
 			auf. Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem
 			Telemediengesetz (TMG).</p>
 
@@ -235,8 +232,7 @@ Grellstr. 5A
 
 		<h3>Kontaktaufnahme</h3>
 		<p>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per E-Mail) werden die Angaben
-			des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.
-		</p>
+			des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.</p>
 
 		<h3>Einbindung von Diensten und Inhalten Dritter</h3>
 		<p>Es kann vorkommen, dass innerhalb dieses Onlineangebotes Inhalte Dritter, wie zum Beispiel Videos von
@@ -276,8 +272,7 @@ Grellstr. 5A
 			finden Sie unter: <a
 				href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html"
 				target="_blank"
-				rel="noopener">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.
-		</p>
+				rel="noopener">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
 
 		<h3>Zwecke der Datenverarbeitung durch die verantwortliche Stelle und Dritte</h3>
 		<p>Wir verarbeiten Ihre personenbezogenen Daten nur zu den in dieser Datenschutzerklärung genannten Zwecken.
