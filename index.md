@@ -9,7 +9,7 @@ pathName: rootPath
       <div class="stage--content content">
         <h1 class="stage--title">Navigating crowds in urban spaces</h1>
         <p class="stage--description">Critical Maps helps organising people world wide to coordinate direct action like the <a href="https://en.wikipedia.org/wiki/Critical_Mass_(cycling)" target="_blank" rel="noopener" title="Critical Mass Wikipedia article">Critical Mass</a> cycling movement.</p>
-        <p class="stage--buttongroup buttongroup">
+        <p class="stage--download">
           <a class="stage--button button-ios button" href="https://itunes.apple.com/app/critical-maps/id918669647" target="_blank" rel="noopener">
             {% include icon-appstore.svg %}
             <span class="download-text button-text">

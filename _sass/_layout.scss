@@ -248,7 +248,7 @@ body {
     }
   }
 
-  .stage--buttongroup {
+  .stage--download {
     display: inline-flex;
     gap: 1.6rem;
     z-index: 3;
@@ -259,46 +259,85 @@ body {
     @media only screen and (max-width: $screen-small) {
         flex-direction: column;
     }
+  }
 
-    .stage--button {
-      padding: 1rem 2.6rem 1rem 2.2rem;
-      width: auto;
-      gap: 1.2rem;
+  .stage--button {
+    padding: 1rem 2.6rem 1rem 2.2rem;
+    width: auto;
+    gap: 1.2rem;
 
-      svg {
-        width: 3rem;
+    svg {
+      width: 3rem;
+    }
+
+    .download-text--tagline {
+      font-size: 1.2rem;
+      line-height: 1em;
+      color: $color-gray300;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray400;
       }
+    }
 
-      .download-text--tagline {
-        font-size: 1.2rem;
-        line-height: 1em;
-        color: $color-gray300;
+    .download-text--title {
+      font-size: 1.8rem;
+      line-height: 1.5em;
+      color: $color-gray100;
 
-        @media (prefers-color-scheme: dark) {
-          color: $color-gray400;
-        }
-      }
-
-      .download-text--title {
-        font-size: 1.8rem;
-        line-height: 1.5em;
-        color: $color-gray100;
-
-        @media (prefers-color-scheme: dark) {
-          color: #FFF;
-        }
+      @media (prefers-color-scheme: dark) {
+        color: #FFF;
       }
     }
   }
 }
 
-html.ios .download .button-android,
-html.ios .f-droid {
-  display: none;
+html.ios,
+html.android {
+
+  // Add arrow decoration to platform-specific download buttons
+  .stage--button {
+    position: relative;
+    
+    &::after {
+      content: '→';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 4rem;
+      height: 4rem;
+      margin: 1rem;
+      line-height: 4rem;
+      text-align: center;
+      font-size: 2.4rem;
+      color: white;
+      background: $color-action-light;
+      border-radius: 4rem;
+      pointer-events: none;
+
+      @media (prefers-color-scheme: dark) {
+        color: black;
+        background: $color-action-dark
+      }
+    }
+  }
 }
 
-html.android .download .button-ios {
-  display: none;
+html.ios {
+
+  // Hide Android and F-Droid buttons on iOS devices
+  .button-android,
+  .button-fdroid {
+    display: none;
+  }
+}
+
+html.android {
+
+  // Hide iOS button on Android devices
+  .button-ios {
+    display: none;
+  }
 }
 
 
