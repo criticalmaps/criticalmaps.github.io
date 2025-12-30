@@ -482,20 +482,123 @@ html.android .download .button-ios {
     padding-bottom: 2.4rem;
   }
 
-  .donate--introduction {
-    padding: 5rem;
-    border-radius: 6rem;
-    background: linear-gradient(180deg, #52BBF7 0%, #2FA8EE 100%);
+  .donate-wrapper {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: 2rem;
+
+    @media only screen and (min-width: $screen-large) {
+      width: calc(100% + 4.8rem);
+      margin-left: -2.4rem;
+      margin-right: -2.4rem;
+    }
+  }
+
+  .donate--box {
+    grid-column: span 6;
+    padding: 3rem;
+    border-radius: 2rem;
+    box-sizing: border-box;
+
+    @media only screen and (max-width: $screen-small) {
+      grid-column: span 12;
+    }
+  }
+
+  .donate--decoration {
+    grid-row: span 9;
+    background-image: url('../images/donate-background-light.webp');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+
+    @media (prefers-color-scheme: dark) {
+      background-image: url('../images/donate-background-dark.webp');
+    }
+  }
+
+  .donate--statistics {
+    grid-row: span 3;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    background: $color-highlight;
     color: white;
-    font-size: 2.4rem;
+
+    .donate--statistics-label {
+      flex-grow: 0;
+      background: rgba(0,0,0,.15);
+      color: white;
+      margin-right: auto;
+      padding: 0.6em 1.2em;
+      border-radius: 4rem;
+      font-size: 0.9em;
+      line-height: 1em;
+      font-weight: 600;
+      letter-spacing: 5%;
+      text-transform: uppercase;
+
+      svg {
+        width: 2.4rem;
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.4em;
+      }
+    }
+    
+    .donate--statistics-value {
+      margin-top: auto;
+      font-size: 1.8em;
+      line-height: 1.333em;
+      font-weight: 500;
+
+      @media only screen and (max-width: $screen-small) {
+        font-size: 1.4em;
+      }
+
+      strong {
+        font-weight: 900;
+      }
+    }
+  }
+
+  .donate--introduction {
+    grid-row: span 10;
+    background: $color-gray100;
+    color: $color-gray500;
+    font-size: 1.6em;
     line-height: 1.5em;
 
     @media only screen and (max-width: $screen-small) {
-      font-size: 2rem;
-      line-height: 1.5em;
-      padding: 3rem;
-      border-radius: 4rem;
+      font-size: 1.3em;
     }
+
+    *:first-child {
+      margin-top: 0;
+    }
+
+    *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+ .donate--action {
+  grid-row: span 2;
+  background: transparent;
+  border: 3px dashed rgb(60, 214, 114);
+  font-size: 1.2em;
+  line-height: 1.5em;
+
+  @media only screen and (max-width: $screen-small) {
+    font-size: 1.1em;
+  }
 
     *:first-child {
       margin-top: 0;
@@ -506,9 +609,7 @@ html.android .download .button-ios {
     }
 
     .donate--button {
-      background: transparent;
-      border-color: #fff;
-      color: #fff;
+
     }
 
     .donate--button-title {
