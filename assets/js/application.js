@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
 	// before bikeMap existed ("t.addLayer" -> internal map object was undefined).
-	var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13 }).setView([52.468209, 13.425995], 3);
+	var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13, scrollWheelZoom: false }).setView([52.468209, 13.425995], 3);
 
 	// Create additional Control placeholders (vertical center left/right)
 	function addControlPlaceholders(map) {

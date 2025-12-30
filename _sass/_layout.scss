@@ -524,13 +524,17 @@ html.android .download .button-ios {
     display: flex;
     flex-direction: column;
     gap: 1.2rem;
-    background: $color-highlight;
+    background: $color-action-light;
     color: white;
+
+    @media (prefers-color-scheme: dark) {
+      background: $color-action-dark;
+      color: black;
+    }
 
     .donate--statistics-label {
       flex-grow: 0;
       background: rgba(0,0,0,.15);
-      color: white;
       margin-right: auto;
       padding: 0.6em 1.2em;
       border-radius: 4rem;
@@ -575,6 +579,11 @@ html.android .download .button-ios {
     color: $color-gray500;
     font-size: 1.6em;
     line-height: 1.5em;
+
+    @media (prefers-color-scheme: dark) {
+      background: $color-gray200;
+      color: $color-gray600;
+    }
 
     @media only screen and (max-width: $screen-small) {
       font-size: 1.3em;
