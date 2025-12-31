@@ -511,17 +511,17 @@ html.android {
 }
 
 //============================================================
-// Donate
+// sponsor
 //============================================================
 
-.donate {
+.sponsor {
   padding: 8rem 0;
 
   @media only screen and (max-width: $screen-small) {
     padding-bottom: 2.4rem;
   }
 
-  .donate-wrapper {
+  .sponsor-wrapper {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-auto-flow: dense;
@@ -534,7 +534,7 @@ html.android {
     }
   }
 
-  .donate--box {
+  .sponsor-box {
     position: relative;
     grid-column: span 6;
     display: flex;
@@ -549,7 +549,7 @@ html.android {
       grid-column: span 12;
     }
 
-    .donate--box-label {
+    .sponsor-box--label {
       position: relative;
       z-index: 20;
       flex-grow: 0;
@@ -575,7 +575,7 @@ html.android {
       }
     }
 
-    .donate--box-value {
+    .sponsor-box--value {
 
       *:first-child {
         margin-top: 0;
@@ -587,20 +587,20 @@ html.android {
     }
   }
 
-  .donate--decoration {
+  .sponsor-box--decoration {
     grid-row: span 9;
-    background-image: url('../images/donate-background-light.webp');
+    background-image: url('../images/sponsor-background-light.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
 
     @media (prefers-color-scheme: dark) {
-      background-image: url('../images/donate-background-dark.webp');
+      background-image: url('../images/sponsor-background-dark.webp');
     }
   }
 
-  .donate--statistics {
+  .sponsor-box--statistics {
     grid-row: span 3;
     background: $color-action-light;
     color: white;
@@ -610,7 +610,7 @@ html.android {
       color: black;
     }
 
-    .donate--statistics-background {
+    .sponsor-box--background {
       position: absolute;
       z-index: 10;
       left: 0;
@@ -627,7 +627,7 @@ html.android {
       }
     }
 
-    .donate--statistics-label {
+    .sponsor-box--label {
       background: rgba(0,0,0,.2);
       backdrop-filter: blur(5px);
 
@@ -636,7 +636,7 @@ html.android {
       }
     }
     
-    .donate--statistics-value {
+    .sponsor-box--value {
       position: relative;
       z-index: 20;
       margin-top: auto;
@@ -655,12 +655,12 @@ html.android {
     }
   }
 
-  .donate--introduction {
+  .sponsor-box--introduction {
     grid-row: span 8;
     background: $color-gray200;
     color: $color-gray600;
 
-    .donate--introduction-label {
+    .sponsor-box--label {
       background: $color-gray100;
 
       svg {
@@ -668,7 +668,7 @@ html.android {
       }
     }
 
-    .donate--introduction-value {
+    .sponsor-box--value {
       font-size: 1.6em;
       line-height: 1.5em;
 
@@ -678,18 +678,18 @@ html.android {
     }
   }
 
-  .donate--action {
+  .sponsor-box--collective {
     grid-row: span 4;
     background: transparent;
     color: $color-gray100;
     background: rgb(229, 243, 255);
 
-    .donate--action-label {
+    .sponsor-box--label {
       color: rgb(16, 65, 163);
       background: white
     }
 
-    .donate--action-value {
+    .sponsor-box--value {
       font-size: 1.1em;
       line-height: 1.5em;
 
@@ -698,7 +698,7 @@ html.android {
       }
     }
 
-    .donate--button {
+    .button {
       border: 0;
       background: rgb(16, 65, 163);
       color: white;
@@ -709,7 +709,7 @@ html.android {
       }
     }
 
-    .donate--button-title {
+    .button-title {
       width: 100%;
       text-align: center;
     }
