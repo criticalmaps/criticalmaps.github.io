@@ -75,11 +75,17 @@ pathName: rootPath
   <div class="inner">
     <div class="donate-wrapper">
       <div class="donate--box donate--introduction">
-        <p>Critical Maps exists because <strong>people like you</strong> support it.</p>
-        <p>If you find the app useful and want it to remain available, you can help cover costs for infrastructure.</p>
+        <span class="donate--box-label donate--introduction-label">
+          {% include icon-heart.svg %}
+          <span>Thank you</span>
+        </span>
+        <div class="donate--introduction-value">
+          <p>Critical Maps exists because <strong>people like you</strong> support it.</p>
+          <p>If you find the app useful and want it to remain available, you can help cover costs for infrastructure.</p>
+        </div>
       </div>
       <div class="donate--box donate--statistics">
-        <span class="donate--statistics-label">
+        <span class="donate--box-label donate--statistics-label">
           {% include icon-expenses.svg %}
           <span>Expenses</span>
         </span>

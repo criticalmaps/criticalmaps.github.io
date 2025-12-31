@@ -535,13 +535,46 @@ html.android {
   }
 
   .donate--box {
+    position: relative;
     grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     padding: 3rem;
     border-radius: 2rem;
     box-sizing: border-box;
+    overflow: hidden;
 
     @media only screen and (max-width: $screen-small) {
       grid-column: span 12;
+    }
+
+    .donate--box-label {
+      position: relative;
+      z-index: 20;
+      flex-grow: 0;
+      background: rgba(0,0,0,.15);
+      margin-right: auto;
+      padding: 0.4em 1.1em 0.4em 1.2em;
+      border-radius: 4rem;
+      font-size: 0.8em;
+      line-height: 1em;
+      font-weight: 600;
+      letter-spacing: 8%;
+      text-transform: uppercase;
+      backdrop-filter: blur(5px);
+
+      svg {
+        width: 1.4em;
+        vertical-align: middle;
+        display: inline-block;
+      }
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 0.3em;
+      }
     }
   }
 
@@ -559,14 +592,9 @@ html.android {
   }
 
   .donate--statistics {
-    position: relative;
     grid-row: span 3;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
     background: $color-action-light;
     color: white;
-    overflow: hidden;
 
     @media (prefers-color-scheme: dark) {
       background: $color-action-dark;
@@ -587,34 +615,6 @@ html.android {
       @media (prefers-color-scheme: dark) {
         mix-blend-mode: plus-darker;
         filter: invert(100%);
-      }
-    }
-
-    .donate--statistics-label {
-      position: relative;
-      z-index: 20;
-      flex-grow: 0;
-      background: rgba(0,0,0,.15);
-      margin-right: auto;
-      padding: 0.4em 1.1em 0.4em 1.2em;
-      border-radius: 4rem;
-      font-size: 0.8em;
-      line-height: 1em;
-      font-weight: 600;
-      letter-spacing: 8%;
-      text-transform: uppercase;
-      backdrop-filter:blur(5px);
-
-      svg {
-        width: 1.4em;
-        vertical-align: middle;
-        display: inline-block;
-      }
-
-      span {
-        display: inline-block;
-        vertical-align: middle;
-        margin-left: 0.3em;
       }
     }
     
@@ -638,32 +638,42 @@ html.android {
   }
 
   .donate--introduction {
-    grid-row: span 10;
-    background: $color-gray100;
-    color: $color-gray500;
-    font-size: 1.6em;
-    line-height: 1.5em;
+    grid-row: span 8;
+    background: $color-gray200;
+    color: $color-gray600;
 
     @media (prefers-color-scheme: dark) {
       background: $color-gray200;
       color: $color-gray600;
     }
 
-    @media only screen and (max-width: $screen-small) {
-      font-size: 1.3em;
+    .donate--introduction-label {
+
+      svg {
+        color: hotpink;
+      }
     }
 
-    *:first-child {
-      margin-top: 0;
-    }
+    .donate--introduction-value {
+      font-size: 1.6em;
+      line-height: 1.5em;
 
-    *:last-child {
-      margin-bottom: 0;
+      @media only screen and (max-width: $screen-small) {
+        font-size: 1.3em;
+      }
+
+      *:first-child {
+        margin-top: 0;
+      }
+
+      *:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 
  .donate--action {
-  grid-row: span 2;
+  grid-row: span 4;
   background: transparent;
   border: 3px dashed rgb(60, 214, 114);
   font-size: 1.2em;
