@@ -83,7 +83,10 @@ pathName: rootPath
           {% include icon-expenses.svg %}
           <span>Expenses</span>
         </span>
-        <span class="donate--statistics-value">Monthly server costs range from <strong>20 to 60 Euro</strong>, depending on traffic.</span>
+        <span class="donate--statistics-value">Monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</span>
+        <video class="donate--statistics-background" preload="true" autoplay loop muted>
+          <source src="assets/images/statistics-background.mp4" type="video/mp4" />
+        </video>
       </div>
       <div class="donate--box donate--decoration"></div>
       <div class="donate--box donate--action">
