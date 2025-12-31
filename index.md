@@ -75,29 +75,37 @@ pathName: rootPath
   <div class="inner">
     <div class="donate-wrapper">
       <div class="donate--box donate--introduction">
-        <span class="donate--box-label donate--introduction-label">
+        <div class="donate--box-label donate--introduction-label">
           {% include icon-heart.svg %}
           <span>Thank you</span>
-        </span>
-        <div class="donate--introduction-value">
+        </div>
+        <div class="donate--box-value donate--introduction-value">
           <p>Critical Maps exists because <strong>people like you</strong> support it.</p>
           <p>If you find the app useful and want it to remain available, you can help cover costs for infrastructure.</p>
         </div>
       </div>
       <div class="donate--box donate--statistics">
-        <span class="donate--box-label donate--statistics-label">
+        <div class="donate--box-label donate--statistics-label">
           {% include icon-expenses.svg %}
           <span>Expenses</span>
-        </span>
-        <span class="donate--statistics-value">Monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</span>
+        </div>
+        <div class="donate--box-value donate--statistics-value">
+          <p>Monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
+        </div>
         <video class="donate--statistics-background" preload="true" autoplay loop muted>
           <source src="assets/images/statistics-background.mp4" type="video/mp4" />
         </video>
       </div>
       <div class="donate--box donate--decoration"></div>
       <div class="donate--box donate--action">
-        <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on Open Collective.</p>
-        <p><a class="donate--button button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="donate--button-title button-title">Support now</span></a></p>
+        <div class="donate--box-label donate--action-label">
+          {% include icon-opencollective.svg %}
+          <span>Open Collective</span>
+        </div>
+        <div class="donate--box-value donate--action-value">
+          <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on Open Collective.</p>
+          <p><a class="donate--button button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="donate--button-title button-title">Support now</span></a></p>
+        </div>
       </div>
     </div>
   </div>

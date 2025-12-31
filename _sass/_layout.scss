@@ -553,7 +553,6 @@ html.android {
       position: relative;
       z-index: 20;
       flex-grow: 0;
-      background: rgba(0,0,0,.15);
       margin-right: auto;
       padding: 0.4em 1.1em 0.4em 1.2em;
       border-radius: 4rem;
@@ -562,7 +561,6 @@ html.android {
       font-weight: 600;
       letter-spacing: 8%;
       text-transform: uppercase;
-      backdrop-filter: blur(5px);
 
       svg {
         width: 1.4em;
@@ -574,6 +572,17 @@ html.android {
         display: inline-block;
         vertical-align: middle;
         margin-left: 0.3em;
+      }
+    }
+
+    .donate--box-value {
+
+      *:first-child {
+        margin-top: 0;
+      }
+
+      *:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -617,6 +626,15 @@ html.android {
         filter: invert(100%);
       }
     }
+
+    .donate--statistics-label {
+      background: rgba(0,0,0,.2);
+      backdrop-filter: blur(5px);
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(0,0,0,.1);
+      }
+    }
     
     .donate--statistics-value {
       position: relative;
@@ -642,12 +660,8 @@ html.android {
     background: $color-gray200;
     color: $color-gray600;
 
-    @media (prefers-color-scheme: dark) {
-      background: $color-gray200;
-      color: $color-gray600;
-    }
-
     .donate--introduction-label {
+      background: $color-gray100;
 
       svg {
         color: hotpink;
@@ -661,45 +675,45 @@ html.android {
       @media only screen and (max-width: $screen-small) {
         font-size: 1.3em;
       }
-
-      *:first-child {
-        margin-top: 0;
-      }
-
-      *:last-child {
-        margin-bottom: 0;
-      }
     }
   }
 
- .donate--action {
-  grid-row: span 4;
-  background: transparent;
-  border: 3px dashed rgb(60, 214, 114);
-  font-size: 1.2em;
-  line-height: 1.5em;
+  .donate--action {
+    grid-row: span 4;
+    background: transparent;
+    color: $color-gray100;
+    background: rgb(229, 243, 255);
 
-  @media only screen and (max-width: $screen-small) {
-    font-size: 1.1em;
-  }
-
-    *:first-child {
-      margin-top: 0;
+    .donate--action-label {
+      color: rgb(16, 65, 163);
+      background: white
     }
 
-    *:last-child {
-      margin-bottom: 0;
+    .donate--action-value {
+      font-size: 1.1em;
+      line-height: 1.5em;
+
+      @media only screen and (max-width: $screen-small) {
+        font-size: 1.1em;
+      }
     }
 
     .donate--button {
+      border: 0;
+      background: rgb(16, 65, 163);
+      color: white;
 
+      &:hover,
+      &:focus {
+        background: rgb(10, 46, 119);
+      }
     }
 
     .donate--button-title {
       width: 100%;
       text-align: center;
     }
-  } 
+  }
 }
 
 // ============================================================
