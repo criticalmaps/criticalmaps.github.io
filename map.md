@@ -9,3 +9,6 @@ pathName: mapPath
     <span class="map-count-visible">Visible: <span id="activeusers" class="map-count-number">0</span></span>
 </div>
 <div id="map"></div>
+
+<script src="/assets/js/application.js" type="text/javascript"></script>
+<script src="/assets/js/leaflet-hash.js" type="text/javascript"></script>

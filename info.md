@@ -237,3 +237,5 @@ Grellstr. 5A
 					rel="noopener">Datenschutzerklärungs-Generator</a> der activeMind AG erstellt</em>.</p>
 	</div>
 </div>
+
+{% include footer.html %}

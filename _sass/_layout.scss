@@ -29,11 +29,6 @@ body {
 .wrapper {
   position: relative;
   z-index: 10;
-  padding: calc(8vw + 4rem) 0;
-
-  @media only screen and (min-width: $screen-large) {
-      padding-top: 16rem;
-  }
 }
 
 
@@ -155,23 +150,15 @@ body {
 
 .footer {
     padding: 4rem;
-    text-align: center;
 
     background: $color-gray100;
     color: $color-gray400;
   
     .footer-navigation {
       display: flex;
-      justify-content: space-between;
 
       @media only screen and (max-width: $screen-small) {
         flex-direction: column;
-        gap: 2rem;
-      }
-
-      p {
-        margin: 0;
-        padding: 0;
       }
 
       ul {
@@ -210,7 +197,11 @@ body {
 //============================================================
 
 .stage {
-  padding-bottom: 8rem;
+  padding: calc(8vw + 4rem) 0 8rem;
+
+  @media only screen and (min-width: $screen-large) {
+      padding-top: 16rem;
+  }
 
   .stage--title {
     position: relative;
@@ -349,7 +340,6 @@ html.android {
 .map {
   position: relative;
   z-index: 200;
-  padding: 0;
 
   &::before {
     content: '';
@@ -399,7 +389,7 @@ html.android {
     width: 100%;
     height: calc(100% - 4rem);
     background-color: $color-action-light;
-    background-image: url('../images/screenshot-background-light.webp');
+    background-image: url('../images/map-background-light.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -407,7 +397,7 @@ html.android {
 
     @media (prefers-color-scheme: dark) {
       background-color: $color-action-dark;
-      background-image: url('../images/screenshot-background-dark.webp');
+      background-image: url('../images/map-background-dark.webp');
     }
 
     @media only screen and (max-width: $screen-small) {
@@ -448,10 +438,7 @@ html.android {
 //============================================================
 
 .contribute {
-
-  @media only screen and (max-width: $screen-small) {
-    padding-top: 16rem;
-  }
+  padding: calc(4vw + 16rem) 0 calc(4vw + 8rem);
 
   .contribute--introduction {
     font-size: 3.6rem;
@@ -489,17 +476,19 @@ html.android {
     position: absolute;
     z-index: -1;
     right: 0;
-    bottom: -12rem;
+    top: 50%;
     width: 40rem;
+    margin-top: -20rem;
+    margin-right: -10rem;
     pointer-events: none;
-    color: $color-gray500;
+    color: $color-action-dark;
 
     @media only screen and (max-width: $screen-small) {
-      right: -16rem;
+      margin-right: -16rem;
     }
 
     @media (prefers-color-scheme: dark) {
-      color: $color-gray200;
+      color: $color-action-light;
     }
 
     svg {
@@ -589,14 +578,14 @@ html.android {
 
   .sponsor-box--decoration {
     grid-row: span 9;
-    background-image: url('../images/sponsor-background-light.webp');
+    background-image: url('../images/sponsor-decoration-background-light.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
 
     @media (prefers-color-scheme: dark) {
-      background-image: url('../images/sponsor-background-dark.webp');
+      background-image: url('../images/sponsor-decoration-background-dark.webp');
     }
   }
 
@@ -686,7 +675,8 @@ html.android {
 
     .sponsor-box--label {
       color: rgb(16, 65, 163);
-      background: white
+      background: white;
+      font-weight: 700;
     }
 
     .sponsor-box--value {
@@ -883,7 +873,7 @@ html.android {
 //============================================================
 
 .imprint {
-  padding-top: calc(6vw + 2rem);
+  padding-top: 8vw;
 
   @media only screen and (min-width: $screen-large) {
       padding-top: 8rem;

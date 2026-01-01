@@ -90,10 +90,11 @@ pathName: rootPath
           <span>Infrastructure</span>
         </div>
         <div class="sponsor-box--value">
-          <p>Monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
+          <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
         </div>
         <video class="sponsor-box--background" preload="true" autoplay loop muted>
-          <source src="assets/images/statistics-background.mp4" type="video/mp4" />
+          <source src="assets/images/sponsor-statistics-background.mp4" type="video/mp4" />
+          <source src="assets/images/sponsor-statistics-background.webm" type="video/webm" />
         </video>
       </div>
       <div class="sponsor-box sponsor-box--decoration"></div>
@@ -110,3 +111,8 @@ pathName: rootPath
     </div>
   </div>
 </div>
+
+{% include footer.html %}
+
+<script src="/assets/js/application.js" type="text/javascript"></script>
+<script src="/assets/js/leaflet-hash.js" type="text/javascript"></script>
