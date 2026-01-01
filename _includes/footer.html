@@ -1,0 +1,45 @@
+<footer id="footer" class="footer">
+  <div class="inner">
+    <nav class="footer-navigation" aria-label="Footer navigation">
+      <ul>
+        <li>
+          {% if page.pathName == "rootPath" %}
+          <a class="active" aria-current="page" href="/">
+          {% else %}
+          <a href="/">
+          {% endif %}
+            Critical Maps
+          </a>
+        </li>
+        <li>
+          {% if page.pathName == "infoPath" %}
+          <a class="active" aria-current="page" href="/info">
+          {% else %}
+          <a href="/info">
+          {% endif %}
+            Imprint
+          </a>
+        </li>
+        <li>
+          {% if page.pathName == "mapPath" %}
+          <a class="active" aria-current="page" href="/map">
+          {% else %}
+          <a href="/map">
+          {% endif %}
+            Map
+          </a>
+        </li>
+        <li>
+          <a href="https://mastodon.social/@criticalmaps" target="_blank" rel="noopener noreferrer" title="Critical Maps Mastodon">Mastodon</a>
+        </li>
+        <li>
+          <a href="https://instagram.com/criticalmaps" target="_blank" rel="noopener noreferrer" title="Critical Maps Instagram">Instagram</a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/criticalmaps" target="_blank" rel="noopener noreferrer"
+          title="Critical Maps Facebook">Facebook</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</footer>
