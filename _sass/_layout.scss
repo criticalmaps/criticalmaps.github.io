@@ -265,6 +265,11 @@ body {
       width: 3rem;
     }
 
+    .download-icon {
+      display: flex;
+      flex-direction: column;
+    }
+
     .download-text--tagline {
       font-size: 1.2rem;
       line-height: 1em;
