@@ -95,7 +95,7 @@ pathName: rootPath
         <div class="sponsor-box--value">
           <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
         </div>
-        <video class="sponsor-box--background" preload="true" autoplay loop muted>
+        <video class="sponsor-box--background" preload="true" autoplay loop muted aria-hidden="true">
           <source src="assets/images/sponsor-statistics-background.mp4" type="video/mp4" />
           <source src="assets/images/sponsor-statistics-background.webm" type="video/webm" />
         </video>
