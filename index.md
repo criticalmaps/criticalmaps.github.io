@@ -58,16 +58,16 @@ pathName: rootPath
     <div class="contribute--decoration">{% include icon-octocat.svg %}</div>
     <div class="contribute--introduction content">
       <p><strong>Critical Maps</strong> is built by a dedicated <a class="contribute--button button" href="https://github.com/orgs/criticalmaps/people" target="_blank" rel="noopener">
-        {% include icon-team.svg %}
+        <span aria-hidden="true">{% include icon-team.svg %}</span>
         <span class="contribute--button-title button-title">Team</span>
       </a> of a passionate <em>open source</em> community. We are always looking for new contributors. Explore the <a class="contribute--button button" href="https://github.com/criticalmaps/criticalmaps-ios" target="_blank" rel="noopener">
-        {% include icon-xcode.svg %}
+        <span aria-hidden="true">{% include icon-xcode.svg %}</span>
         <span class="contribute--button-title button-title">iOS</span>
       </a> or <a class="contribute--button button" href="https://github.com/criticalmaps/criticalmaps-android" target="_blank" rel="noopener">
-        {% include icon-androidstudio.svg %}
+        <span aria-hidden="true">{% include icon-androidstudio.svg %}</span>
         <span class="contribute--button-title button-title">Android</span>
       </a> projects on <a class="contribute--button button" href="https://github.com/criticalmaps/" target="_blank" rel="noopener">
-        {% include icon-github.svg %}
+        <span aria-hidden="true">{% include icon-github.svg %}</span>
         <span class="contribute--button-title button-title">GitHub</span>
       </a> and get involved.</p>
     </div>

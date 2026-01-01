@@ -459,20 +459,16 @@ html.android {
       margin: 0 0.1em;
       padding: 0.2em 0.4em;
       gap: 0.3em;
+
+      span {
+        line-height: 1rem;
+      }
     }
 
     .contribute--button-title {
       font-size: 0.6em;
       line-height: 1em;
       font-weight: 700;
-    }
-
-    *:first-child {
-      margin-top: 0;
-    }
-
-    *:last-child {
-      margin-bottom: 0;
     }
   }
 
