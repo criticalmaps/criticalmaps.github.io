@@ -18,12 +18,6 @@ body {
   max-width: 96rem;
   margin: auto;
   padding: 0 2.4rem;
-
-  &::after {
-    clear: both;
-    content: '';
-    display: table;
-  }
 }
 
 .wrapper {
@@ -153,7 +147,7 @@ body {
 //============================================================
 
 .footer {
-    padding: 4rem;
+    padding: 4rem 0;
 
     background: $color-gray100;
     color: $color-gray400;
@@ -167,6 +161,7 @@ body {
 
       ul {
         display: flex;
+        flex-wrap: wrap;
         gap: 2rem;
         margin: 0;
         padding: 0;
