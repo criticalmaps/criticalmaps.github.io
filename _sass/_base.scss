@@ -14,6 +14,16 @@ body {
   }
 }
 
+*:focus,
+*:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px $color-action-light;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 0 0 3px $color-action-dark;
+  }
+}
+
 .button {
   display: flex;
   align-items: center;

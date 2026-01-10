@@ -1,29 +1,137 @@
 document.addEventListener('DOMContentLoaded', function () {
 	var currentMarkers = [];
 	var isDarkMode = false;
+	var isMapFullscreen = false;
+	// fullscreen animation state
+	var _fullscreenSavedCenter = null;
+	var _fullscreenSavedZoom = null;
+	var _fullscreenAnimDuration = 0.6; // seconds for flyTo
+	var _fullscreenTransitionDelay = 300; // ms delay to wait for CSS transition before animating (match SCSS 0.3s)
+	var _fullscreenEaseLinearity = 0.15; // lower = more curved easing (0..1)
+	// saved interaction state (restored when exiting fullscreen)
+	var _prevScrollWheelZoom = null;
+	var _prevTouchZoom = null;
+
+	// helpers to enable/restore zoom interactions
+	function _enableZoomInteractions() {
+		try {
+			if (bikeMap && bikeMap.scrollWheelZoom && typeof bikeMap.scrollWheelZoom.enabled === 'function') {
+				_prevScrollWheelZoom = bikeMap.scrollWheelZoom.enabled();
+				if (typeof bikeMap.scrollWheelZoom.enable === 'function') bikeMap.scrollWheelZoom.enable();
+			}
+			if (bikeMap && bikeMap.touchZoom && typeof bikeMap.touchZoom.enabled === 'function') {
+				_prevTouchZoom = bikeMap.touchZoom.enabled();
+				if (typeof bikeMap.touchZoom.enable === 'function') bikeMap.touchZoom.enable();
+			}
+		} catch (e) { /* ignore */ }
+	}
+
+	function _restoreZoomInteractions() {
+		try {
+			if (bikeMap && bikeMap.scrollWheelZoom && typeof bikeMap.scrollWheelZoom.enabled === 'function') {
+				if (_prevScrollWheelZoom === false && typeof bikeMap.scrollWheelZoom.disable === 'function') bikeMap.scrollWheelZoom.disable();
+				else if (_prevScrollWheelZoom === true && typeof bikeMap.scrollWheelZoom.enable === 'function') bikeMap.scrollWheelZoom.enable();
+			}
+			if (bikeMap && bikeMap.touchZoom && typeof bikeMap.touchZoom.enabled === 'function') {
+				if (_prevTouchZoom === false && typeof bikeMap.touchZoom.disable === 'function') bikeMap.touchZoom.disable();
+				else if (_prevTouchZoom === true && typeof bikeMap.touchZoom.enable === 'function') bikeMap.touchZoom.enable();
+			}
+		} catch (e) { /* ignore */ }
+		_prevScrollWheelZoom = null;
+		_prevTouchZoom = null;
+	}
+
+	// Native Fullscreen API helper (handles vendor prefixes and Promise/event fallback)
+	var _nativeFullscreen = (function () {
+		var methodMap = [
+			['requestFullscreen', 'exitFullscreen', 'fullscreenElement', 'fullscreenEnabled', 'fullscreenchange', 'fullscreenerror'],
+			['webkitRequestFullscreen', 'webkitExitFullscreen', 'webkitFullscreenElement', 'webkitFullscreenEnabled', 'webkitfullscreenchange', 'webkitfullscreenerror'],
+			['msRequestFullscreen', 'msExitFullscreen', 'msFullscreenElement', 'msFullscreenEnabled', 'MSFullscreenChange', 'MSFullscreenError']
+		];
+		var base = methodMap[0];
+		for (var i = 0; i < methodMap.length; i++) {
+			var m = methodMap[i];
+			if (m[1] in document) {
+				var ret = {};
+				for (var j = 0; j < m.length; j++) ret[base[j]] = m[j];
+				return ret;
+			}
+		}
+		return null;
+	})();
+
+	var fullscreenAPI = {
+		native: !!_nativeFullscreen,
+		nativeAPI: _nativeFullscreen,
+		on: function (event, cb) {
+			if (!this.native) return;
+			document.addEventListener(this.nativeAPI[event === 'change' ? 'fullscreenchange' : 'fullscreenerror'], cb);
+		},
+		off: function (event, cb) {
+			if (!this.native) return;
+			document.removeEventListener(this.nativeAPI[event === 'change' ? 'fullscreenchange' : 'fullscreenerror'], cb);
+		},
+		isEnabled: function () {
+			return this.native && Boolean(document[this.nativeAPI.fullscreenEnabled]);
+		},
+		isFullscreen: function () {
+			return this.native && Boolean(document[this.nativeAPI.fullscreenElement]);
+		},
+		_callNative: async function (action) {
+			try {
+				var res = action();
+				if (res instanceof Promise) await res;
+				return;
+			} catch (e) {
+				// For older Safari that doesn't return a Promise, wait for fullscreenchange
+				await new Promise(function (resolve) {
+					var handler = function () {
+						document.removeEventListener(fullscreenAPI.nativeAPI.fullscreenchange, handler);
+						resolve();
+					};
+					document.addEventListener(fullscreenAPI.nativeAPI.fullscreenchange, handler);
+				});
+			}
+		},
+		request: async function (el, options) {
+			el = el || document.documentElement;
+			if (!this.native) return Promise.reject(new Error('Fullscreen API not available'));
+			var req = this.nativeAPI.requestFullscreen;
+			return this._callNative(function () { return el[req](options); });
+		},
+		exit: async function () {
+			if (!this.native) return Promise.reject(new Error('Fullscreen API not available'));
+			var exit = this.nativeAPI.exitFullscreen;
+			return this._callNative(function () { return document[exit](); });
+		}
+	};
 
 	// create the map first (was after svgRenderer). The error came from calling L.svg().addTo(bikeMap)
 	// before bikeMap existed ("t.addLayer" -> internal map object was undefined).
-	var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13, scrollWheelZoom: false }).setView([52.468209, 13.425995], 3);
+	var bikeMap = new L.map('map', { zoomControl: false, minZoom: 4, maxZoom: 13, scrollWheelZoom: false, easeLinearity: _fullscreenEaseLinearity }).setView([52.468209, 13.425995], 3);
 
-	// Create additional Control placeholders (vertical center left/right)
-	function addControlPlaceholders(map) {
-		var corners = map._controlCorners,
-			l = 'leaflet-',
-			container = map._controlContainer;
+	// add zoom control to top right (fs control will be inserted first in the container)
+	new L.Control.Zoom({ position: 'topright' }).addTo(bikeMap);
 
-		function createCorner(vSide, hSide) {
-			var className = l + vSide + ' ' + l + hSide;
-			corners[vSide + hSide] = L.DomUtil.create('div', className, container);
+	// helper to ensure a center-right container exists and return it
+	function ensureCenterRightContainer() {
+		var controlContainer = (bikeMap && bikeMap._controlContainer) ? bikeMap._controlContainer : document.querySelector('.leaflet-control-container') || document.body;
+		var centerRight = controlContainer.querySelector('.leaflet-center.leaflet-right');
+		if (!centerRight) {
+			centerRight = document.createElement('div');
+			centerRight.className = 'leaflet-center leaflet-right';
+			controlContainer.appendChild(centerRight);
 		}
-
-		createCorner('verticalcenter', 'left');
-		createCorner('verticalcenter', 'right');
+		return centerRight;
 	}
-	addControlPlaceholders(bikeMap);
 
-	// add zoom control to vertical center left
-	new L.Control.Zoom({ position: 'verticalcenterleft' }).addTo(bikeMap);
+	// Move zoom control into center-right container so it is vertically centered on the right side
+	try {
+		var centerRightEl = ensureCenterRightContainer();
+		var controlContainer = (bikeMap && bikeMap._controlContainer) ? bikeMap._controlContainer : document.querySelector('.leaflet-control-container') || document.body;
+		var zoomEl = controlContainer.querySelector('.leaflet-control-zoom');
+		if (zoomEl && zoomEl.parentNode !== centerRightEl) centerRightEl.appendChild(zoomEl);
+	} catch (e) { /* ignore */ }
 
 	// map style URLs (change darkStyle if you have a preferred dark theme)
 	var MAPTILER_KEY = 'veX8Oi3lr3dolNkIbcRT';
@@ -66,6 +174,233 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// create a shared SVG renderer and add it to the map so all circleMarkers live in the same <svg>
 	var svgRenderer = L.svg().addTo(bikeMap);
+
+	// Fullscreen functionality
+	function createFullscreenControls() {
+		var mapEl = document.getElementById('map');
+		// Only enable fullscreen controls if the page has #map and it opts in via data-fullscreen="true" OR presence of data-fullscreen
+		var hasOptIn = mapEl && (mapEl.getAttribute('data-fullscreen') === 'true' || mapEl.hasAttribute('data-fullscreen'));
+		if (!mapEl || !hasOptIn) return; 
+		
+		// Create container inside Leaflet control corner (center right)
+		var controlContainer = (bikeMap && bikeMap._controlContainer) ? bikeMap._controlContainer : document.querySelector('.leaflet-control-container') || document.body;
+		var centerRight = controlContainer.querySelector('.leaflet-center.leaflet-right');
+		if (!centerRight) {
+			centerRight = document.createElement('div');
+			centerRight.className = 'leaflet-center leaflet-right';
+			controlContainer.appendChild(centerRight);
+		}
+		var fsControl = centerRight.querySelector('.leaflet-control-fullscreen');
+		if (!fsControl) {
+			fsControl = document.createElement('div');
+			fsControl.className = 'leaflet-control-fullscreen leaflet-bar leaflet-control';
+			fsControl.setAttribute('role', 'group');
+			fsControl.setAttribute('aria-label', 'Map fullscreen controls');
+			// Insert as first child so fullscreen control appears before other controls
+			centerRight.insertBefore(fsControl, centerRight.firstChild);
+		} 
+
+		// Create maximize button
+		var maximizeBtn = document.createElement('button');
+		maximizeBtn.id = 'map-fullscreen-btn';
+		maximizeBtn.className = 'map-fullscreen-btn';
+		maximizeBtn.setAttribute('aria-label', 'Expand map to fullscreen');
+		maximizeBtn.setAttribute('aria-pressed', 'false');
+		maximizeBtn.setAttribute('title', 'Expand to fullscreen (F)');
+		maximizeBtn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
+		maximizeBtn.onclick = function(e) {
+			e.preventDefault();
+			toggleMapFullscreen();
+		};
+
+		// Keep keyboard shortcut support (F key) and ESC fallback
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'f' || e.key === 'F') {
+				// Only trigger if not typing in an input/textarea
+				if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+					toggleMapFullscreen();
+				}
+			}
+			// ESC key to exit fullscreen if currently toggled
+			if (e.key === 'Escape' && isMapFullscreen) {
+				toggleMapFullscreen();
+			}
+		});
+
+		fsControl.appendChild(maximizeBtn);
+
+		// Move zoom control into center-right container so it stacks below the fullscreen button
+		try {
+			var zoomEl = controlContainer.querySelector('.leaflet-control-zoom');
+			if (zoomEl && zoomEl.parentNode !== centerRight) centerRight.appendChild(zoomEl);
+		} catch (e) { /* ignore */ }
+
+		function updateButtonState(isFs) {
+			var btn = document.getElementById('map-fullscreen-btn');
+			if (!btn) return;
+			if (isFs) {
+				btn.setAttribute('aria-label', 'Exit fullscreen');
+				btn.setAttribute('aria-pressed', 'true');
+				btn.setAttribute('title', 'Exit fullscreen (ESC)');
+				btn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>';
+			} else {
+				btn.setAttribute('aria-label', 'Expand map to fullscreen');
+				btn.setAttribute('aria-pressed', 'false');
+				btn.setAttribute('title', 'Expand to fullscreen (F)');
+				btn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
+			}
+		}
+
+		// Handle changes triggered by browser (ESC or external controls)
+		function onNativeFsChange() {
+			var btn = document.getElementById('map-fullscreen-btn');
+			var html = document.documentElement;
+			var mapEl = document.getElementById('map');
+			var fsEl = null;
+			if (fullscreenAPI.native) fsEl = document[fullscreenAPI.nativeAPI.fullscreenElement];
+			// Only react when our map element is the fullscreen element
+			var isNativeFs = !!fsEl && mapEl && (fsEl === mapEl);
+			if (isNativeFs) {
+				// We are now fullscreen
+				isMapFullscreen = true;
+				html.classList.add('map-fullscreen-active');
+				if (mapEl) mapEl.classList.add('fullscreen');
+				updateButtonState(true);
+				// enable pinch/scroll zoom in fullscreen
+				_enableZoomInteractions();
+				bikeMap.invalidateSize();
+				setTimeout(function() {
+					try {
+						var targetZoom = Math.max(bikeMap.getMinZoom(), (_fullscreenSavedZoom || bikeMap.getZoom()) - 1.5);
+						bikeMap.flyTo(_fullscreenSavedCenter || bikeMap.getCenter(), targetZoom, { animate: true, duration: _fullscreenAnimDuration, easeLinearity: _fullscreenEaseLinearity });
+					} catch (e) { /* ignore */ }
+				}, 50);
+			} else if (!fsEl) {
+				// Exited fullscreen (or another element was fullscreen then closed)
+				isMapFullscreen = false;
+				html.classList.remove('map-fullscreen-active');
+				if (mapEl) mapEl.classList.remove('fullscreen');
+				updateButtonState(false);
+				// restore previous interaction modes
+				_restoreZoomInteractions();
+				bikeMap.invalidateSize();
+				setTimeout(function() {
+					try {
+						var restoreCenter = _fullscreenSavedCenter || bikeMap.getCenter();
+						var restoreZoom = _fullscreenSavedZoom || bikeMap.getZoom();
+						bikeMap.flyTo(restoreCenter, restoreZoom, { animate: true, duration: _fullscreenAnimDuration, easeLinearity: _fullscreenEaseLinearity });
+					} catch (e) { /* ignore */ }
+				}, 50);
+			}
+		} 
+
+		if (fullscreenAPI.isEnabled()) {
+			fullscreenAPI.on('change', onNativeFsChange);
+		}
+
+	}
+
+
+
+	async function toggleMapFullscreen() {
+		var mapEl = document.getElementById('map');
+		// Only toggle fullscreen if #map exists and it opts in via data-fullscreen (presence) or equals "true"
+		var hasOptIn = mapEl && (mapEl.getAttribute('data-fullscreen') === 'true' || mapEl.hasAttribute('data-fullscreen'));
+		if (!mapEl || !hasOptIn) return;
+		var mapWrapper = mapEl; // use the map element itself for fullscreen target (no wrapper created)
+		var btn = document.getElementById('map-fullscreen-btn');
+		var html = document.documentElement;
+
+		if (!isMapFullscreen) {
+			// ENTER fullscreen (native if available)
+			_fullscreenSavedCenter = bikeMap.getCenter();
+			_fullscreenSavedZoom = bikeMap.getZoom();
+			var targetZoom = Math.max(bikeMap.getMinZoom(), _fullscreenSavedZoom - 1.5);
+			isMapFullscreen = true;
+			bikeMap._exitFired = false;
+
+			if (fullscreenAPI.isEnabled()) {
+				try {
+					await fullscreenAPI.request(mapWrapper);
+					// when native request resolves, enable interactions
+					_enableZoomInteractions();
+				} catch (e) {
+					// fallback to pseudo-fullscreen
+					html.classList.add('map-fullscreen-active');
+					mapWrapper.classList.add('fullscreen');
+					_enableZoomInteractions();
+				}
+			} else {
+				html.classList.add('map-fullscreen-active');
+				mapWrapper.classList.add('fullscreen');
+				_enableZoomInteractions();
+			}
+
+			if (btn) {
+				btn.setAttribute('aria-label', 'Exit fullscreen');
+				btn.setAttribute('aria-pressed', 'true');
+				btn.setAttribute('title', 'Exit fullscreen (ESC)');
+				btn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>';
+			}
+			announceToScreenReader('Map is now fullscreen. Press ESC to exit.');
+			bikeMap.invalidateSize();
+			setTimeout(function() {
+				try {
+					bikeMap.flyTo(_fullscreenSavedCenter, targetZoom, { animate: true, duration: _fullscreenAnimDuration, easeLinearity: _fullscreenEaseLinearity });
+				} catch (e) { /* ignore */ }
+			}, 50);
+		} else {
+			// EXIT fullscreen (native if available)
+			isMapFullscreen = false;
+			if (fullscreenAPI.isEnabled()) {
+				bikeMap._exitFired = true;
+				try {
+					await fullscreenAPI.exit();
+				} catch (e) {
+					html.classList.remove('map-fullscreen-active');
+					mapWrapper.classList.remove('fullscreen');
+					_restoreZoomInteractions();
+				}
+			} else {
+				html.classList.remove('map-fullscreen-active');
+				mapWrapper.classList.remove('fullscreen');
+				_restoreZoomInteractions();
+			}
+
+			if (btn) {
+				btn.setAttribute('aria-label', 'Expand map to fullscreen');
+				btn.setAttribute('aria-pressed', 'false');
+				btn.setAttribute('title', 'Expand to fullscreen (F)');
+				btn.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="24" height="24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>';
+			}
+			announceToScreenReader('Map exited fullscreen mode.');
+			bikeMap.invalidateSize();
+			setTimeout(function() {
+				try {
+					var restoreCenter = _fullscreenSavedCenter || bikeMap.getCenter();
+					var restoreZoom = _fullscreenSavedZoom || bikeMap.getZoom();
+					bikeMap.flyTo(restoreCenter, restoreZoom, { animate: true, duration: _fullscreenAnimDuration, easeLinearity: _fullscreenEaseLinearity });
+				} catch (e) { /* ignore */ }
+			}, 50);
+		}
+	}
+
+	function announceToScreenReader(message) {
+		var liveRegion = document.getElementById('map-sr-announcements');
+		if (!liveRegion) {
+			liveRegion = document.createElement('div');
+			liveRegion.id = 'map-sr-announcements';
+			liveRegion.className = 'sr-only';
+			liveRegion.setAttribute('role', 'status');
+			liveRegion.setAttribute('aria-live', 'polite');
+			liveRegion.setAttribute('aria-atomic', 'true');
+			document.body.appendChild(liveRegion);
+		}
+		liveRegion.textContent = message;
+	}
+
+	// Initialize fullscreen controls when page loads
+	createFullscreenControls();
 
 	// shared meatball state
 	var meatballState = { blur: 0, thresh: 1 };
