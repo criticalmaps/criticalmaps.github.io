@@ -29,7 +29,15 @@ body {
   height: 100vh;
 }
 
-
+// Screen reader only content
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
 
 //============================================================
 //	Navigation
@@ -192,7 +200,7 @@ body {
 }
 
 //============================================================
-// Stage
+// Stage Section
 //============================================================
 
 .stage {
@@ -335,110 +343,8 @@ html.android {
   }
 }
 
-
-
 //============================================================
-// Map
-//============================================================
-
-.map {
-  position: relative;
-  z-index: 200;
-
-  &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    top: 4rem;
-    width: 100%;
-    height: calc(100% - 8rem);
-    background-attachment: scroll;
-    background-image: 
-      repeating-linear-gradient(90deg, #ffffff22 0 1px, #0000 1px 25px), 
-      repeating-linear-gradient(#ffffff22 0 1px, #0000 1px 25px), 
-      repeating-linear-gradient(90deg, #ffffff44 0 1px, #0000 1px 100px), 
-      repeating-linear-gradient(#ffffff44 0 1px, #0000 1px 100px);
-
-    @media (prefers-color-scheme: dark) {
-      background-image: 
-        repeating-linear-gradient(90deg, #ffffff08 0 1px, #0000 1px 25px), 
-        repeating-linear-gradient(#ffffff08 0 1px, #0000 1px 25px), 
-        repeating-linear-gradient(90deg, #ffffff1a 0 1px, #0000 1px 100px), 
-        repeating-linear-gradient(#ffffff1a 0 1px, #0000 1px 100px);
-    }
-    background-position:
-      calc(50% + 12.5px) calc(50% + 12.5px), 
-      calc(50% + 12.5px) calc(50% + 12.5px), 
-      calc(50% + 50px) calc(50% + 50px), 
-      calc(50% + 50px) calc(50% + 50px);
-
-    background-size: 
-      25px 25px, 
-      25px 25px, 
-      100px 100px, 
-      100px 100px;
-    
-    @media only screen and (max-width: $screen-small) {
-      display: none;
-    }
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: -2;
-    left: 0;
-    top: 4rem;
-    width: 100%;
-    height: calc(100% - 8rem);
-    background-color: $color-action-light;
-    background-image: url('../images/map-background-light.webp');
-    background-position: top center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
-
-    @media (prefers-color-scheme: dark) {
-      background-color: $color-action-dark;
-      background-image: url('../images/map-background-dark.webp');
-    }
-
-    @media only screen and (max-width: $screen-small) {
-      background-image: none;
-    }
-  }
-
-  .map-wrapper {
-    position: relative;
-    width: 100%;
-    box-sizing: border-box;
-    margin-bottom: -4rem;
-
-    @media only screen and (min-width: $screen-large) {
-      width: calc(100% + 4.8rem);
-      margin-left: -2.4rem;
-      margin-right: -2.4rem;
-    }
-
-    #map {
-      padding-bottom: calc(100% / 3 * 2);
-      border-radius: 2rem;
-      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.06), 0px 4px 12px rgba(0, 0, 0, 0.08), 0px 16px 24px -4px rgba(0, 0, 0, 0.1), 0px 32px 48px -8px rgba(0, 0, 0, 0.12);
-
-      @media only screen and (max-width: $screen-small) {
-        padding-bottom: 125%;
-      }
-    }
-
-    #map-count {
-      position: absolute;
-    }
-  }
-}
-
-//============================================================
-// Contribute
+// Contribute Section
 //============================================================
 
 .contribute {
@@ -500,7 +406,7 @@ html.android {
 }
 
 //============================================================
-// sponsor
+// Sponsor Section
 //============================================================
 
 .sponsor {
@@ -706,12 +612,122 @@ html.android {
   }
 }
 
-// ============================================================
-// Map
-// ============================================================
+//============================================================
+// Map Section
+//============================================================
 
-#map {
+.map {
   position: relative;
+  z-index: 200;
+
+  &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 4rem;
+    width: 100%;
+    height: calc(100% - 8rem);
+    background-attachment: scroll;
+    background-image: 
+      repeating-linear-gradient(90deg, #ffffff22 0 1px, #0000 1px 25px), 
+      repeating-linear-gradient(#ffffff22 0 1px, #0000 1px 25px), 
+      repeating-linear-gradient(90deg, #ffffff44 0 1px, #0000 1px 100px), 
+      repeating-linear-gradient(#ffffff44 0 1px, #0000 1px 100px);
+
+    @media (prefers-color-scheme: dark) {
+      background-image: 
+        repeating-linear-gradient(90deg, #ffffff08 0 1px, #0000 1px 25px), 
+        repeating-linear-gradient(#ffffff08 0 1px, #0000 1px 25px), 
+        repeating-linear-gradient(90deg, #ffffff1a 0 1px, #0000 1px 100px), 
+        repeating-linear-gradient(#ffffff1a 0 1px, #0000 1px 100px);
+    }
+    background-position:
+      calc(50% + 12.5px) calc(50% + 12.5px), 
+      calc(50% + 12.5px) calc(50% + 12.5px), 
+      calc(50% + 50px) calc(50% + 50px), 
+      calc(50% + 50px) calc(50% + 50px);
+
+    background-size: 
+      25px 25px, 
+      25px 25px, 
+      100px 100px, 
+      100px 100px;
+    
+    @media only screen and (max-width: $screen-small) {
+      display: none;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: -2;
+    left: 0;
+    top: 4rem;
+    width: 100%;
+    height: calc(100% - 8rem);
+    background-color: $color-action-light;
+    background-image: url('../images/map-background-light.webp');
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-action-dark;
+      background-image: url('../images/map-background-dark.webp');
+    }
+
+    @media only screen and (max-width: $screen-small) {
+      background-color: transparent;
+      background-image: none;
+    }
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+//============================================================
+// Leaflet Map
+//============================================================
+
+.map-wrapper {
+  position: relative;
+  min-width: 100%;
+  max-width: calc(72rem + 32vw);
+  width: calc(100vw - 4rem);
+  height: calc(100vw / 16 * 9);
+  min-height: 60vh;
+  max-height: 80vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 2rem;
+  box-shadow:
+    0px 0px 4px rgba(0, 0, 0, 0.04),
+    0px 2px 8px rgba(0, 0, 0, 0.06),
+    0px 4px 12px rgba(0, 0, 0, 0.08),
+    0px 16px 24px -4px rgba(0, 0, 0, 0.1),
+    0px 32px 48px -8px rgba(0, 0, 0, 0.12);
+  transition:
+    border-radius ease-out 0.5s,
+    box-shadow ease-out 0.5s;
+}
+
+.map-fullscreen-active {
+
+  .map-wrapper {
+    box-shadow: none;
+    border-radius: 0;
+  } 
+}
+
+.map-container {
+  position: absolute;
   width: 100%;
   height: 100%;
   padding: 0;
@@ -726,10 +742,190 @@ html.android {
 
   left: 0;
   top: 0;
+
+  .leaflet-control-container {
+
+    .leaflet-control-attribution {
+      font-size: 1rem;
+      background: rgba(255,255,255,.5);
+      backdrop-filter: blur(10px);
+      border-top-left-radius: 4px;
+      padding: 2px 8px;
+
+      @media (prefers-color-scheme: dark) {
+        background: rgba(26,26,26,75);
+        color: #FFF;
+      }
+
+      a {
+        color: inherit
+      }
+    }
+
+    .leaflet-bar {
+      background: linear-gradient(#FFF,rgba(255,255,255,.5));
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      border-radius: 4rem;
+      border: 0;
+
+      @media (prefers-color-scheme: dark) {
+        background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
+        color: #FFF;
+      }
+    }
+
+    .leaflet-control-fullscreen {
+      display: flex;
+      margin: 1.2rem;
+
+      @media only screen and (max-width: $screen-small) {
+        margin: 2.4rem;
+      }
+
+      .map-fullscreen-btn {
+        width: 4rem;
+        height: 4rem;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0;
+        border-radius: 2rem;
+        background: transparent;
+        color: $color-gray200;
+        cursor: pointer;
+        transition: all ease-out 0.2s;
+
+
+        &:hover,
+        &:focus {
+          background: $color-gray600;
+
+          @media (prefers-color-scheme: dark) {
+            background: $color-gray200;
+          }
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          fill: $color-gray200;;
+          transition: fill ease-out 0.2s;
+
+          @media (prefers-color-scheme: dark) {
+            fill: #fff;
+          }
+        }
+      }
+    }
+
+    .leaflet-control-zoom {
+      margin: 1.2rem;
+
+      @media only screen and (max-width: $screen-small) {
+        margin: 2.4rem;
+      }
+    }
+
+    .leaflet-center {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      z-index: 1000;
+    }
+
+    .leaflet-center.leaflet-right {
+      right: 1.2rem;
+
+      @media only screen and (max-width: $screen-small) {
+        right: 2.4rem;
+      }
+    }
+
+    .leaflet-center .leaflet-control-fullscreen,
+    .leaflet-center .leaflet-control-zoom {
+      margin: 0 0 1.2rem 0;
+
+      @media only screen and (max-width: $screen-small) {
+        margin: 0 0 2.4rem 0;
+      }
+    }
+
+    .leaflet-bar a {
+      background-color: transparent;
+      border-bottom: 1px solid $color-gray500;
+      width: 4rem;
+      height: 4rem;
+      line-height: 4rem;
+      color: $color-gray100;
+      transition: all ease-out 0.2s;
+
+      @media (prefers-color-scheme: dark) {
+        border-color: $color-gray200;
+        color: $color-gray500;
+      }
+    }
+
+    .leaflet-bar a span {
+      position: relative;
+      top: -2px;
+    }
+
+    .leaflet-bar a:hover,
+    .leaflet-bar a:focus {
+      background-color: $color-gray600;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: $color-gray200;
+      }
+    }
+
+    .leaflet-bar a:first-child {
+      border-top-left-radius: 4rem;
+      border-top-right-radius: 4rem;
+      padding-top: 0.2rem;
+    }
+
+    .leaflet-bar a:last-child {
+      border-bottom-left-radius: 4rem;
+      border-bottom-right-radius: 4rem;
+      padding-bottom: 0.2rem;
+      border-bottom: 0;
+    }
+
+    .leaflet-bar a.leaflet-disabled {
+      background-color: transparent;
+      color: $color-gray400;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-gray300;
+      }
+    }
+
+    .leaflet-touch .leaflet-bar a {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+    }
+
+    .leaflet-touch .leaflet-bar a:first-child {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
+
+    .leaflet-touch .leaflet-bar a:last-child {
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 2px;
+    }
+  }
 }
 
-#map-count {
-  position: fixed;
+.map-count {
+  position: absolute;
   display: flex;
   width: 14em;
   left: 50%;
@@ -746,7 +942,7 @@ html.android {
   background: linear-gradient(#FFF,rgba(255,255,255,.5));
   backdrop-filter: blur(10px);
   color: $color-gray200;
-  z-index: 100;
+  z-index: 500;
   box-sizing: border-box;
 
   @media (prefers-color-scheme: dark) {
@@ -765,13 +961,14 @@ html.android {
 
     span {
       font-weight: 700;
-      color: rgba(68,0,255,1);
+      color: $color-action-light;
 
       @media (prefers-color-scheme: dark) {
-        color: rgba(255,214,51,1);
+        color: $color-action-dark;
       }
     }
   }
+
   .map-count-online {
     border-right: 1px solid $color-gray500;
 
@@ -781,95 +978,8 @@ html.android {
   }
 }
 
-#map {
-  .leaflet-control-zoom {
-    margin: 1.2rem;
-
-    @media only screen and (max-width: $screen-small) {
-      margin: 2.4rem;
-    }
-  }
-
-  .leaflet-verticalcenter {
-    position: absolute;
-    top: 50%;
-    margin-top: -4rem;
-  }
-
-  .leaflet-bar {
-    background: linear-gradient(#FFF,rgba(255,255,255,.5));
-    backdrop-filter: blur(10px);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    border-radius: 4rem;
-    border: 0;
-
-    @media (prefers-color-scheme: dark) {
-      background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
-      color: #FFF;
-    }
-  }
-  .leaflet-bar a {
-    background-color: transparent;
-    border-bottom: 1px solid $color-gray500;
-    width: 4rem;
-    height: 4rem;
-    line-height: 4rem;
-    color: $color-gray100;
-
-    @media (prefers-color-scheme: dark) {
-      border-color: $color-gray200;
-      color: $color-gray500;
-    }
-  }
-  .leaflet-bar a span {
-    position: relative;
-    top: -2px;
-  }
-  .leaflet-bar a:hover,
-  .leaflet-bar a:focus {
-    background-color: $color-gray600;
-
-    @media (prefers-color-scheme: dark) {
-     background-color: $color-gray200;
-    }
-  }
-  .leaflet-bar a:first-child {
-    border-top-left-radius: 4rem;
-    border-top-right-radius: 4rem;
-    padding-top: 0.2rem;
-  }
-  .leaflet-bar a:last-child {
-    border-bottom-left-radius: 4rem;
-    border-bottom-right-radius: 4rem;
-    padding-bottom: 0.2rem;
-    border-bottom: 0;
-  }
-  .leaflet-bar a.leaflet-disabled {
-    background-color: transparent;
-    color: $color-gray400;
-
-    @media (prefers-color-scheme: dark) {
-     color: $color-gray300;
-    }
-  }
-
-  .leaflet-touch .leaflet-bar a {
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
-  }
-  .leaflet-touch .leaflet-bar a:first-child {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
-  }
-  .leaflet-touch .leaflet-bar a:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-  }
-}
-
 //============================================================
-// Imprint
+// Imprint Section
 //============================================================
 
 .imprint {
