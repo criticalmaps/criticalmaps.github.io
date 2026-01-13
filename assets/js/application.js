@@ -130,7 +130,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		var centerRightEl = ensureCenterRightContainer();
 		var controlContainer = (bikeMap && bikeMap._controlContainer) ? bikeMap._controlContainer : document.querySelector('.leaflet-control-container') || document.body;
 		var zoomEl = controlContainer.querySelector('.leaflet-control-zoom');
-		if (zoomEl && zoomEl.parentNode !== centerRightEl) centerRightEl.appendChild(zoomEl);
+		if (zoomEl) {
+			if (isMobile.any()) {
+				// hide zoom control on mobile
+				zoomEl.style.display = 'none';
+			} else {
+				zoomEl.style.display = '';
+				if (zoomEl.parentNode !== centerRightEl) centerRightEl.appendChild(zoomEl);
+			}
+		}
 	} catch (e) { /* ignore */ }
 
 	// map style URLs (change darkStyle if you have a preferred dark theme)
@@ -180,7 +188,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		var mapEl = document.getElementById('map');
 		// Only enable fullscreen controls if the page has #map and it opts in via data-fullscreen="true" OR presence of data-fullscreen
 		var hasOptIn = mapEl && (mapEl.getAttribute('data-fullscreen') === 'true' || mapEl.hasAttribute('data-fullscreen'));
-		if (!mapEl || !hasOptIn) return; 
+		// Do not show fullscreen controls on mobile devices
+		if (!mapEl || !hasOptIn || isMobile.any()) return; 
 		
 		// Create container inside Leaflet control corner (center right)
 		var controlContainer = (bikeMap && bikeMap._controlContainer) ? bikeMap._controlContainer : document.querySelector('.leaflet-control-container') || document.body;
@@ -232,7 +241,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Move zoom control into center-right container so it stacks below the fullscreen button
 		try {
 			var zoomEl = controlContainer.querySelector('.leaflet-control-zoom');
-			if (zoomEl && zoomEl.parentNode !== centerRight) centerRight.appendChild(zoomEl);
+			if (zoomEl) {
+				if (isMobile.any()) {
+					zoomEl.style.display = 'none';
+				} else {
+					zoomEl.style.display = '';
+					if (zoomEl.parentNode !== centerRight) centerRight.appendChild(zoomEl);
+				}
+			}
 		} catch (e) { /* ignore */ }
 
 		function updateButtonState(isFs) {
@@ -307,6 +323,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Only toggle fullscreen if #map exists and it opts in via data-fullscreen (presence) or equals "true"
 		var hasOptIn = mapEl && (mapEl.getAttribute('data-fullscreen') === 'true' || mapEl.hasAttribute('data-fullscreen'));
 		if (!mapEl || !hasOptIn) return;
+		// Do not allow toggling fullscreen on mobile devices
+		if (isMobile.any()) return;
 		var mapWrapper = mapEl; // use the map element itself for fullscreen target (no wrapper created)
 		var btn = document.getElementById('map-fullscreen-btn');
 		var html = document.documentElement;
@@ -741,33 +759,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
-$().ready(function () {
-	var isMobile = {
-		Android: function () {
-			return navigator.userAgent.match(/Android/i);
-		},
-		BlackBerry: function () {
-			return navigator.userAgent.match(/BlackBerry/i);
-		},
-		iOS: function () {
-			return navigator.userAgent.match(/iPhone|iPad|iPod/i);
-		},
-		Opera: function () {
-			return navigator.userAgent.match(/Opera Mini/i);
-		},
-		Windows: function () {
-			return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
-		},
-		any: function () {
-			return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
-		}
+// Mobile detection (focused on iOS and Android)
+var isMobile = (function () {
+	var ua = navigator.userAgent || navigator.vendor || '';
+	var isAndroid = /Android/i.test(ua);
+	var isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+	return {
+		Android: function () { return isAndroid; },
+		iOS: function () { return isIOS; },
+		any: function () { return isAndroid || isIOS; }
 	};
-	if (isMobile.iOS()) {
-		$('html').addClass('ios');
-	} else if (isMobile.Android()) {
-		$('html').addClass('android');
-	}
-});
+})();
+
+// Apply platform class to <html> for styling
+if (isMobile.iOS()) {
+	document.documentElement.classList.add('ios');
+} else if (isMobile.Android()) {
+	document.documentElement.classList.add('android');
+}
 
 criticalMapsUtils = {
 	convertCoordinateFormat: function (oldFormat) {
