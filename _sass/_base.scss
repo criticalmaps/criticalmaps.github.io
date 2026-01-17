@@ -25,6 +25,7 @@ body {
 }
 
 .button {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -46,15 +47,53 @@ body {
   &:focus {
     border-color: $color-gray400;
     text-decoration: none;
+    transform: scale3d(1.02,1.02,1);
+    box-shadow: 0 0 8px 0 rgba($color-action-light, 0.1);
 
     @media (prefers-color-scheme: dark) {
       border-color: $color-gray400;
+      box-shadow: 0 0 8px 0 rgba($color-action-dark, 0.1);
+    }
+  }
+
+  &.highlight-button {
+    background: $color-gray500;
+    color: $color-gray100;
+
+    @media (prefers-color-scheme: dark) {
+      background: $color-gray200;
+      color: white
+    }
+  }
+
+  &.action-button {
+    background-color: $color-action-light;
+    color: white;
+    border: none;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-action-dark;
+      color: black;
+    }
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 0 12px 0 rgba($color-action-light, 0.3);
+
+      @media (prefers-color-scheme: dark) {
+        box-shadow: 0 0 12px 0 rgba($color-action-dark, 0.3);
+      }
     }
   }
 
   svg {
     height: auto;
     flex-shrink: 0;
+  }
+
+  .button-icon {
+    display: flex;
+    flex-direction: column;
   }
 
   .button-text {
