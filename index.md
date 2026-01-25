@@ -77,39 +77,43 @@ pathName: rootPath
 <div class="wrapper sponsor">
   <div class="inner">
     <div class="sponsor-wrapper">
-      <div class="sponsor-box sponsor-box--introduction">
-        <div class="sponsor-box--label">
-          <span aria-hidden="true">{% include icon-heart.svg %}</span>
-          <span>Thank you</span>
+      <div class="sponsor-wrapper-col">
+        <div class="sponsor-box sponsor-box--introduction">
+          <div class="sponsor-box--label">
+            <span aria-hidden="true">{% include icon-heart.svg %}</span>
+            <span>Thank you</span>
+          </div>
+          <div class="sponsor-box--value">
+            <p>Critical Maps exists because <strong>people like you</strong> support it.</p>
+            <p>If you find the app useful and want it to remain available, you can help cover costs for infrastructure.</p>
+          </div>
         </div>
-        <div class="sponsor-box--value">
-          <p>Critical Maps exists because <strong>people like you</strong> support it.</p>
-          <p>If you find the app useful and want it to remain available, you can help cover costs for infrastructure.</p>
-        </div>
+        <div class="sponsor-box sponsor-box--statistics">
+          <div class="sponsor-box--label">
+            <span aria-hidden="true">{% include icon-infrastructure.svg %}</span>
+            <span>Infrastructure</span>
+          </div>
+          <div class="sponsor-box--value">
+            <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
+          </div>
+          <video class="sponsor-box--background" preload="true" autoplay loop muted aria-hidden="true">
+            <source src="assets/images/sponsor-statistics-background.mp4" type="video/mp4" />
+            <source src="assets/images/sponsor-statistics-background.webm" type="video/webm" />
+          </video>
+        </div>      
       </div>
-      <div class="sponsor-box sponsor-box--statistics">
-        <div class="sponsor-box--label">
-          <span aria-hidden="true">{% include icon-infrastructure.svg %}</span>
-          <span>Infrastructure</span>
+      <div class="sponsor-wrapper-col">
+        <div class="sponsor-box sponsor-box--collective">
+          <div class="sponsor-box--label">
+            <span aria-hidden="true">{% include icon-opencollective.svg %}</span>
+            <span>Open Collective</span>
+          </div>
+          <div class="sponsor-box--value">
+            <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on Open Collective.</p>
+            <p><a class="button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="button-title">Support now</span></a></p>
+          </div>
         </div>
-        <div class="sponsor-box--value">
-          <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
-        </div>
-        <video class="sponsor-box--background" preload="true" autoplay loop muted aria-hidden="true">
-          <source src="assets/images/sponsor-statistics-background.mp4" type="video/mp4" />
-          <source src="assets/images/sponsor-statistics-background.webm" type="video/webm" />
-        </video>
-      </div>
-      <div class="sponsor-box sponsor-box--decoration"></div>
-      <div class="sponsor-box sponsor-box--collective">
-        <div class="sponsor-box--label">
-          <span aria-hidden="true">{% include icon-opencollective.svg %}</span>
-          <span>Open Collective</span>
-        </div>
-        <div class="sponsor-box--value">
-          <p>Contributions of any size make a difference, whether one-time or ongoing. All donations and expenses are published transparently on Open Collective.</p>
-          <p><a class="button" href="https://opencollective.com/criticalmaps" target="_blank"><span class="button-title">Support now</span></a></p>
-        </div>
+        <div class="sponsor-box sponsor-box--decoration"></div>
       </div>
     </div>
   </div>
