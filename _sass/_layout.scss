@@ -435,8 +435,11 @@ body {
   .sponsor-wrapper {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-auto-flow: dense;
+    grid-auto-rows: max-content;
     gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 1px;
 
     @media only screen and (min-width: $screen-large) {
       width: calc(100% + 4.8rem);
@@ -454,7 +457,8 @@ body {
     padding: 3rem;
     border-radius: 2rem;
     box-sizing: border-box;
-    overflow: hidden;
+    min-height: 0;
+    min-width: 0;
 
     @media only screen and (max-width: $screen-small) {
       grid-column: span 12;
@@ -465,12 +469,12 @@ body {
       z-index: 20;
       flex-grow: 0;
       margin-right: auto;
-      padding: 0.4em 1.1em 0.4em 1.2em;
+      padding: 0.4em 1.2em 0.4em 0.6em;
       border-radius: 4rem;
       font-size: 0.8em;
       line-height: 1em;
       font-weight: 600;
-      letter-spacing: 8%;
+      letter-spacing: .05em;
       text-transform: uppercase;
 
       svg {
@@ -531,6 +535,7 @@ body {
       object-fit: cover;
       mix-blend-mode: plus-lighter;
       opacity: 0.5;
+      border-radius: 2rem;
 
       @media (prefers-color-scheme: dark) {
         mix-blend-mode: plus-darker;
