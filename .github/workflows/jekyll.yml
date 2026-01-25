@@ -34,12 +34,19 @@ jobs:
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
 
+      - name: Fix symlinks in artifact
+        run: |
+          cd _site
+          find . -type l -delete
+          cd ..
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
           path: _site/
           retention-days: 1
+          if-no-files-found: error
 
   deploy:
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
