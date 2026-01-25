@@ -10,24 +10,24 @@ pathName: rootPath
         <h1 class="stage--title">Navigating crowds in urban spaces</h1>
         <p class="stage--description">Critical Maps helps organising people world wide to coordinate direct action like the <a href="https://en.wikipedia.org/wiki/Critical_Mass_(cycling)" target="_blank" rel="noopener" title="Critical Mass Wikipedia article">Critical Mass</a> cycling movement.</p>
         <p class="stage--download">
-          <a class="stage--button button-ios button" href="https://itunes.apple.com/app/critical-maps/id918669647" target="_blank" rel="noopener">
-            <span class="download-icon" aria-hidden="true">{% include icon-appstore.svg %}</span>
-            <span class="download-text button-text">
+          <a class="stage--button button" href="https://itunes.apple.com/app/critical-maps/id918669647" target="_blank" rel="noopener">
+            <span class="button-icon download-icon" aria-hidden="true">{% include icon-appstore.svg %}</span>
+            <span class="download-text">
               <span class="download-text--tagline button-tagline">Download on the</span>
               <span class="download-text--title button-title">App Store</span>
             </span>
           </a>
-          <a class="stage--button button-android button"
+          <a class="stage--button button"
             href="https://play.google.com/store/apps/details?id=de.stephanlindauer.criticalmaps" target="_blank" rel="noopener">
-            <span class="download-icon" aria-hidden="true">{% include icon-googleplay.svg %}</span>
+            <span class="button-icon" aria-hidden="true">{% include icon-googleplay.svg %}</span>
             <span class="download-text button-text">
               <span class="download-text--tagline button-tagline">Get it on</span>
               <span class="download-text--title button-title">Google Play</span>
             </span>
           </a>
-          <a class="stage--button button-fdroid button"
+          <a class="stage--button button"
             href="https://f-droid.org/en/packages/de.stephanlindauer.criticalmaps" target="_blank" rel="noopener">
-            <span class="download-icon" aria-hidden="true">{% include icon-fdroid.svg %}</span>
+            <span class="button-icon" aria-hidden="true">{% include icon-fdroid.svg %}</span>
             <span class="download-text button-text">
               <span class="download-text--tagline button-tagline">Get it on</span>
               <span class="download-text--title button-title">F-Droid</span>
@@ -114,8 +114,6 @@ pathName: rootPath
     </div>
   </div>
 </div>
-
-{% include footer.html %}
 
 <script src="/assets/js/application.js" type="text/javascript"></script>
 <script src="/assets/js/leaflet-hash.js" type="text/javascript"></script>

@@ -78,10 +78,34 @@
     <script src="https://cdn.maptiler.com/mapbox-gl-leaflet/latest/leaflet-mapbox-gl.js"></script>
   </head>
   <body>
-    {% include header.html %}
+    <header id="navigation" class="navigation navigation-map" role="banner" aria-label="Site header">
+        <div class="inner">
+            <div class="nav-app">
+                <picture>
+                    <img src="/assets/images/logo-touchicon.png" alt="Critical Maps - Open Source app for organizing bike events" />
+                </picture>
+                <div class="title">
+                    <h1 class="name">Critical Maps</h1>
+                    <span class="rating web-only" aria-label="Open Source Software">Open Source App</span>
+                    <span class="rating ios-only" aria-label="iOS app rating 4.9 out of 5 stars"><span aria-hidden="true">★★★★★</span> <em aria-hidden="true">4,9</em></span>
+                    <span class="rating android-only" aria-label="Android app rating 4.6 out of 5 stars"><span aria-hidden="true">★★★★☆</span> <em aria-hidden="true">4,6</em></span>
+                </div>
+            </div>
+            <nav class="nav-action" aria-label="App download links">
+                <a class="nav-button button highlight-button web-only" href="/" title="Visit Critical Maps Website" aria-label="Open Critical Maps Website">
+                  <span class="button-title">Open Website</span>
+                </a>
+                <a class="nav-button button action-button ios-only" href="https://itunes.apple.com/app/critical-maps/id918669647" target="_blank" rel="noopener noreferrer" aria-label="Download Critical Maps from Apple App Store">
+                  <span class="button-title">Download</span>
+                </a>
+                <a class="nav-button button action-button android-only" href="https://play.google.com/store/apps/details?id=de.stephanlindauer.criticalmaps" target="_blank" rel="noopener noreferrer" aria-label="Download Critical Maps from Google Play Store">
+                  <span class="button-title">Download</span>
+                </a>
+            </nav>
+        </div>
+    </header>
     <main id="main" role="main" tabindex="-1">
       {{ content }}
     </main>
-    {% include footer.html %}
   </body>
 </html>

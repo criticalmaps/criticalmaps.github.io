@@ -25,10 +25,6 @@ body {
   z-index: 10;
 }
 
-.mapPath main {
-  height: 100vh;
-}
-
 // Screen reader only content
 .sr-only {
   position: absolute;
@@ -37,6 +33,37 @@ body {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+.ios-only,
+.android-only {
+  display: none;
+}
+
+// Only visible on iOS devices
+.ios {
+
+  .ios-only {
+    display: block;
+  }
+
+  .web-only,
+  .android-only {
+    display: none;
+  }
+}
+
+// Only visible on Android devices
+.android {
+
+  .android-only {
+    display: block;
+  }
+
+  .web-only,
+  .ios-only {
+    display: none;
+  }
 }
 
 //============================================================
@@ -63,88 +90,105 @@ body {
   }
 
   .nav-logo {
-      width: 14rem;
-      flex-shrink: 0;
-      margin-left: 0;
-      margin-right: auto;
-      align-content: center;
+    width: 14rem;
+    flex-shrink: 0;
+    margin-left: 0;
+    margin-right: auto;
+    align-content: center;
 
-      a {
-          display: block;
-          text-decoration: none;
-          color: inherit;
-      }
+    a {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+    }
 
-      img {
-          display: block;
-          width: 100%;
-          height: auto;
-      }
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
   }
 
-  .nav-github {
+  .nav-action {
     display: flex;
+    gap: 1em;
     align-content: center;
-    margin-left: auto;
-    margin-right: 0;
+    margin: auto 0 auto auto;
   }
 
   .nav-button {
-    font-size: 1.6rem;
-    margin: auto 0.4rem;
-    padding: 1rem 1.6rem;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    font-weight: 700;
-    color: $color-gray100;
-    background: rgba(0,0,0,.05);
-    border-radius: 4rem;
-    text-decoration: none;
-    transition: all ease-out 0.2s;
     white-space: nowrap;
+    margin: auto 0;
+    font-size: 1.6rem;
+    padding: 0.4rem 1.6rem;
 
     svg {
-      width: 1.6rem;
+      width: 1em;
+      margin-top: -0.1em;
       vertical-align: middle;
       display: inline-block;
     }
 
     span {
       display: inline-block;
-      vertical-align: middle;
-      margin-left: 0.4rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      color: $color-gray500;
-      background: rgba(255,255,255,0.05);
-    }
-
-    &:hover,
-    &:focus {
-      color: $color-gray100;
-      background: rgba(0,0,0,0.1);
-      transform: scale3d(1.01,1.01,1);
-
-      @media (prefers-color-scheme: dark) {
-        color: $color-gray600;
-        background: rgba(255,255,255,0.1);
-        box-shadow: 0 0 4px rgba(255,255,255,.05), 0 0 8px rgba(255,255,255,.05), inset 0 0 2px rgba(255,255,255,.1);
-      }
     }
   }
-}
 
-.mapPath {
+  .nav-app {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    
+    img {
+      display: block;
+      width: 6rem;
+      border-radius: 1.5rem;
+      box-shadow:
+        0 0 0.5px rgba(0,0,0,0.1),
+        0 0.5px 2px rgba(0,0,0,0.1),
+        0 1px 5px rgba(0,0,0,0.1);
 
-  .navigation {
-    position: absolute;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-
-    .inner {
-        
       @media only screen and (max-width: $screen-small) {
-        padding: 1.2rem;
+        width: 5rem;
+        border-radius: 1.3rem;
+      }
+    }
+
+    .title {
+      display: flex;
+      gap: 0.4rem;
+      flex-direction: column;
+
+      .name {
+        margin: 0;
+        font-size: 1.8rem;
+        line-height: 2rem;
+        font-weight: 700;
+        color: black;
+
+        @media (prefers-color-scheme: dark) {
+          color: white;
+        }
+      }
+
+      .rating {
+        font-size: 1.4rem;
+        line-height: 2rem;
+        font-weight: 500;
+
+        span {
+          color: $color-action-light;
+
+          @media (prefers-color-scheme: dark) {
+            color: $color-action-dark;
+          }
+        }
+        
+        &.rating-ios,
+        &.rating-android {
+          display: none;
+        }
       }
     }
   }
@@ -264,13 +308,33 @@ body {
     width: auto;
     gap: 1.2rem;
 
-    svg {
-      width: 3rem;
+    @media only screen and (max-width: $screen-small) {
+
+      &::after {
+        content: '→';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4rem;
+        height: 4rem;
+        margin: 1rem;
+        line-height: 4rem;
+        text-align: center;
+        font-size: 2.4rem;
+        color: white;
+        background: $color-action-light;
+        border-radius: 4rem;
+        pointer-events: none;
+
+        @media (prefers-color-scheme: dark) {
+          color: black;
+          background: $color-action-dark
+        }
+      }
     }
 
-    .download-icon {
-      display: flex;
-      flex-direction: column;
+    svg {
+      width: 3rem;
     }
 
     .download-text--tagline {
@@ -292,54 +356,6 @@ body {
         color: #FFF;
       }
     }
-  }
-}
-
-html.ios,
-html.android {
-
-  // Add arrow decoration to platform-specific download buttons
-  .stage--button {
-    position: relative;
-    
-    &::after {
-      content: '→';
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 4rem;
-      height: 4rem;
-      margin: 1rem;
-      line-height: 4rem;
-      text-align: center;
-      font-size: 2.4rem;
-      color: white;
-      background: $color-action-light;
-      border-radius: 4rem;
-      pointer-events: none;
-
-      @media (prefers-color-scheme: dark) {
-        color: black;
-        background: $color-action-dark
-      }
-    }
-  }
-}
-
-html.ios {
-
-  // Hide Android and F-Droid buttons on iOS devices
-  .button-android,
-  .button-fdroid {
-    display: none;
-  }
-}
-
-html.android {
-
-  // Hide iOS button on Android devices
-  .button-ios {
-    display: none;
   }
 }
 
@@ -974,6 +990,31 @@ html.android {
 
     @media (prefers-color-scheme: dark) {
       border-color: $color-gray300;
+    }
+  }
+}
+
+//============================================================
+//	Map View
+//============================================================
+
+.mapPath {
+
+  main {
+    height: 100vh;
+  }
+
+  .navigation {
+    position: absolute;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+    .inner {
+      padding: 1.6rem;
+      max-width: none;
+        
+      @media only screen and (max-width: $screen-small) {
+        padding: 1.2rem;
+      }
     }
   }
 }
