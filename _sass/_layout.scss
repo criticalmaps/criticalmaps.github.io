@@ -433,24 +433,30 @@ body {
   }
 
   .sponsor-wrapper {
-    display: grid;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-auto-rows: max-content;
+    display: flex;
     gap: 2rem;
-    width: 100%;
     box-sizing: border-box;
-    min-height: 1px;
 
     @media only screen and (min-width: $screen-large) {
       width: calc(100% + 4.8rem);
       margin-left: -2.4rem;
       margin-right: -2.4rem;
     }
+
+    @media only screen and (max-width: $screen-small) {
+      flex-direction: column;
+    }
+  }
+
+  .sponsor-wrapper-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 50%;
   }
 
   .sponsor-box {
     position: relative;
-    grid-column: span 6;
     display: block;
     padding: 3rem;
     border-radius: 2rem;
@@ -458,7 +464,7 @@ body {
     overflow: hidden;
 
     @media only screen and (max-width: $screen-small) {
-      grid-column: span 12;
+      padding: 2rem;
     }
 
     .sponsor-box--label {
@@ -490,6 +496,10 @@ body {
     .sponsor-box--value {
       margin: 0;
 
+      * {
+        margin: 2rem 0;
+      }
+
       *:first-child {
         margin-top: 0;
       }
@@ -501,12 +511,16 @@ body {
   }
 
   .sponsor-box--decoration {
-    grid-row: span 9;
+    flex-grow: 1;
     background-image: url('../images/sponsor-decoration-background-light.webp');
     background-position: top center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
+
+    @media only screen and (max-width: $screen-small) {
+      min-height: 24rem;
+    }
 
     @media (prefers-color-scheme: dark) {
       background-image: url('../images/sponsor-decoration-background-dark.webp');
@@ -514,7 +528,6 @@ body {
   }
 
   .sponsor-box--statistics {
-    grid-row: span 3;
     background: $color-action-light;
     color: white;
 
@@ -570,7 +583,6 @@ body {
   }
 
   .sponsor-box--introduction {
-    grid-row: span 8;
     background: $color-gray200;
     color: $color-gray600;
 
@@ -593,15 +605,23 @@ body {
   }
 
   .sponsor-box--collective {
-    grid-row: span 4;
-    background: transparent;
-    color: $color-gray100;
     background: rgb(229, 243, 255);
+    color: rgb(52, 73, 116);
+
+    @media (prefers-color-scheme: dark) {
+      background: rgb(25, 35, 55);
+      color: rgb(130, 158, 212);
+    }
 
     .sponsor-box--label {
       color: rgb(16, 65, 163);
       background: white;
       font-weight: 700;
+
+      @media (prefers-color-scheme: dark) {
+        background: rgb(11, 19, 35);
+        color: rgb(170, 189, 227);
+      }
     }
 
     .sponsor-box--value {
