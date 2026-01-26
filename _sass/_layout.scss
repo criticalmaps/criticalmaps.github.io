@@ -3,14 +3,10 @@ body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background: #FFF;
+  background: var(--color-background-main);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-
-  @media (prefers-color-scheme: dark) {
-    background: $color-gray100;
-  }
 }
 
 .inner {
@@ -77,12 +73,6 @@ body {
   width: 100%;
   z-index: 9999;
   box-sizing: border-box;
-  background: linear-gradient(#FFF,rgba(255,255,255,.5));
-  backdrop-filter: blur(10px);
-
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(rgba(26,26,26,1),rgba(26,26,26,.75));
-  }
 
   .inner {
     display: flex;
@@ -165,11 +155,7 @@ body {
         font-size: 1.8rem;
         line-height: 2rem;
         font-weight: 700;
-        color: black;
-
-        @media (prefers-color-scheme: dark) {
-          color: white;
-        }
+        color: var(--color-content-lead);
       }
 
       .rating {
@@ -178,11 +164,7 @@ body {
         font-weight: 500;
 
         span {
-          color: $color-action-light;
-
-          @media (prefers-color-scheme: dark) {
-            color: $color-action-dark;
-          }
+          color: var(--color-action);
         }
         
         &.rating-ios,
@@ -199,48 +181,43 @@ body {
 //============================================================
 
 .footer {
-    padding: 4rem 0;
+  padding: 4rem 0 8vw;
 
-    background: $color-gray100;
-    color: $color-gray400;
-  
-    .footer-navigation {
+  .footer-navigation {
+    display: flex;
+
+    @media only screen and (max-width: $screen-small) {
+      flex-direction: column;
+    }
+
+    ul {
       display: flex;
-
-      @media only screen and (max-width: $screen-small) {
-        flex-direction: column;
-      }
-
-      ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
+  }
 
-    a {
-      color: $color-gray400;
+  a {
+    color: var(--color-content-secondary);
+    text-decoration: none;
+    font-weight: 400;
+
+    &:hover,
+    &:focus {
+      color: var(--color-content-primary);
       text-decoration: none;
-      font-weight: 400;
-
-      &:hover,
-      &:focus {
-        color: $color-gray600;
-        text-decoration: none;
-      }
-
-      &.active {
-        font-weight: 600;
-        color: #fff;
-
-        @media (prefers-color-scheme: dark) {
-          color: #FFF;
-        }
-      }
     }
+
+    &.active {
+      color: var(--color-content-main);
+      font-weight: 600;
+    }
+  }
 }
 
 //============================================================
@@ -260,12 +237,8 @@ body {
     margin-bottom: 2rem;
     font-size: 10vw;
     line-height: 1em;
-    color: $color-gray100;
+    color: var(--color-content-lead);
     font-weight: 800;
-
-    @media (prefers-color-scheme: dark) {
-      color: #FFF;
-    }
 
     @media only screen and (min-width: $screen-large) {
       font-size: 10rem;
@@ -322,14 +295,9 @@ body {
         text-align: center;
         font-size: 2.4rem;
         color: white;
-        background: $color-action-light;
-        border-radius: 4rem;
+        background: var(--color-action);
+        border-radius: var(--radius-full);
         pointer-events: none;
-
-        @media (prefers-color-scheme: dark) {
-          color: black;
-          background: $color-action-dark
-        }
       }
     }
 
@@ -340,21 +308,13 @@ body {
     .download-text--tagline {
       font-size: 1.2rem;
       line-height: 1em;
-      color: $color-gray300;
-
-      @media (prefers-color-scheme: dark) {
-        color: $color-gray400;
-      }
+      color: var(--color-content-secondary);
     }
 
     .download-text--title {
       font-size: 1.8rem;
       line-height: 1.5em;
-      color: $color-gray100;
-
-      @media (prefers-color-scheme: dark) {
-        color: #FFF;
-      }
+      color: var(--color-content-lead);
     }
   }
 }
@@ -403,20 +363,17 @@ body {
     margin-top: -20rem;
     margin-right: -10rem;
     pointer-events: none;
-    color: $color-action-dark;
+    color: var(--color-action-reverse);
 
     @media only screen and (max-width: $screen-small) {
       margin-right: -16rem;
-    }
-
-    @media (prefers-color-scheme: dark) {
-      color: $color-action-light;
     }
 
     svg {
       display: block;
       width: 100%;
       height: auto;
+      opacity: 0.5;
     }
   }
 }
@@ -451,7 +408,7 @@ body {
     position: relative;
     display: block;
     padding: 3rem;
-    border-radius: 2rem;
+    border-radius: var(--radius-box);
     box-sizing: border-box;
     overflow: hidden;
 
@@ -466,7 +423,7 @@ body {
       z-index: 20;
       margin-bottom: 2rem;
       padding: 0.4em 1.2em 0.4em 0.6em;
-      border-radius: 4rem;
+      border-radius: var(--radius-full);
       font-size: 0.8em;
       line-height: 1em;
       font-weight: 600;
@@ -522,13 +479,8 @@ body {
 
   .support-box--statistics {
     grid-row: span 3;
-    background: $color-action-light;
-    color: white;
-
-    @media (prefers-color-scheme: dark) {
-      background: $color-action-dark;
-      color: black;
-    }
+    background: var(--color-action);
+    color: var(--color-background-main);
 
     .support-box--background {
       position: absolute;
@@ -540,7 +492,7 @@ body {
       object-fit: cover;
       mix-blend-mode: plus-lighter;
       opacity: 0.5;
-      border-radius: 2rem;
+      border-radius: var(--radius-box);
 
       @media (prefers-color-scheme: dark) {
         mix-blend-mode: plus-darker;
@@ -578,11 +530,11 @@ body {
 
   .support-box--introduction {
     grid-row: span 8;
-    background: $color-gray200;
-    color: $color-gray600;
+    background: var(--color-gray200);
+    color: var(--color-gray600);
 
     .support-box--label {
-      background: $color-gray100;
+      background: var(--color-gray100);
 
       svg {
         color: hotpink;
@@ -601,22 +553,22 @@ body {
 
   .support-box--collective {
     grid-row: span 4;
-    background: rgb(229, 243, 255);
-    color: rgb(52, 73, 116);
+    background: hsl(220, 100%, 95%);
+    color: hsl(220, 35%, 33%);
 
     @media (prefers-color-scheme: dark) {
-      background: rgb(25, 35, 55);
-      color: rgb(130, 158, 212);
+      background: hsl(220, 35%, 15%);
+      color: hsl(220, 50%, 75%);
     }
 
     .support-box--label {
-      color: rgb(16, 65, 163);
+      color: hsl(220, 80%, 30%);
       background: white;
       font-weight: 700;
 
       @media (prefers-color-scheme: dark) {
-        background: rgb(11, 19, 35);
-        color: rgb(170, 189, 227);
+        background: hsl(220, 50%, 10%);
+        color: hsl(220, 50%, 85%);
       }
     }
 
@@ -631,12 +583,12 @@ body {
 
     .button {
       border: 0;
-      background: rgb(16, 65, 163);
+      background: hsl(220, 82%, 35%);
       color: white;
 
       &:hover,
       &:focus {
-        background: rgb(10, 46, 119);
+        background: hsl(220, 84%, 25%);
       }
     }
 
@@ -664,17 +616,17 @@ body {
     width: 100%;
     height: calc(100% - 8rem);
     background-attachment: scroll;
-    background-image: 
-      repeating-linear-gradient(90deg, #ffffff22 0 1px, #0000 1px 25px), 
-      repeating-linear-gradient(#ffffff22 0 1px, #0000 1px 25px), 
-      repeating-linear-gradient(90deg, #ffffff44 0 1px, #0000 1px 100px), 
+    background-image:
+      repeating-linear-gradient(90deg, #ffffff22 0 1px, #0000 1px 25px),
+      repeating-linear-gradient(#ffffff22 0 1px, #0000 1px 25px),
+      repeating-linear-gradient(90deg, #ffffff44 0 1px, #0000 1px 100px),
       repeating-linear-gradient(#ffffff44 0 1px, #0000 1px 100px);
 
     @media (prefers-color-scheme: dark) {
-      background-image: 
-        repeating-linear-gradient(90deg, #ffffff08 0 1px, #0000 1px 25px), 
-        repeating-linear-gradient(#ffffff08 0 1px, #0000 1px 25px), 
-        repeating-linear-gradient(90deg, #ffffff1a 0 1px, #0000 1px 100px), 
+      background-image:
+        repeating-linear-gradient(90deg, #ffffff08 0 1px, #0000 1px 25px),
+        repeating-linear-gradient(#ffffff08 0 1px, #0000 1px 25px),
+        repeating-linear-gradient(90deg, #ffffff1a 0 1px, #0000 1px 100px),
         repeating-linear-gradient(#ffffff1a 0 1px, #0000 1px 100px);
     }
     background-position:
@@ -702,7 +654,7 @@ body {
     top: 4rem;
     width: 100%;
     height: calc(100% - 8rem);
-    background-color: $color-action-light;
+    background-color: var(--color-action);
     background-image: url('../images/map-background-light.webp');
     background-position: top center;
     background-size: cover;
@@ -710,7 +662,6 @@ body {
     background-attachment: scroll;
 
     @media (prefers-color-scheme: dark) {
-      background-color: $color-action-dark;
       background-image: url('../images/map-background-dark.webp');
     }
 
@@ -741,7 +692,7 @@ body {
   max-height: 80vh;
   box-sizing: border-box;
   overflow: hidden;
-  border-radius: 2rem;
+  border-radius: var(--radius-box);
   box-shadow:
     0px 0px 4px rgba(0, 0, 0, 0.04),
     0px 2px 8px rgba(0, 0, 0, 0.06),
@@ -757,7 +708,7 @@ body {
 
   .map-wrapper {
     box-shadow: none;
-    border-radius: 0;
+    border-radius: none;
   } 
 }
 
@@ -789,7 +740,7 @@ body {
 
       @media (prefers-color-scheme: dark) {
         background: rgba(26,26,26,75);
-        color: #FFF;
+        color: white;
       }
 
       a {
@@ -798,15 +749,14 @@ body {
     }
 
     .leaflet-bar {
-      background: linear-gradient(#FFF,rgba(255,255,255,.5));
+      background: var(--background-map-ui);
       backdrop-filter: blur(10px);
       box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-      border-radius: 4rem;
+      border-radius: var(--radius-full);
       border: 0;
 
       @media (prefers-color-scheme: dark) {
-        background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
-        color: #FFF;
+        color: white;
       }
     }
 
@@ -826,31 +776,23 @@ body {
         align-items: center;
         justify-content: center;
         border: 0;
-        border-radius: 2rem;
+        border-radius: var(--radius-box);
         background: transparent;
-        color: $color-gray200;
+        color: var(--color-content-primary);
         cursor: pointer;
         transition: all ease-out 0.2s;
 
 
         &:hover,
         &:focus {
-          background: $color-gray600;
-
-          @media (prefers-color-scheme: dark) {
-            background: $color-gray200;
-          }
+          background: var(--color-background-contrast);
         }
 
         svg {
           width: 24px;
           height: 24px;
-          fill: $color-gray200;;
+          fill: var(--color-content-primary);
           transition: fill ease-out 0.2s;
-
-          @media (prefers-color-scheme: dark) {
-            fill: #fff;
-          }
         }
       }
     }
@@ -892,17 +834,12 @@ body {
 
     .leaflet-bar a {
       background-color: transparent;
-      border-bottom: 1px solid $color-gray500;
+      border-bottom: 1px solid var(--color-background-contrast);
       width: 4rem;
       height: 4rem;
       line-height: 4rem;
-      color: $color-gray100;
+      color: var(--color-content-lead);
       transition: all ease-out 0.2s;
-
-      @media (prefers-color-scheme: dark) {
-        border-color: $color-gray200;
-        color: $color-gray500;
-      }
     }
 
     .leaflet-bar a span {
@@ -912,11 +849,7 @@ body {
 
     .leaflet-bar a:hover,
     .leaflet-bar a:focus {
-      background-color: $color-gray600;
-
-      @media (prefers-color-scheme: dark) {
-        background-color: $color-gray200;
-      }
+      background-color: var(--color-background-highlight);
     }
 
     .leaflet-bar a:first-child {
@@ -934,11 +867,7 @@ body {
 
     .leaflet-bar a.leaflet-disabled {
       background-color: transparent;
-      color: $color-gray400;
-
-      @media (prefers-color-scheme: dark) {
-        color: $color-gray300;
-      }
+      color: var(--color-content-primary);
     }
 
     .leaflet-touch .leaflet-bar a {
@@ -968,22 +897,17 @@ body {
   bottom: 0;
   margin-bottom: 1.2rem;
   padding: 1rem;
-  border-radius: 4rem;
+  border-radius: var(--radius-full);
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   font-size: 1.4rem;
   line-height: 1.6rem;
   font-weight: 400;
   text-align: center;
-  background: linear-gradient(#FFF,rgba(255,255,255,.5));
+  color: var(--color-content-primary);
+  background: var(--background-map-ui);
   backdrop-filter: blur(10px);
-  color: $color-gray200;
   z-index: 500;
   box-sizing: border-box;
-
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(rgba(26,26,26,.75),rgba(26,26,26,1));
-    color: #FFF;
-  }
 
   @media only screen and (max-width: $screen-small) {
     margin-bottom: 2.4rem;
@@ -996,20 +920,12 @@ body {
 
     span {
       font-weight: 700;
-      color: $color-action-light;
-
-      @media (prefers-color-scheme: dark) {
-        color: $color-action-dark;
-      }
+      color: var(--color-action);
     }
   }
 
   .map-count-online {
-    border-right: 1px solid $color-gray500;
-
-    @media (prefers-color-scheme: dark) {
-      border-color: $color-gray300;
-    }
+    border-right: 1px solid var(--color-background-contrast);
   }
 }
 
@@ -1025,7 +941,13 @@ body {
 
   .navigation {
     position: absolute;
+    background: linear-gradient(white,hsla(220, 02%, 96%, 0.5));
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+
+    @media (prefers-color-scheme: dark) {
+      background: linear-gradient(hsl(220, 15%, 10%), hsla(220, 15%, 10%, 0.75));
+    }
 
     .inner {
       padding: 1.6rem;
