@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
 	var currentMarkers = [];
-	var isDarkMode = false;
 	var isMapFullscreen = false;
 	// fullscreen animation state
 	var _fullscreenSavedCenter = null;
@@ -148,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	var mapboxLayer = null;
 	function applyMapStyle(useDark) {
-		isDarkMode = !!useDark;
 		// remove existing layer if present
 		if (mapboxLayer) {
 			try { bikeMap.removeLayer(mapboxLayer); } catch (e) { /* ignore */ }
@@ -158,8 +156,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			attribution: '<a href="https://www.maptiler.com/copyright/">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
 			style: useDark ? darkStyleUrl : lightStyleUrl
 		}).addTo(bikeMap);
-		// update existing markers to match theme (yellow in dark mode)
-		var markerColor = isDarkMode ? '#ffd633' : '#4400ff';
+		// update existing markers to match theme
+		var markerColor = getComputedStyle(document.documentElement).getPropertyValue('--color-action').trim();
 		currentMarkers.forEach(function (m) {
 			try { m.setStyle({ fillColor: markerColor, color: markerColor }); } catch (e) { /* ignore */ }
 		});
@@ -645,8 +643,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			if (rafId) cancelAnimationFrame(rafId);
 			rafId = null;
 		});
-
-		// hover handlers removed — markers no longer affect meatball state on mouseover
 	})();
 
 	function saveHashToElements() {
@@ -676,8 +672,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		currentMarkers = []
 
 		//add new markers as SVG circleMarkers (use shared svgRenderer)
+		var markerColor = getComputedStyle(document.documentElement).getPropertyValue('--color-action').trim();
 		locationsArray.forEach(function (coordinate) {
-			var markerColor = isDarkMode ? '#ffd633' : '#4400ff';
 			var circle = L.circleMarker([coordinate.latitude, coordinate.longitude], {
 				renderer: svgRenderer,
 				radius: 12,

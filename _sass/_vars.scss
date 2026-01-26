@@ -1,12 +1,49 @@
 $screen-small: 40rem;
 $screen-large: 64rem;
 
-$color-gray100: #1a1a1a;
-$color-gray200: #262626;
-$color-gray300: #45474d;
-$color-gray400: #909399;
-$color-gray500: #dadce0;
-$color-gray600: #fafafa;
+:root {
+  --radius-full: 4rem;
+  --radius-box: 2rem;
 
-$color-action-dark: #ffd633;
-$color-action-light: rgba(68,0,255,1);
+  --background-map-ui: linear-gradient(white,hsla(220, 02%, 96%, 0.5));
+
+  --color-gray100: hsl(220, 15%, 10%);
+  --color-gray200: hsl(220, 15%, 15%);
+  --color-gray300: hsl(220, 12%, 28%);
+  --color-gray400: hsl(220, 06%, 58%);
+  --color-gray500: hsl(220, 04%, 83%);
+  --color-gray600: hsl(220, 02%, 96%);
+
+  --color-action-dark: hsl(48, 100%, 60%);
+  --color-action-light: hsl(256, 100%, 50%);
+
+  --color-background-main: white;
+  --color-background-highlight: var(--color-gray600);
+  --color-background-contrast: var(--color-gray500);
+  --color-background-contrast--hover: var(--color-gray400);
+
+  --color-content-lead: black;
+  --color-content-primary: var(--color-gray200);
+  --color-content-secondary: var(--color-gray300);
+
+  --color-action: var(--color-action-light);
+  --color-action-reverse: var(--color-action-dark);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-map-ui: linear-gradient(hsla(220, 15%, 10%, 0.75),hsl(220, 15%, 10%));
+
+    --color-background-main: var(--color-gray100);;
+    --color-background-highlight: var(--color-gray200);
+    --color-background-contrast: var(--color-gray300);
+    --color-background-contrast--hover: var(--color-gray400);
+
+    --color-content-lead: white;
+    --color-content-primary: var(--color-gray600);
+    --color-content-secondary: var(--color-gray500);
+
+    --color-action: var(--color-action-dark);
+    --color-action-reverse: var(--color-action-light);
+  }
+}
