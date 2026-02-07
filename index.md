@@ -95,10 +95,69 @@ pathName: rootPath
         <div class="support-box--value">
           <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
         </div>
-        <video class="support-box--background" preload="true" autoplay loop muted aria-hidden="true">
-          <source src="assets/images/support-statistics-background.mp4" type="video/mp4" />
-          <source src="assets/images/support-statistics-background.webm" type="video/webm" />
-        </video>
+        <div class="support-box--background particle-stream" aria-hidden="true">
+          <style>
+            .particle-stream {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              overflow: hidden;
+            }
+            .particle-stream svg {
+              width: 100%;
+              height: 100%;
+              position: absolute;
+              inset: 0;
+              pointer-events: none;
+            }
+            @keyframes movePath {
+              0% {
+                offset-distance: 0%;
+                opacity: 0;
+              }
+              10% {
+                opacity: var(--p-opacity);
+              }
+              90% {
+                opacity: var(--p-opacity);
+              }
+              100% {
+                offset-distance: 100%;
+                opacity: 0;
+              }
+            }
+            .particle {
+              offset-path: path('M 350 100 Q 500 500 1600 800');
+              animation: movePath linear infinite;
+            }
+          </style>
+          <svg viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice" id="particle-svg"></svg>
+          <script>
+            (function() {
+              const svg = document.getElementById('particle-svg');
+              const particleCount = 80;
+              for (let i = 0; i < particleCount; i++) {
+                const size = Math.random() * 24 + 4;
+                const duration = Math.random() * 12 + 4;
+                const delay = Math.random() * -24;
+                const offsetX = (Math.random() - 0.5) * 600;
+                const offsetY = (Math.random() - 0.5) * 600;
+                const opacity = Math.random() * 0.6 + 0.4;
+                const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+                rect.setAttribute('class', 'particle');
+                rect.setAttribute('width', size);
+                rect.setAttribute('height', size);
+                rect.setAttribute('fill', 'white');
+                rect.setAttribute('rx', 2);
+                rect.style.setProperty('--p-opacity', opacity);
+                rect.style.animationDuration = duration + 's';
+                rect.style.animationDelay = delay + 's';
+                rect.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+                svg.appendChild(rect);
+              }
+            })();
+          </script>
+        </div>
       </div>
       <div class="support-box support-box--decoration"></div>
       <div class="support-box support-box--collective">
