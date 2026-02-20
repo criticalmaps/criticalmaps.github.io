@@ -95,21 +95,8 @@ pathName: rootPath
         <div class="support-box--value">
           <p>Our monthly server costs range from <strong>20</strong> to <strong>60 Euro</strong>, depending on traffic.</p>
         </div>
-        <div class="support-box--background particle-stream" aria-hidden="true">
+        <div class="support-box--background" aria-hidden="true">
           <style>
-            .particle-stream {
-              position: absolute;
-              width: 100%;
-              height: 100%;
-              overflow: hidden;
-            }
-            .particle-stream svg {
-              width: 100%;
-              height: 100%;
-              position: absolute;
-              inset: 0;
-              pointer-events: none;
-            }
             @keyframes movePath {
               0% {
                 offset-distance: 0%;
@@ -147,7 +134,7 @@ pathName: rootPath
                 rect.setAttribute('class', 'particle');
                 rect.setAttribute('width', size);
                 rect.setAttribute('height', size);
-                rect.setAttribute('fill', 'white');
+                rect.setAttribute('fill', 'currentColor');
                 rect.setAttribute('rx', 2);
                 rect.style.setProperty('--p-opacity', opacity);
                 rect.style.animationDuration = duration + 's';

@@ -489,14 +489,22 @@ body {
       top: 0;
       width: 100%;
       height: 100%;
+      border-radius: var(--radius-box);
       object-fit: cover;
+      color: var(--color-background-main);
       mix-blend-mode: plus-lighter;
       opacity: 0.5;
-      border-radius: var(--radius-box);
 
       @media (prefers-color-scheme: dark) {
-        mix-blend-mode: plus-darker;
-        filter: invert(100%);
+        mix-blend-mode: color-burn;
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
       }
     }
 
