@@ -6,15 +6,15 @@ pathName: infoPath
 <div class="wrapper imprint">
 	<div class="inner content">
 		<h2><a name="Impressum">Imprint</a></h2>
-		<p>Angaben gemäß § 5 TMG</p>
+		<p>Angaben gemäß § 5 TMG:</p>
 		<pre>Stephan Lindauer
 Grellstr. 5A
-10409 Berlin</pre>
-		<p>Vertreten durch: Stephan Lindauer und Norman Sander</p>
-		<p>Kontakt: <a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></p>
+10409 Berlin
+<a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a></pre>
+
+		<p>Vertreten durch: <strong>Stephan Lindauer</strong> und <strong>Norman Sander</strong></p>
 
 		<h2><a name="Haftungsausschluss">Haftungsausschluss</a></h2>
-
 		<h3>Haftung für Inhalte</h3>
 		<p>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
 			Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7
@@ -26,7 +26,6 @@ Grellstr. 5A
 			konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese
 			Inhalte umgehend entfernen.</p>
 
-
 		<h3>Haftung für Links</h3>
 		<p>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben.
 			Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten
@@ -35,7 +34,6 @@ Grellstr. 5A
 			Zeitpunkt der Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist
 			jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von
 			Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p>
-
 
 		<h3>Urheberrecht</h3>
 		<p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
@@ -47,10 +45,9 @@ Grellstr. 5A
 			Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von
 			Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
 
-
 		<h3>Datenschutz</h3>
 		<p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren
-			Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt
+			Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail-Adressen) erhoben werden, erfolgt
 			dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung
 			nicht an Dritte weitergegeben.</p>
 		<p>Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail)
@@ -63,14 +60,11 @@ Grellstr. 5A
 
 		<h2><a name="Datenschutzerklärung">Datenschutzerklärung</a></h2>
 		<p>Verantwortliche Stelle im Sinne der Datenschutzgesetze, insbesondere der EU-Datenschutzgrundverordnung
-			(DSGVO), ist:</p>
-		<pre>Stephan Lindauer
-Grellstr. 5A
-10409 Berlin</pre>
+			(DSGVO), ist: Stephan Lindauer, Grellstr. 5A, 10409 Berlin</p>
 
 		<h3>Geltungsbereich</h3>
 		<p>Diese Datenschutzerklärung klärt Nutzer über die Art, den Umfang und Zwecke der Erhebung und Verwendung
-			personenbezogener Daten durch den verantwortlichen Anbieter Stephan Lindauer (stephanlindauer@posteo.de)
+			personenbezogener Daten durch den verantwortlichen Anbieter Stephan Lindauer (<a href='mailto:stephanlindauer@posteo.de'>stephanlindauer@posteo.de</a>)
 			auf. Die rechtlichen Grundlagen des Datenschutzes finden sich im Bundesdatenschutzgesetz (BDSG) und dem
 			Telemediengesetz (TMG).</p>
 
@@ -99,15 +93,8 @@ Grellstr. 5A
 			einwilligen.</p>
 
 		<h3>Kontaktaufnahme</h3>
-		<p>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per Kontaktformular oder E-Mail) werden die Angaben
-			des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.
-		</p>
-
-		<h3>Kommentare und Beiträge</h3>
-		<p>Wenn Nutzer Kommentare im Blog oder sonstige Beiträge hinterlassen, werden ihre IP-Adressen gespeichert. Das
-			erfolgt zur Sicherheit des Anbieters, falls jemand in Kommentaren und Beiträgen widerrechtliche Inhalte
-			schreibt (Beleidigungen, verbotene politische Propaganda, etc.). In diesem Fall kann der Anbieter selbst für
-			den Kommentar oder Beitrag belangt werden und ist daher an der Identität des Verfassers interessiert.</p>
+		<p>Bei der Kontaktaufnahme mit dem Anbieter (zum Beispiel per E-Mail) werden die Angaben
+			des Nutzers zwecks Bearbeitung der Anfrage sowie für den Fall, dass Anschlussfragen entstehen, gespeichert.</p>
 
 		<h3>Einbindung von Diensten und Inhalten Dritter</h3>
 		<p>Es kann vorkommen, dass innerhalb dieses Onlineangebotes Inhalte Dritter, wie zum Beispiel Videos von
@@ -125,9 +112,6 @@ Grellstr. 5A
 			über ihn gespeichert wurden. Zusätzlich hat der Nutzer das Recht auf Berichtigung unrichtiger Daten,
 			Sperrung und Löschung seiner personenbezogenen Daten, soweit dem keine gesetzliche Aufbewahrungspflicht
 			entgegensteht.</p>
-		<p><a
-				href="http://rechtsanwalt-schwenke.de/smmr-buch/datenschutz-muster-generator-fuer-webseiten-blogs-und-social-media/">Datenschutz-Muster
-				von Rechtsanwalt Thomas Schwenke</a></p>
 
 		<h3>Ihre Betroffenenrechte</h3>
 		<p>Unter den angegebenen Kontaktdaten unseres Datenschutzbeauftragten können Sie jederzeit folgende Rechte
@@ -150,8 +134,7 @@ Grellstr. 5A
 			finden Sie unter: <a
 				href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html"
 				target="_blank"
-				rel="noopener">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.
-		</p>
+				rel="noopener">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>.</p>
 
 		<h3>Zwecke der Datenverarbeitung durch die verantwortliche Stelle und Dritte</h3>
 		<p>Wir verarbeiten Ihre personenbezogenen Daten nur zu den in dieser Datenschutzerklärung genannten Zwecken.
@@ -208,21 +191,12 @@ Grellstr. 5A
 			beachten Sie, dass einzelne Funktionen unserer Website möglicherweise nicht funktionieren, wenn Sie die
 			Verwendung von Cookies deaktiviert haben.</p>
 
-		<h3>Eingebettete YouTube-Videos</h3>
-		<p>Auf einigen unserer Webseiten betten wir Youtube-Videos ein. Betreiber der entsprechenden Plugins ist die
-			YouTube, LLC, 901 Cherry Ave., San Bruno, CA 94066, USA. Wenn Sie eine Seite mit dem YouTube-Plugin
-			besuchen, wird eine Verbindung zu Servern von Youtube hergestellt. Dabei wird Youtube mitgeteilt, welche
-			Seiten Sie besuchen. Wenn Sie in Ihrem Youtube-Account eingeloggt sind, kann Youtube Ihr Surfverhalten Ihnen
-			persönlich zuzuordnen. Dies verhindern Sie, indem Sie sich vorher aus Ihrem Youtube-Account ausloggen.</p>
-		<p>Wird ein Youtube-Video gestartet, setzt der Anbieter Cookies ein, die Hinweise über das Nutzerverhalten
-			sammeln.</p>
-		<p>Wer das Speichern von Cookies für das Google-Ad-Programm deaktiviert hat, wird auch beim Anschauen von
-			Youtube-Videos mit keinen solchen Cookies rechnen müssen. Youtube legt aber auch in anderen Cookies
-			nicht-personenbezogene Nutzungsinformationen ab. Möchten Sie dies verhindern, so müssen Sie das Speichern
-			von Cookies im Browser blockieren.</p>
-		<p>Weitere Informationen zum Datenschutz bei „Youtube“ finden Sie in der Datenschutzerklärung des Anbieters
-			unter: <a href="https://www.google.de/intl/de/policies/privacy/" target="_blank"
-				rel="noopener">https://www.google.de/intl/de/policies/privacy/ </a></p>
+		<h3>MapTiler</h3>
+		<p>Diese Website bindet Kartenmaterial von MapTiler ein. Anbieter ist die MapTiler AG, Höfnerstrasse 98, Unterägeri, 6314 Zug, Schweiz. MapTiler ermöglicht die Anzeige von Kartenmaterial auf unserer Website. Die Einbindung des Kartenmaterials dient der Verbesserung der geografischen Darstellung und der Vereinfachung der Suche in unseren Projekten.</p>
+		<p>Bei der Nutzung dieses Dienstes werden personenbezogene Daten erhoben: MapTiler protokolliert nicht, wie Sie die Karte selbst nutzen. Die IP-Adressen der Besucher der MapTiler Cloud werden jedoch für eine begrenzte Zeit (maximal 20 Minuten) gespeichert und anschließend automatisch gelöscht. Die Erhebung und kurzzeitige Speicherung ist für die Protokollierung sicherheitsrelevanter Aktivitäten auf der MapTiler-Infrastruktur erforderlich.</p>
+		<p>Die Nutzung dieses Dienstes erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Das berechtigte Interesse liegt in der grafischen Darstellung und Vereinfachung von Projekten. Soweit eine entsprechende Einwilligung eingeholt wurde, erfolgt die Verarbeitung ausschließlich auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO. Die Einwilligung kann jederzeit widerrufen werden.</p>
+		<p>Bitte beachten Sie, dass dieser Dienst Ihre Daten in ein Land übermitteln kann, das nicht über die erforderlichen Datenschutzstandards verfügt. Bei einer Übermittlung in die USA besteht das Risiko, dass Ihre Daten von US-Behörden zu Kontroll- und Überwachungszwecken verarbeitet werden, möglicherweise ohne dass Sie rechtliche Schritte einleiten können. Nachfolgend finden Sie eine Liste der Länder, in die Ihre Daten übermittelt werden. Weitere Informationen zu den Sicherheitsmaßnahmen finden Sie in der Datenschutzerklärung des Website-Anbieters oder erhalten Sie direkt vom Website-Anbieter.</p>
+		<p>Soweit personenbezogene Daten an MapTiler-Server in der Schweiz übermittelt, dort gespeichert und verarbeitet werden, ist die Grundlage für die Übermittlung in ein Drittland der Angemessenheitsbeschluss (<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32000D0518" target="_blank" rel="noopener">https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32000D0518</a>) der EU-Kommission für die Schweiz. Dieser bescheinigt, dass die Schweiz über einen Datenschutzstandard verfügt, der dem EWR-Standard gleichwertig ist.</p>
 
 		<h3>Änderung unserer Datenschutzbestimmungen</h3>
 		<p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, damit sie stets den aktuellen rechtlichen
